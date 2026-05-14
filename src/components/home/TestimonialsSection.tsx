@@ -6,20 +6,20 @@ import { Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "João Silva",
-    role: "CEO, TechSolutions",
+    name: "Pércio",
+    role: "CEO, JJ Moto Peças",
     content: "A Agência DN transformou nossa captação. Saímos de um Custo Por Lead altíssimo para uma máquina previsível e lucrativa em apenas 3 meses.",
     rating: 5
   },
   {
-    name: "Maria Fernandes",
-    role: "Diretora de Marketing, Grupo Varejo",
+    name: "Rhenan Veres",
+    role: "CEO, Dentista Para todos",
     content: "O design do nosso novo site junto com a estratégia de tráfego dobrou nossas vendas online. O nível de profissionalismo e proximidade deles é incomparável.",
     rating: 5
   },
   {
-    name: "Carlos Eduardo",
-    role: "Fundador, StartUp Health",
+    name: "Laís",
+    role: "CEO, Connect Imoveis Litoral",
     content: "Não é apenas uma agência, são parceiros de negócio. Eles entendem de métricas que importam: faturamento e lucro no bolso.",
     rating: 5
   }
@@ -45,19 +45,19 @@ export default function TestimonialsSection() {
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.8, ease: "easeOut" } 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
     },
   };
 
   return (
     <section ref={containerRef} className="relative bg-[--color-brand-dark] py-32 px-6 overflow-hidden">
       {/* Background Glows */}
-      <motion.div 
+      <motion.div
         style={{ y: yBackground }}
-        className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-3xl h-96 bg-[--color-brand-primary] rounded-full blur-[180px] opacity-10 pointer-events-none" 
+        className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-3xl h-96 bg-[--color-brand-primary] rounded-full blur-[180px] opacity-10 pointer-events-none"
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -70,7 +70,7 @@ export default function TestimonialsSection() {
           >
             <span className="text-sm font-semibold tracking-wider text-[--color-brand-primary] uppercase">Resultados Comprovados</span>
           </motion.div>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -82,7 +82,7 @@ export default function TestimonialsSection() {
           </motion.h2>
         </div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -90,23 +90,23 @@ export default function TestimonialsSection() {
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           {testimonials.map((testimonial, idx) => (
-            <motion.div 
+            <motion.div
               key={idx}
               variants={itemVariants}
               className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm hover:bg-white/10 hover:border-[--color-brand-primary]/50 transition-all duration-300 relative group"
             >
               <Quote className="absolute top-8 right-8 w-10 h-10 text-[--color-brand-primary] opacity-20 group-hover:opacity-40 transition-opacity" />
-              
+
               <div className="flex gap-1 mb-6">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-[--color-brand-primary] text-[--color-brand-primary]" />
                 ))}
               </div>
-              
+
               <p className="text-white/80 text-lg mb-8 leading-relaxed font-medium">
                 &quot;{testimonial.content}&quot;
               </p>
-              
+
               <div className="flex items-center gap-4 mt-auto">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[--color-brand-primary] to-black flex items-center justify-center border border-white/20 text-white font-bold text-xl">
                   {testimonial.name.charAt(0)}

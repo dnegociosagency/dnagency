@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { ShaderAnimation } from "@/components/ui/shader-animation";
 
 export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,16 +31,19 @@ export default function Preloader() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[1000] bg-[--color-brand-darker] flex flex-col items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[1000] bg-[#040807] flex flex-col items-center justify-center overflow-hidden"
         >
-          <div className="flex flex-col items-center gap-6">
+          {/* Background Shader Animation */}
+          <ShaderAnimation />
+
+          <div className="flex flex-col items-center gap-6 relative z-10">
             <motion.span 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               className="text-[--color-brand-primary] text-xs font-medium tracking-[0.3em] uppercase"
             >
-              Iniciando
+              Loading...
             </motion.span>
             
             {/* Sleek Progress Bar */}

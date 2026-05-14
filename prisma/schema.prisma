@@ -1,0 +1,169 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum Role {
+  ADMIN
+  INSTRUCTOR
+  STUDENT
+  COMPANY_ADMIN
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  name          String
+  role          Role      @default(STUDENT)
+  isVerified    Boolean   @default(false)
+  companyId     String?
+  company       Company?  @relation(fields: [companyId], references: [id])
+  
+  enrollments   Enrollment[]
+  progress      Progress[]
+  certificates  Certificate[]
+  sessions      Session[]
+  auditLogs     AuditLog[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+model Company {
+  id            String    @id @default(uuid())
+  name          String
+  cnpj          String?   @unique
+  employeeCount Int       @default(0)
+  users         User[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+model Course {
+  id            String    @id @default(uuid())
+  title         String
+  slug          String    @unique
+  description   String?
+  thumbnail     String?
+  price         Decimal   @db.Decimal(10, 2)
+  isPublished   Boolean   @default(false)
+  instructorId  String
+  
+  modules       Module[]
+  enrollments   Enrollment[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+model Module {
+  id            String    @id @default(uuid())
+  courseId      String
+  course        Course    @relation(fields: [courseId], references: [id])
+  title         String
+  order         Int
+  isLocked      Boolean   @default(false)
+  
+  lessons       Lesson[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+model Lesson {
+  id            String    @id @default(uuid())
+  moduleId      String
+  module        Module    @relation(fields: [moduleId], references: [id])
+  title         String
+  content       String?
+  videoUrl      String?
+  duration      Int?
+  order         Int
+  
+  materials     Material[]
+  progress      Progress[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+model Material {
+  id            String    @id @default(uuid())
+  lessonId      String
+  lesson        Lesson    @relation(fields: [lessonId], references: [id])
+  title         String
+  fileUrl       String
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Enrollment {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  courseId      String
+  course        Course    @relation(fields: [courseId], references: [id])
+  isActive      Boolean   @default(true)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  @@unique([userId, courseId])
+}
+
+model Progress {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  lessonId      String
+  lesson        Lesson    @relation(fields: [lessonId], references: [id])
+  isCompleted   Boolean   @default(false)
+  watchedSeconds Int      @default(0)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  @@unique([userId, lessonId])
+}
+
+model Certificate {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  courseId      String
+  issueDate     DateTime  @default(now())
+  code          String    @unique
+}
+
+model Session {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  refreshToken  String    @unique
+  fingerprint   String?
+  expiresAt     DateTime
+  
+  createdAt     DateTime  @default(now())
+}
+
+model AuditLog {
+  id            String    @id @default(uuid())
+  userId        String?
+  user          User?     @relation(fields: [userId], references: [id])
+  action        String
+  details       String?
+  ipAddress     String?
+  
+  createdAt     DateTime  @default(now())
+}

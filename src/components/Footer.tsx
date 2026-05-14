@@ -187,8 +187,7 @@ const NAV_LINKS = [
 ];
 
 const SOCIAL: { icon: React.ComponentType; href: string; label: string }[] = [
-  { icon: IconInstagram, href: "#", label: "Instagram" },
-  { icon: IconLinkedin, href: "#", label: "LinkedIn" },
+  { icon: IconInstagram, href: "https://www.instagram.com/agenciadnegocios/", label: "Instagram" },
   { icon: IconYoutube, href: "#", label: "YouTube" },
 ];
 
@@ -206,14 +205,18 @@ export default function Footer() {
       gsap.fromTo(
         giantRef.current,
         { y: "12vh", opacity: 0, scale: 0.85 },
-        { y: "0vh", opacity: 1, scale: 1, ease: "power1.out",
-          scrollTrigger: { trigger: wrapperRef.current, start: "top 85%", end: "bottom bottom", scrub: 1.2 } }
+        {
+          y: "0vh", opacity: 1, scale: 1, ease: "power1.out",
+          scrollTrigger: { trigger: wrapperRef.current, start: "top 85%", end: "bottom bottom", scrub: 1.2 }
+        }
       );
       gsap.fromTo(
         [headingRef.current, linksRef.current],
         { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.18, ease: "power3.out",
-          scrollTrigger: { trigger: wrapperRef.current, start: "top 55%", end: "center center", scrub: 1 } }
+        {
+          y: 0, opacity: 1, stagger: 0.18, ease: "power3.out",
+          scrollTrigger: { trigger: wrapperRef.current, start: "top 55%", end: "center center", scrub: 1 }
+        }
       );
     }, wrapperRef);
     return () => ctx.revert();

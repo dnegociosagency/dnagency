@@ -7,6 +7,10 @@ import {
   Wrench,
   Home,
   Dumbbell,
+  Car,
+  PaintBucket,
+  Van,
+  Container,
 } from "lucide-react";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -21,10 +25,10 @@ const CLIENTS = [
   { name: "JJ Moto Peças", Icon: Wrench },
   { name: "Connect Imóveis", Icon: Home },
   { name: "Power Fit", Icon: Dumbbell },
-  { name: "PrimeCar Veiculos", Icon: Dumbbell },
-  { name: "Montarte Inox", Icon: Dumbbell },
-  { name: "XStream Plumbers & Heating", Icon: Dumbbell },
-  { name: "Serpa Painting", Icon: Dumbbell },
+  { name: "PrimeCar Veiculos", Icon: Car },
+  { name: "Montarte Inox", Icon: Container },
+  { name: "XStream Plumbers & Heating", Icon: Van },
+  { name: "Serpa Painting", Icon: PaintBucket },
   // 👉 Adicione mais clientes aqui:
   // { name: "Cliente X", Icon: Star },
 ];

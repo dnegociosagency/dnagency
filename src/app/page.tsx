@@ -8,6 +8,7 @@ import GlobalSection from "@/components/home/GlobalSection";
 import EbookSection from "@/components/home/EbookSection";
 import PricingSection from "@/components/home/PricingSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
+import TeamSection from "@/components/home/TeamSection";
 import FAQSection from "@/components/home/FAQSection";
 import CTASection from "@/components/home/CTASection";
 import PixelWipeTransition from "@/components/ui/PixelWipeTransition";
@@ -47,6 +48,7 @@ export default function Home() {
       <EbookSection />
       <PricingSection />
       <TestimonialsSection />
+      <TeamSection />
       <FAQSection />
       <CTASection />
     </div>

@@ -21,7 +21,7 @@ export default function Navbar() {
     } else {
       setHidden(false);
     }
-    
+
     if (latest > 50) {
       setIsScrolled(true);
     } else {
@@ -35,6 +35,7 @@ export default function Navbar() {
     { name: "Método", href: "/#metodo" },
     { name: "Sobre", href: "/#sobre" },
     { name: "Blog", href: "/blog" },
+    { name: "Cursos", href: "/academy" },
   ];
 
   return (
@@ -49,11 +50,10 @@ export default function Navbar() {
         className={`fixed top-0 inset-x-0 z-50 flex items-center justify-center pt-6 px-4 transition-all duration-300`}
       >
         <div
-          className={`w-full max-w-5xl flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 ${
-            isScrolled
+          className={`w-full max-w-5xl flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 ${isScrolled
               ? "bg-[--color-brand-darker]/70 backdrop-blur-md border border-[--color-border-white-10] shadow-lg"
               : "bg-transparent border border-transparent"
-          }`}
+            }`}
         >
           {/* Logo */}
           <Link href="/" className="flex items-center">

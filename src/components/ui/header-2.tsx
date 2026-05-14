@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,35 @@ import MagneticButton from "@/components/ui/MagneticButton";
 export function Header() {
   const [open, setOpen] = useState(false);
   const scrolled = useScroll(10);
+  const pathname = usePathname();
+  
+  const isAcademy = pathname === "/academy";
+  const [showAcademyHeader, setShowAcademyHeader] = useState(false);
+
+  useEffect(() => {
+    if (!isAcademy) return;
+    
+    const handleScroll = () => {
+      const coursesSection = document.getElementById("courses-showcase");
+      if (coursesSection) {
+        const rect = coursesSection.getBoundingClientRect();
+        // Show header when the top of the courses section reaches the middle of the screen
+        if (rect.top <= window.innerHeight * 0.8) {
+          setShowAcademyHeader(true);
+        } else {
+          setShowAcademyHeader(false);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Initial check
+    handleScroll();
+    
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isAcademy]);
+
+  const isVisible = isAcademy ? showAcademyHeader : true;
 
   const links = [
     { label: "Início", href: "/" },
@@ -21,14 +51,16 @@ export function Header() {
     { label: "Método", href: "/#metodo" },
     { label: "Sobre", href: "/#sobre" },
     { label: "Blog", href: "/blog" },
+    { label: "Cursos", href: "/academy" },
   ];
 
   return (
     <>
       <header
         className={cn(
-          "fixed top-0 inset-x-0 z-50 flex items-center justify-center pt-6 px-4 transition-all duration-300",
-          scrolled ? "pt-4" : "pt-6"
+          "fixed top-0 inset-x-0 z-50 flex items-center justify-center pt-6 px-4 transition-all duration-500",
+          scrolled ? "pt-4" : "pt-6",
+          !isVisible && "opacity-0 pointer-events-none -translate-y-full"
         )}
       >
         <div
