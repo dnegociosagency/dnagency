@@ -33,19 +33,9 @@ export default function RegisterPage() {
         throw new Error(data.message || "Erro ao registrar conta");
       }
 
-      // Auto login after registration
-      const loginRes = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: formData.email, password: formData.password }),
-      });
-
-      if (loginRes.ok) {
-        router.push("/dashboard");
-        router.refresh();
-      } else {
-        router.push("/login");
-      }
+      // O backend agora faz o auto-login e seta o cookie de sessão automaticamente
+      router.push("/dashboard");
+      router.refresh();
     } catch (err: any) {
       setError(err.message);
     } finally {

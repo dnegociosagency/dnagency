@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { hashPassword } from "@/lib/auth";
+import { hashPassword, generateAccessToken, generateRefreshToken } from "@/lib/auth";
 
 export async function POST(req: Request) {
   try {
@@ -41,22 +41,70 @@ export async function POST(req: Request) {
         email,
         passwordHash,
       },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
+    });
+
+    // Auto-login: generate tokens
+    const payload = {
+      userId: newUser.id,
+      role: newUser.role,
+      companyId: newUser.companyId,
+    };
+
+    const accessToken = generateAccessToken(payload);
+    const refreshToken = generateRefreshToken(payload);
+
+    // Save session in database
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + 7); // 7 days
+
+    await prisma.session.create({
+      data: {
+        userId: newUser.id,
+        refreshToken,
+        expiresAt,
       },
     });
 
-    return NextResponse.json(
-      { message: "Usuário registrado com sucesso.", user: newUser },
+    const response = NextResponse.json(
+      {
+        message: "Usuário registrado e autenticado com sucesso.",
+        user: {
+          id: newUser.id,
+          name: newUser.name,
+          email: newUser.email,
+          role: newUser.role,
+        },
+        accessToken,
+      },
       { status: 201 }
     );
-  } catch (error) {
-    console.error("REGISTER_ERROR", error);
+
+    // Set refresh token as HTTP-Only cookie
+    response.cookies.set("refresh_token", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
+    });
+
+    return response;
+  } catch (error: any) {
+    console.error("=======================");
+    console.error("[REGISTER_ERROR] Erro na rota de registro:");
+    console.error(error);
+    console.error("=======================");
+
+    // Verifica erro específico de conexão do banco/Prisma (Hostinger)
+    if (error?.message?.includes("Access denied") || error?.message?.includes("timeout")) {
+      return NextResponse.json(
+        { message: "Erro de conexão com o banco de dados. Verifique o Remote MySQL da Hostinger." },
+        { status: 503 }
+      );
+    }
+
     return NextResponse.json(
-      { message: "Erro interno no servidor." },
+      { message: "Erro interno no servidor ao tentar registrar." },
       { status: 500 }
     );
   }
