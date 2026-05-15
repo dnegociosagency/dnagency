@@ -36,6 +36,25 @@ export async function PATCH(
       return NextResponse.json({ message: "Status alterado com sucesso" });
     }
 
+    if (body.action === "change_role") {
+      if (!body.role) return NextResponse.json({ message: "Role é obrigatória" }, { status: 400 });
+      
+      const targetUser = await prisma.user.findUnique({ where: { id } });
+      if (!targetUser) return NextResponse.json({ message: "Usuário não encontrado" }, { status: 404 });
+      
+      // Prevenir que admin remova seu próprio admin
+      if (targetUser.id === user.id && body.role !== "ADMIN") {
+        return NextResponse.json({ message: "Você não pode remover seu próprio acesso de Administrador." }, { status: 400 });
+      }
+
+      await prisma.user.update({
+        where: { id },
+        data: { role: body.role }
+      });
+
+      return NextResponse.json({ message: "Papel do usuário atualizado com sucesso" });
+    }
+
     return NextResponse.json({ message: "Ação não reconhecida" }, { status: 400 });
   } catch (error) {
     console.error("PATCH_USER_ERROR", error);

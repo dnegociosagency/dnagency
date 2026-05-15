@@ -2,13 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Filter, MoreVertical, Lock, Unlock, Mail, Loader2 } from "lucide-react";
+import { Search, Filter, MoreVertical, Lock, Unlock, Mail, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function UsersManagementPage() {
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+
+  // Estados para edição de Role (Papel)
+  const [isRoleModalOpen, setRoleModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [selectedRole, setSelectedRole] = useState("STUDENT");
+  const [savingRole, setSavingRole] = useState(false);
 
   const fetchUsers = async () => {
     try {
@@ -46,6 +52,37 @@ export default function UsersManagementPage() {
       console.error(error);
     } finally {
       setActionLoading(null);
+    }
+  };
+
+  const openRoleModal = (user: any) => {
+    setSelectedUser(user);
+    setSelectedRole(user.role);
+    setRoleModalOpen(true);
+  };
+
+  const handleSaveRole = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedUser) return;
+    setSavingRole(true);
+
+    try {
+      const res = await fetch(`/api/admin/users/${selectedUser.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "change_role", role: selectedRole })
+      });
+      if (res.ok) {
+        await fetchUsers(); // Recarrega com o novo cargo
+        setRoleModalOpen(false);
+      } else {
+        const err = await res.json();
+        alert(err.message || "Erro ao atualizar o papel do usuário.");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSavingRole(false);
     }
   };
 
@@ -147,9 +184,11 @@ export default function UsersManagementPage() {
                     </td>
                     <td className="py-4 px-4 text-right">
                       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-white/40 hover:text-white" title="Enviar e-mail">
-                          <Mail className="w-4 h-4" />
-                        </Button>
+                        <a href={`mailto:${user.email}`}>
+                          <Button variant="ghost" size="icon" className="h-8 w-8 text-white/40 hover:text-white" title={`Enviar e-mail para ${user.email}`}>
+                            <Mail className="w-4 h-4" />
+                          </Button>
+                        </a>
                         <Button 
                           onClick={() => handleToggleBlock(user.id)}
                           disabled={actionLoading === user.id}
@@ -166,7 +205,13 @@ export default function UsersManagementPage() {
                             <Unlock className="w-4 h-4" />
                           )}
                         </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-white/40 hover:text-white">
+                        <Button 
+                          onClick={() => openRoleModal(user)}
+                          variant="ghost" 
+                          size="icon" 
+                          className="h-8 w-8 text-white/40 hover:text-[--color-brand-primary]"
+                          title="Editar Nível de Acesso (Papel)"
+                        >
                           <MoreVertical className="w-4 h-4" />
                         </Button>
                       </div>
@@ -178,6 +223,35 @@ export default function UsersManagementPage() {
           </table>
         </div>
       </div>
+
+      {/* Modal Editar Papel */}
+      {isRoleModalOpen && selectedUser && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-[#070d0c] border border-white/10 rounded-3xl p-6 w-full max-w-md relative shadow-2xl">
+            <button onClick={() => setRoleModalOpen(false)} className="absolute top-4 right-4 text-white/40 hover:text-white"><X className="w-5 h-5"/></button>
+            <h2 className="text-xl font-bold text-white mb-2">Nível de Acesso</h2>
+            <p className="text-sm text-white/50 mb-6">Alterando as permissões de <strong className="text-white">{selectedUser.name}</strong></p>
+            
+            <form onSubmit={handleSaveRole} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-white/70 mb-2">Selecione o Papel</label>
+                <select 
+                  value={selectedRole} 
+                  onChange={e => setSelectedRole(e.target.value)} 
+                  className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:outline-none focus:border-[--color-brand-primary] appearance-none"
+                >
+                  <option value="STUDENT">STUDENT (Aluno comum)</option>
+                  <option value="INSTRUCTOR">INSTRUCTOR (Pode gerenciar cursos)</option>
+                  <option value="ADMIN">ADMIN (Acesso total)</option>
+                </select>
+              </div>
+              <Button type="submit" disabled={savingRole} className="w-full bg-[--color-brand-primary] text-white hover:bg-[#3b8780] py-6 rounded-xl mt-4">
+                {savingRole ? <Loader2 className="w-5 h-5 animate-spin" /> : "Salvar Permissões"}
+              </Button>
+            </form>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }
