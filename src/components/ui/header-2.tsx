@@ -54,7 +54,7 @@ export function Header() {
     { label: "Início", href: "/" },
     { label: "Serviços", href: "/#servicos" },
     { label: "Método", href: "/#metodo" },
-    { label: "Sobre", href: "/#sobre" },
+    { label: "Sobre", href: "/sobre" },
     { label: "Blog", href: "/blog" },
     { label: "Cursos", href: "/academy" },
   ];
