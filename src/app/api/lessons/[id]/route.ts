@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/session";
@@ -28,8 +28,9 @@ function getYoutubeEmbedUrl(url: string | undefined): string | null {
 }
 
 // PATCH: Update Lesson
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const user = await getCurrentUser();
     if (!user || (user.role !== "ADMIN" && user.role !== "INSTRUCTOR")) {
       return NextResponse.json({ message: "Acesso Negado." }, { status: 403 });
@@ -42,7 +43,7 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
       return NextResponse.json({ message: "Dados inválidos", details: result.error.flatten().fieldErrors }, { status: 400 });
     }
 
-    const lessonData = await prisma.lesson.findUnique({ where: { id: params.id } });
+    const lessonData = await prisma.lesson.findUnique({ where: { id } });
     if (!lessonData) {
       return NextResponse.json({ message: "Aula não encontrada" }, { status: 404 });
     }
@@ -55,7 +56,7 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
     }
 
     const updatedLesson = await prisma.lesson.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         ...otherData,
         ...(videoUrl !== undefined && { videoUrl }),
@@ -71,19 +72,20 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
 }
 
 // DELETE: Delete Lesson
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const user = await getCurrentUser();
     if (!user || (user.role !== "ADMIN" && user.role !== "INSTRUCTOR")) {
       return NextResponse.json({ message: "Acesso Negado." }, { status: 403 });
     }
 
-    const lessonData = await prisma.lesson.findUnique({ where: { id: params.id } });
+    const lessonData = await prisma.lesson.findUnique({ where: { id } });
     if (!lessonData) {
       return NextResponse.json({ message: "Aula não encontrada" }, { status: 404 });
     }
 
-    await prisma.lesson.delete({ where: { id: params.id } });
+    await prisma.lesson.delete({ where: { id } });
 
     return NextResponse.json({ success: true, message: "Aula deletada" }, { status: 200 });
   } catch (error) {

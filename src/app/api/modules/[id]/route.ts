@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/session";
@@ -10,8 +10,9 @@ const updateModuleSchema = z.object({
 });
 
 // PATCH: Update Module
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const user = await getCurrentUser();
     if (!user || (user.role !== "ADMIN" && user.role !== "INSTRUCTOR")) {
       return NextResponse.json({ message: "Acesso Negado." }, { status: 403 });
@@ -24,13 +25,13 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
       return NextResponse.json({ message: "Dados inválidos", details: result.error.flatten().fieldErrors }, { status: 400 });
     }
 
-    const moduleData = await prisma.module.findUnique({ where: { id: params.id } });
+    const moduleData = await prisma.module.findUnique({ where: { id } });
     if (!moduleData) {
       return NextResponse.json({ message: "Módulo não encontrado" }, { status: 404 });
     }
 
     const updatedModule = await prisma.module.update({
-      where: { id: params.id },
+      where: { id },
       data: result.data
     });
 
@@ -42,19 +43,20 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
 }
 
 // DELETE: Delete Module
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const user = await getCurrentUser();
     if (!user || (user.role !== "ADMIN" && user.role !== "INSTRUCTOR")) {
       return NextResponse.json({ message: "Acesso Negado." }, { status: 403 });
     }
 
-    const moduleData = await prisma.module.findUnique({ where: { id: params.id } });
+    const moduleData = await prisma.module.findUnique({ where: { id } });
     if (!moduleData) {
       return NextResponse.json({ message: "Módulo não encontrado" }, { status: 404 });
     }
 
-    await prisma.module.delete({ where: { id: params.id } });
+    await prisma.module.delete({ where: { id } });
 
     return NextResponse.json({ success: true, message: "Módulo deletado" }, { status: 200 });
   } catch (error) {
