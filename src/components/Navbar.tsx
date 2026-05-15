@@ -51,8 +51,8 @@ export default function Navbar() {
       >
         <div
           className={`w-full max-w-5xl flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 ${isScrolled
-              ? "bg-[--color-brand-darker]/70 backdrop-blur-md border border-[--color-border-white-10] shadow-lg"
-              : "bg-transparent border border-transparent"
+            ? "bg-[--color-brand-darker]/70 backdrop-blur-md border border-[--color-border-white-10] shadow-lg"
+            : "bg-transparent border border-transparent"
             }`}
         >
           {/* Logo */}
@@ -80,11 +80,11 @@ export default function Navbar() {
             </div>
             <Link
               href="/login"
-              className="px-5 py-2 text-sm font-bold rounded-full border border-[--color-brand-primary] text-[--color-brand-primary] hover:bg-[--color-brand-primary] hover:text-white transition-all duration-300"
+              className="px-5 py-2 text-sm font-bold rounded-full border border-[#2f6b65] text-[#2f6b65] hover:bg-[#2f6b65] hover:text-white transition-all duration-300"
             >
               Acessar Plataforma
             </Link>
-            <a href="https://wa.me/558899222054" target="_blank" rel="noopener noreferrer">
+            <a href="/login" target="_blank" rel="noopener noreferrer">
               <MagneticButton className="px-6 py-2 text-sm font-bold bg-[--color-brand-primary] text-white hover:bg-[#3b8780] border-none shadow-[0_0_15px_rgba(47,107,101,0.4)]">
                 Falar com Especialista
               </MagneticButton>
@@ -133,7 +133,7 @@ export default function Navbar() {
               <Link
                 href="/login"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-8 py-3 text-lg font-bold rounded-full border-2 border-[--color-brand-primary] text-[--color-brand-primary] hover:bg-[--color-brand-primary] hover:text-white transition-all duration-300"
+                className="px-8 py-3 text-lg font-bold rounded-full border-2 border-[#2f6b65] text-[#2f6b65] hover:bg-[#2f6b65] hover:text-white transition-all duration-300"
               >
                 Acessar Plataforma
               </Link>
