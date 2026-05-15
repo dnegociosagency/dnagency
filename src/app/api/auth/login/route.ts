@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
     if (!email || !password) {
       return NextResponse.json(
-        { message: "Email e senha são obrigatórios." },
+        { error: "Dados inválidos", message: "Email e senha são obrigatórios." },
         { status: 400 }
       );
     }
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
 
     if (!user) {
       return NextResponse.json(
-        { message: "Credenciais inválidas." },
+        { error: "Email ou senha inválidos" },
         { status: 401 }
       );
     }
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 
     if (!isPasswordValid) {
       return NextResponse.json(
-        { message: "Credenciais inválidas." },
+        { error: "Email ou senha inválidos" },
         { status: 401 }
       );
     }
@@ -71,8 +71,16 @@ export async function POST(req: Request) {
       { status: 200 }
     );
 
-    // Set refresh token as HTTP-Only cookie
-    response.cookies.set("refresh_token", refreshToken, {
+    // Set tokens as HTTP-Only cookies
+    response.cookies.set("accessToken", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+      maxAge: 15 * 60, // 15 minutes in seconds
+    });
+
+    response.cookies.set("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
@@ -84,7 +92,7 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("LOGIN_ERROR", error);
     return NextResponse.json(
-      { message: "Erro interno no servidor." },
+      { error: "Erro interno no servidor" },
       { status: 500 }
     );
   }

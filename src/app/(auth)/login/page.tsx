@@ -27,16 +27,25 @@ export default function LoginPage() {
         body: JSON.stringify(formData),
       });
 
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Erro de comunicação com o servidor.");
+      }
+
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.message || "Erro ao fazer login");
+        throw new Error(data.error || data.message || "Erro ao fazer login");
       }
 
       router.push("/dashboard");
       router.refresh();
     } catch (err: any) {
-      setError(err.message);
+      if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+        setError("Erro de conexão. Verifique sua internet.");
+      } else {
+        setError(err.message || "Email ou senha inválidos");
+      }
     } finally {
       setLoading(false);
     }
