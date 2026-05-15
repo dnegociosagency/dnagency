@@ -14,7 +14,7 @@ export async function GET(req: Request) {
     const courses = await prisma.course.findMany({
       include: {
         _count: {
-          select: { modules: true, enrollments: true }
+          select: { modules: true, userCourses: true }
         }
       },
       orderBy: { createdAt: "desc" }

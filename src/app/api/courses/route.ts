@@ -22,7 +22,7 @@ export async function GET(request: Request) {
       where,
       include: {
         _count: {
-          select: { modules: true, enrollments: true }
+          select: { modules: true, userCourses: true }
         }
       },
       orderBy: { createdAt: "desc" }

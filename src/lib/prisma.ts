@@ -12,6 +12,7 @@ function createPrismaClient(): PrismaClient {
     user: decodeURIComponent(url.username),
     password: decodeURIComponent(url.password),
     database: url.pathname.replace("/", ""),
+    connectionLimit: 2, // Limita o pool em Vercel (Serverless) para não estourar na Hostinger
   });
 
   return new PrismaClient({ adapter });

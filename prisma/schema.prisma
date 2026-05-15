@@ -25,7 +25,7 @@ model User {
   companyId     String?
   company       Company?  @relation(fields: [companyId], references: [id])
   
-  enrollments   Enrollment[]
+  userCourses   UserCourse[]
   progress      Progress[]
   certificates  Certificate[]
   sessions      Session[]
@@ -51,14 +51,14 @@ model Course {
   id            String    @id @default(uuid())
   title         String
   slug          String    @unique
-  description   String?
+  description   String?   @db.Text
   thumbnail     String?
   price         Decimal   @db.Decimal(10, 2)
   isPublished   Boolean   @default(false)
   instructorId  String
   
   modules       Module[]
-  enrollments   Enrollment[]
+  userCourses   UserCourse[]
   
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -68,7 +68,7 @@ model Course {
 model Module {
   id            String    @id @default(uuid())
   courseId      String
-  course        Course    @relation(fields: [courseId], references: [id])
+  course        Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
   title         String
   order         Int
   isLocked      Boolean   @default(false)
@@ -83,14 +83,15 @@ model Module {
 model Lesson {
   id            String    @id @default(uuid())
   moduleId      String
-  module        Module    @relation(fields: [moduleId], references: [id])
+  module        Module    @relation(fields: [moduleId], references: [id], onDelete: Cascade)
   title         String
-  content       String?
+  content       String?   @db.Text
   videoUrl      String?
+  embedUrl      String?
   duration      Int?
   order         Int
   
-  materials     Material[]
+  attachments   Attachment[]
   progress      Progress[]
   
   createdAt     DateTime  @default(now())
@@ -98,23 +99,25 @@ model Lesson {
   deletedAt     DateTime?
 }
 
-model Material {
+model Attachment {
   id            String    @id @default(uuid())
   lessonId      String
-  lesson        Lesson    @relation(fields: [lessonId], references: [id])
-  title         String
+  lesson        Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  fileName      String
   fileUrl       String
+  mimeType      String?
+  size          Int?
   
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
 
-model Enrollment {
+model UserCourse {
   id            String    @id @default(uuid())
   userId        String
-  user          User      @relation(fields: [userId], references: [id])
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   courseId      String
-  course        Course    @relation(fields: [courseId], references: [id])
+  course        Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
   isActive      Boolean   @default(true)
   
   createdAt     DateTime  @default(now())
@@ -126,9 +129,9 @@ model Enrollment {
 model Progress {
   id            String    @id @default(uuid())
   userId        String
-  user          User      @relation(fields: [userId], references: [id])
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   lessonId      String
-  lesson        Lesson    @relation(fields: [lessonId], references: [id])
+  lesson        Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
   isCompleted   Boolean   @default(false)
   watchedSeconds Int      @default(0)
   
@@ -141,7 +144,7 @@ model Progress {
 model Certificate {
   id            String    @id @default(uuid())
   userId        String
-  user          User      @relation(fields: [userId], references: [id])
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   courseId      String
   issueDate     DateTime  @default(now())
   code          String    @unique
