@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     const result = issueCertSchema.safeParse(body);
 
     if (!result.success) {
-      return NextResponse.json({ error: "Invalid data", details: result.error.errors }, { status: 400 });
+      return NextResponse.json({ error: "Invalid data", details: result.error.flatten().fieldErrors }, { status: 400 });
     }
 
     const { courseId } = result.data;
