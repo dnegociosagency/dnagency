@@ -6,6 +6,7 @@ import Preloader from "@/components/Preloader";
 import { Header } from "@/components/ui/header-2";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot/Chatbot";
+import { Providers } from "@/lib/query-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -52,12 +53,14 @@ export default function RootLayout({
     >
       <body className="min-h-screen flex flex-col overflow-x-hidden">
         <Preloader />
-        <SmoothScroll>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </SmoothScroll>
-        <Chatbot />
+        <Providers>
+          <SmoothScroll>
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </SmoothScroll>
+          <Chatbot />
+        </Providers>
       </body>
     </html>
   );

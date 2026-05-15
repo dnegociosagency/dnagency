@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Zap, BookOpen, Award, Settings, Building2, LogOut } from "lucide-react";
+import { Zap, BookOpen, Award, Settings, Building2, LogOut, Users } from "lucide-react";
 import { getCurrentUser } from "@/lib/session";
 
 export default async function DashboardLayout({
@@ -43,11 +43,31 @@ export default async function DashboardLayout({
           {(user.role === "COMPANY_ADMIN" || user.role === "ADMIN") && (
             <>
               <div className="pt-6 pb-2 px-4 text-xs font-bold text-white/30 uppercase tracking-widest">
-                Gestão
+                Corporativo
               </div>
               <Link href="/dashboard/company" className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/50 hover:text-white hover:bg-white/5 transition-all font-medium">
                 <Building2 className="w-5 h-5" />
-                Painel Corporativo
+                Painel da Empresa
+              </Link>
+            </>
+          )}
+
+          {(user.role === "ADMIN" || user.role === "MODERATOR") && (
+            <>
+              <div className="pt-6 pb-2 px-4 text-xs font-bold text-white/30 uppercase tracking-widest">
+                Administração
+              </div>
+              <Link href="/dashboard/admin" className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/50 hover:text-white hover:bg-white/5 transition-all font-medium">
+                <Settings className="w-5 h-5" />
+                Painel Geral
+              </Link>
+              <Link href="/dashboard/admin/courses" className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/50 hover:text-white hover:bg-white/5 transition-all font-medium">
+                <BookOpen className="w-5 h-5" />
+                Course Builder
+              </Link>
+              <Link href="/dashboard/admin/users" className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/50 hover:text-white hover:bg-white/5 transition-all font-medium">
+                <Users className="w-5 h-5" />
+                Gestão de Alunos
               </Link>
             </>
           )}

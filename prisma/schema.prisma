@@ -8,6 +8,8 @@ datasource db {
 
 enum Role {
   ADMIN
+  MODERATOR
+  SUPPORT
   INSTRUCTOR
   STUDENT
   COMPANY_ADMIN
