@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowUp, MessageCircle } from "lucide-react";
 
@@ -194,10 +195,13 @@ const SOCIAL: { icon: React.ComponentType; href: string; label: string }[] = [
 // ─── Main ───────────────────────────────────────────────────────────────────
 
 export default function Footer() {
+  const pathname = usePathname();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const giantRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
+
+  const isPlatformRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register");
 
   useEffect(() => {
     if (typeof window === "undefined" || !wrapperRef.current) return;
@@ -220,7 +224,11 @@ export default function Footer() {
       );
     }, wrapperRef);
     return () => ctx.revert();
-  }, []);
+  }, [isPlatformRoute]);
+
+  if (isPlatformRoute) {
+    return null;
+  }
 
   return (
     <>

@@ -18,7 +18,12 @@ export function Header() {
   const pathname = usePathname();
   
   const isAcademy = pathname === "/academy";
+  const isPlatformRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register");
   const [showAcademyHeader, setShowAcademyHeader] = useState(false);
+
+  if (isPlatformRoute) {
+    return null;
+  }
 
   useEffect(() => {
     if (!isAcademy) return;
