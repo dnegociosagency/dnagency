@@ -78,6 +78,12 @@ export default function Navbar() {
             <div className="relative w-9 h-9">
               <ThemeToggle variant="icon" defaultTheme="dark" duration={550} />
             </div>
+            <Link
+              href="/login"
+              className="px-5 py-2 text-sm font-bold rounded-full border border-[--color-brand-primary] text-[--color-brand-primary] hover:bg-[--color-brand-primary] hover:text-white transition-all duration-300"
+            >
+              Acessar Plataforma
+            </Link>
             <a href="https://wa.me/558899222054" target="_blank" rel="noopener noreferrer">
               <MagneticButton className="px-6 py-2 text-sm font-bold bg-[--color-brand-primary] text-white hover:bg-[#3b8780] border-none shadow-[0_0_15px_rgba(47,107,101,0.4)]">
                 Falar com Especialista
@@ -123,7 +129,14 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <div className="mt-4 flex flex-col items-center gap-6">
+            <div className="mt-4 flex flex-col items-center gap-4">
+              <Link
+                href="/login"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-8 py-3 text-lg font-bold rounded-full border-2 border-[--color-brand-primary] text-[--color-brand-primary] hover:bg-[--color-brand-primary] hover:text-white transition-all duration-300"
+              >
+                Acessar Plataforma
+              </Link>
               <a href="https://wa.me/558899222054" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>
                 <MagneticButton className="px-8 py-3 text-lg font-bold bg-[--color-brand-primary] text-white hover:bg-[#3b8780] shadow-[0_0_20px_rgba(47,107,101,0.4)]">
                   Falar com Especialista
