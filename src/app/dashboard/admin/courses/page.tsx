@@ -5,6 +5,15 @@ import { Plus, Settings, Video, Users, MoreVertical } from "lucide-react";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
+interface CourseWithCounts {
+  id: string;
+  title: string;
+  _count: {
+    modules: number;
+    enrollments: number;
+  };
+}
+
 export default async function AdminCoursesPage() {
   const user = await getCurrentUser();
 
@@ -12,14 +21,14 @@ export default async function AdminCoursesPage() {
     redirect("/dashboard");
   }
 
-  const courses = await prisma.course.findMany({
+  const courses = (await prisma.course.findMany({
     include: {
       _count: {
         select: { modules: true, enrollments: true }
       }
     },
     orderBy: { createdAt: "desc" }
-  });
+  })) as unknown as CourseWithCounts[];
 
   return (
     <div className="space-y-8">
@@ -62,7 +71,7 @@ export default async function AdminCoursesPage() {
                   </td>
                 </tr>
               ) : (
-                courses.map((course) => (
+                courses.map((course: CourseWithCounts) => (
                   <tr key={course.id} className="hover:bg-white/[0.02] transition-colors">
                     <td className="px-6 py-4 font-bold text-white flex items-center gap-3">
                       <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center">
