@@ -1,96 +1,123 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Plus, GripVertical, Settings, Video, FileText, ChevronDown } from "lucide-react";
+import { Plus, BookOpen, Clock, Settings, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function CourseBuilderPage() {
-  const [modules, setModules] = useState([
-    {
-      id: "m1", title: "Módulo 1: Fundamentos", lessons: [
-        { id: "l1", title: "Boas-vindas e Mindset", type: "video" },
-        { id: "l2", title: "O que é Performance?", type: "video" }
-      ]
-    },
-    {
-      id: "m2", title: "Módulo 2: Tráfego Pago na Prática", lessons: [
-        { id: "l3", title: "Configurando o BM", type: "video" },
-        { id: "l4", title: "Material Complementar", type: "pdf" }
-      ]
+interface Course {
+  id: string;
+  title: string;
+  description: string;
+  thumbnail?: string;
+  _count: {
+    modules: number;
+    userCourses: number;
+  };
+}
+
+export default function AdminCoursesPage() {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCourses() {
+      try {
+        const res = await fetch("/api/admin/courses");
+        if (res.ok) {
+          const data = await res.json();
+          setCourses(data);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar cursos", error);
+      } finally {
+        setLoading(false);
+      }
     }
-  ]);
+    fetchCourses();
+  }, []);
 
   return (
     <div className="space-y-8 p-4">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
-            Course Builder
+            Meus Cursos
           </h1>
-          <p className="text-sm text-white/50 mt-1">Crie, reorganize e gerencie as aulas do curso.</p>
+          <p className="text-sm text-white/50 mt-1">Gerencie e crie novos treinamentos para seus alunos.</p>
         </div>
-        <div className="flex gap-3">
-          <Button className="bg-white/5 text-white hover:bg-white/10 rounded-full px-6">
-            Configurações
-          </Button>
+        <Link href="/dashboard/admin/courses/new">
           <Button className="bg-[--color-brand-primary] text-white hover:bg-[#3b8780] rounded-full px-6">
-            <Plus className="w-4 h-4 mr-2" /> Novo Módulo
+            <Plus className="w-4 h-4 mr-2" /> Novo Curso
           </Button>
-        </div>
+        </Link>
       </div>
 
-      <div className="max-w-4xl">
-        <div className="space-y-4">
-          {modules.map((module, mIndex) => (
+      {loading ? (
+        <div className="flex justify-center items-center py-20">
+          <Loader2 className="w-8 h-8 text-[--color-brand-primary] animate-spin" />
+        </div>
+      ) : courses.length === 0 ? (
+        <div className="premium-card p-12 text-center flex flex-col items-center justify-center">
+          <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-4">
+            <BookOpen className="w-8 h-8 text-white/20" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2">Nenhum curso encontrado</h3>
+          <p className="text-white/50 max-w-md mx-auto mb-6">
+            Você ainda não criou nenhum treinamento. Clique no botão abaixo para começar a construir a sua plataforma.
+          </p>
+          <Link href="/dashboard/admin/courses/new">
+            <Button className="bg-white/10 text-white hover:bg-white/20 rounded-full px-6">
+              Criar meu primeiro curso
+            </Button>
+          </Link>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {courses.map((course, i) => (
             <motion.div
-              key={module.id}
-              initial={{ opacity: 0, y: 10 }}
+              key={course.id}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: mIndex * 0.1 }}
-              className="premium-card overflow-hidden"
+              transition={{ delay: i * 0.1 }}
+              className="premium-card overflow-hidden flex flex-col group cursor-pointer border border-transparent hover:border-[--color-brand-primary]/30 transition-all"
             >
-              {/* Module Header */}
-              <div className="p-4 bg-white/[0.02] border-b border-white/5 flex items-center justify-between cursor-pointer hover:bg-white/[0.04] transition-colors">
-                <div className="flex items-center gap-3">
-                  <GripVertical className="w-5 h-5 text-white/20 cursor-grab" />
-                  <h3 className="font-semibold text-lg text-white">{module.title}</h3>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold px-2 py-1 bg-[--color-brand-primary]/20 text-[--color-brand-primary] rounded-md">
-                    {module.lessons.length} Aulas
-                  </span>
-                  <ChevronDown className="w-5 h-5 text-white/40" />
+              <div className="h-40 bg-white/5 relative overflow-hidden">
+                {course.thumbnail ? (
+                  <img src={course.thumbnail} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[--color-brand-primary]/20 to-black/40 group-hover:scale-105 transition-transform duration-500">
+                    <BookOpen className="w-10 h-10 text-[--color-brand-primary]/50" />
+                  </div>
+                )}
+                <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium text-white border border-white/10">
+                  {course._count.modules} Módulos
                 </div>
               </div>
-
-              {/* Lessons List (Placeholder for Drag & Drop context) */}
-              <div className="p-2 space-y-1 bg-black/20">
-                {module.lessons.map((lesson) => (
-                  <div key={lesson.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 group border border-transparent hover:border-white/5 transition-all">
-                    <div className="flex items-center gap-3">
-                      <GripVertical className="w-4 h-4 text-white/10 cursor-grab opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <div className={`p-1.5 rounded-md ${lesson.type === 'video' ? 'bg-blue-500/20 text-blue-400' : 'bg-rose-500/20 text-rose-400'}`}>
-                        {lesson.type === 'video' ? <Video className="w-4 h-4" /> : <FileText className="w-4 h-4" />}
-                      </div>
-                      <span className="text-sm font-medium text-white/80">{lesson.title}</span>
-                    </div>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button variant="ghost" size="icon" className="h-8 w-8 text-white/50 hover:text-white">
-                        <Settings className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+              
+              <div className="p-5 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-white mb-2 line-clamp-1 group-hover:text-[--color-brand-primary] transition-colors">{course.title}</h3>
+                <p className="text-white/50 text-sm line-clamp-2 mb-4 flex-1">
+                  {course.description}
+                </p>
                 
-                <button className="w-full mt-2 py-3 rounded-lg border border-dashed border-white/10 text-white/40 text-sm font-medium flex items-center justify-center gap-2 hover:bg-white/5 hover:text-white/70 hover:border-white/20 transition-all">
-                  <Plus className="w-4 h-4" /> Adicionar Aula
-                </button>
+                <div className="flex items-center justify-between pt-4 border-t border-white/5 mt-auto">
+                  <div className="flex items-center gap-2 text-white/40 text-xs">
+                    <Settings className="w-4 h-4" />
+                    <span>{course._count.userCourses} Alunos</span>
+                  </div>
+                  <Link href={`/dashboard/admin/courses/${course.id}`}>
+                    <Button variant="ghost" className="text-[--color-brand-primary] hover:bg-[--color-brand-primary]/10 hover:text-white rounded-full text-sm px-4">
+                      Construtor
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
+      )}
     </div>
   );
 }
