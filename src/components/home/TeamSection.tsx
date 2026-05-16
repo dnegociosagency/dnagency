@@ -74,6 +74,7 @@ export default function TeamSection() {
     if (!section || !glow) return;
 
     const handleMouseMove = (e: MouseEvent) => {
+      if (window.matchMedia("(hover: none)").matches) return; // Prevent heavy calculations on mobile
       const rect = section.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width - 0.5) * 60;
       const y = ((e.clientY - rect.top) / rect.height - 0.5) * 40;
@@ -192,7 +193,7 @@ export default function TeamSection() {
     >
       {/* Three.js Background Shader em vez do ruído */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-[1] opacity-40">
-        <Canvas camera={{ position: [0, 0, 5] }} gl={{ alpha: true }}>
+        <Canvas camera={{ position: [0, 0, 5] }} gl={{ alpha: true }} dpr={[1, 1.5]}>
           <ambientLight intensity={1} />
           <ShaderPlane position={[0, 0, 0]} color1="#2f6b65" color2="#040807" scale={15} />
         </Canvas>

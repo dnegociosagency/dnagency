@@ -181,7 +181,7 @@ export default function HeroMacBook() {
 
       {/* 3D Canvas MacBook */}
       <div className="absolute inset-0 z-10 w-full h-full pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
+        <Canvas camera={{ position: [0, 0, 15], fov: 45 }} dpr={[1, 1.5]}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 10]} intensity={1} />
           <directionalLight position={[-10, 10, -10]} intensity={0.5} />

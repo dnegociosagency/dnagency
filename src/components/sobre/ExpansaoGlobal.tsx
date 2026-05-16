@@ -2,18 +2,22 @@
 
 import { useEffect, useRef } from "react";
 import createGlobe from "cobe";
-import { motion } from "framer-motion";
+import { motion, useInView as motionUseInView } from "framer-motion";
 
 export default function ExpansaoGlobal() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const isInView = motionUseInView(containerRef, { margin: "0px 0px 400px 0px" });
 
   useEffect(() => {
     let phi = 0;
 
     if (!canvasRef.current) return;
 
+    const dpr = Math.min(window.devicePixelRatio, 1.5); // Optimize for mobile
+
     const globe = createGlobe(canvasRef.current, {
-      devicePixelRatio: 2,
+      devicePixelRatio: dpr,
       width: 1000 * 2,
       height: 1000 * 2,
       phi: 0,
@@ -37,8 +41,7 @@ export default function ExpansaoGlobal() {
       ],
       // @ts-ignore - type definitions might be outdated
       onRender: (state: Record<string, any>) => {
-        // Called on every animation frame.
-        // `state` will be an empty object, return updated params.
+        if (!isInView) return; // Pause calculations when off-screen
         state.phi = phi;
         phi += 0.003;
       },
@@ -50,7 +53,7 @@ export default function ExpansaoGlobal() {
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-black overflow-hidden flex flex-col items-center justify-center py-32">
+    <section ref={containerRef} className="relative min-h-screen bg-black overflow-hidden flex flex-col items-center justify-center py-32">
       
       <div className="absolute inset-0 flex items-center justify-center opacity-60 mix-blend-screen pointer-events-none">
         <canvas

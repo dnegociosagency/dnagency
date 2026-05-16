@@ -70,6 +70,7 @@ export default function LadoHumano() {
             clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", 
             duration: 1.5, 
             ease: "power4.inOut",
+            force3D: true,
             scrollTrigger: {
               trigger: img,
               start: "top 85%",
@@ -105,9 +106,9 @@ export default function LadoHumano() {
                 key={member.id} 
                 className={`w-full flex flex-col items-start ${isOdd ? 'md:mt-32' : ''}`}
               >
-                <div className="team-reveal-img w-full aspect-[3/4] overflow-hidden rounded-sm relative">
+                <div className="team-reveal-img w-full aspect-[3/4] overflow-hidden rounded-sm relative will-change-[clip-path,transform]">
                   <motion.div 
-                    className="absolute inset-[-10%] grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+                    className="absolute inset-[-10%] grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 will-change-transform"
                     style={{ y: isOdd ? parallaxOdd : parallaxEven }}
                   >
                     <Image

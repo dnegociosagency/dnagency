@@ -43,6 +43,7 @@ export default function PricingSection() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      if (window.matchMedia("(hover: none)").matches) return;
       // Normalize to -0.5 to 0.5
       mouseX.set(e.clientX / window.innerWidth - 0.5);
       mouseY.set(e.clientY / window.innerHeight - 0.5);
@@ -55,7 +56,7 @@ export default function PricingSection() {
     <section ref={containerRef} className="relative bg-[#040807] py-24 md:py-40 px-4 md:px-6 overflow-hidden">
       {/* Three.js Background Shader */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-[1] opacity-60">
-        <Canvas camera={{ position: [0, 0, 5] }} gl={{ alpha: true }}>
+        <Canvas camera={{ position: [0, 0, 5] }} gl={{ alpha: true }} dpr={[1, 1.5]}>
           <ambientLight intensity={1} />
           <ShaderPlane position={[0, 0, 0]} color1="#2f6b65" color2="#040807" scale={15} />
         </Canvas>

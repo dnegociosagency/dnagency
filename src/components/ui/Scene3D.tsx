@@ -30,12 +30,14 @@ function ParticleSphere() {
       ref.current.rotation.y += delta * 0.05;
       ref.current.rotation.x += delta * 0.03;
       
-      // Mouse interaction for parallax effect
-      const targetX = (state.pointer.x * Math.PI) / 12;
-      const targetY = (state.pointer.y * Math.PI) / 12;
-      
-      ref.current.rotation.y += (targetX - ref.current.rotation.y) * 0.03;
-      ref.current.rotation.x += (targetY - ref.current.rotation.x) * 0.03;
+      // Mouse interaction for parallax effect only on devices with hover
+      if (window.matchMedia("(hover: hover)").matches) {
+        const targetX = (state.pointer.x * Math.PI) / 12;
+        const targetY = (state.pointer.y * Math.PI) / 12;
+        
+        ref.current.rotation.y += (targetX - ref.current.rotation.y) * 0.03;
+        ref.current.rotation.x += (targetY - ref.current.rotation.x) * 0.03;
+      }
     }
   });
 
@@ -57,7 +59,7 @@ function ParticleSphere() {
 export default function Scene3D() {
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
-      <Canvas camera={{ position: [0, 0, 7], fov: 60 }} dpr={[1, 2]}>
+      <Canvas camera={{ position: [0, 0, 7], fov: 60 }} dpr={[1, 1.5]}>
         <ambientLight intensity={0.5} />
         <ParticleSphere />
       </Canvas>
