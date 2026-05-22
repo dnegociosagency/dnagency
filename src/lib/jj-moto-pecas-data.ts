@@ -30,7 +30,7 @@ export const UNIDADES: Record<string, UnidadeData> = {
     horarioSemana: "08:00 às 18:00",
     horarioSabado: "08:00 às 13:00",
     email: "parauapebas@jjmotopecas.com.br",
-    instagram: "https://www.instagram.com/jjmotopecas_",
+    instagram: "https://www.instagram.com/jjmotopecasparauapebas/",
     facebook: "https://www.facebook.com/jjmotopecas",
     youtube: "https://www.youtube.com/@jjmotopecas"
   },
@@ -47,7 +47,7 @@ export const UNIDADES: Record<string, UnidadeData> = {
     horarioSemana: "08:00 às 18:00",
     horarioSabado: "08:00 às 13:00",
     email: "maraba@jjmotopecas.com.br",
-    instagram: "https://www.instagram.com/jjmotopecas_",
+    instagram: "http://instagram.com/jjmotopecasmaraba/",
     facebook: "https://www.facebook.com/jjmotopecas",
     youtube: "https://www.youtube.com/@jjmotopecas"
   },
@@ -64,7 +64,7 @@ export const UNIDADES: Record<string, UnidadeData> = {
     horarioSemana: "08:00 às 18:00",
     horarioSabado: "08:00 às 13:00",
     email: "ananindeua@jjmotopecas.com.br",
-    instagram: "https://www.instagram.com/jjmotopecas_",
+    instagram: "https://www.instagram.com/jjmotopecasananindeua/",
     facebook: "https://www.facebook.com/jjmotopecas",
     youtube: "https://www.youtube.com/@jjmotopecas"
   }
