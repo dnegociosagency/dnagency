@@ -5,7 +5,6 @@ import BackgroundEffects from "@/components/jj-moto-pecas/BackgroundEffects";
 import HeroSection from "@/components/jj-moto-pecas/HeroSection";
 import QuickLinks from "@/components/jj-moto-pecas/QuickLinks";
 import ProductsGrid from "@/components/jj-moto-pecas/ProductsGrid";
-import GallerySlider from "@/components/jj-moto-pecas/GallerySlider";
 import FeaturesSection from "@/components/jj-moto-pecas/FeaturesSection";
 import ContactArea from "@/components/jj-moto-pecas/ContactArea";
 import MapEmbed from "@/components/jj-moto-pecas/MapEmbed";
@@ -101,9 +100,6 @@ export default async function JJMotoPecasPage({ params }: PageProps) {
 
         {/* Vitrine de Produtos interativos 3D */}
         <ProductsGrid unidade={unidade} />
-
-        {/* Galeria Carrossel de fotos reais */}
-        <GallerySlider />
 
         {/* Seção Diferenciais competitivos */}
         <FeaturesSection />
