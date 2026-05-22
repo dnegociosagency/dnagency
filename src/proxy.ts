@@ -22,10 +22,10 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  // Se for o subdomínio da unidade de Canaã
-  if (host.includes("jjmotocanaa") || host.includes("canaa.jjmoto")) {
+  // Se for o subdomínio da unidade de Ananindeua
+  if (host.includes("jjmotoananindeua") || host.includes("ananindeua.jjmoto")) {
     if (!url.pathname.startsWith("/jj-moto-pecas") && !url.pathname.startsWith("/images") && !url.pathname.startsWith("/logos")) {
-      url.pathname = `/jj-moto-pecas/canaa${url.pathname === "/" ? "" : url.pathname}`;
+      url.pathname = `/jj-moto-pecas/ananindeua${url.pathname === "/" ? "" : url.pathname}`;
       return NextResponse.rewrite(url);
     }
   }
