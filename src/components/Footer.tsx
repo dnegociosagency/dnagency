@@ -201,7 +201,19 @@ export default function Footer() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
 
-  const isJJMoto = pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
+  const [isJJMoto, setIsJJMoto] = React.useState(() => {
+    return pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
+  });
+
+  React.useEffect(() => {
+    const hostname = typeof window !== "undefined" ? window.location.hostname : "";
+    if (pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto") || hostname.includes("jjmoto") || hostname.includes("jj-moto-pecas")) {
+      setIsJJMoto(true);
+    } else {
+      setIsJJMoto(false);
+    }
+  }, [pathname]);
+
   const isPlatformRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register") || isJJMoto;
 
   useEffect(() => {

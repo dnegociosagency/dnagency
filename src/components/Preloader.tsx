@@ -9,8 +9,24 @@ export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
   const isFirstLoad = useRef(true);
+  const [isJJMoto, setIsJJMoto] = useState(() => {
+    return pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
+  });
 
   useEffect(() => {
+    const hostname = typeof window !== "undefined" ? window.location.hostname : "";
+    if (pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto") || hostname.includes("jjmoto") || hostname.includes("jj-moto-pecas")) {
+      setIsJJMoto(true);
+    } else {
+      setIsJJMoto(false);
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    if (isJJMoto) {
+      setIsLoading(false);
+      return;
+    }
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
     window.scrollTo(0, 0);
@@ -21,7 +37,11 @@ export default function Preloader() {
     }, isFirstLoad.current ? 1800 : 800);
 
     return () => clearTimeout(timer);
-  }, [pathname]);
+  }, [pathname, isJJMoto]);
+
+  if (isJJMoto) {
+    return null;
+  }
 
   return (
     <AnimatePresence>

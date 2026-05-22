@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import ChatbotWindow from './ChatbotWindow';
 import styles from './Chatbot.module.css';
@@ -8,8 +8,19 @@ import styles from './Chatbot.module.css';
 export default function Chatbot() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isJJMoto, setIsJJMoto] = useState(() => {
+    return pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
+  });
 
-  const isJJMoto = pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
+  useEffect(() => {
+    const hostname = typeof window !== "undefined" ? window.location.hostname : "";
+    if (pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto") || hostname.includes("jjmoto") || hostname.includes("jj-moto-pecas")) {
+      setIsJJMoto(true);
+    } else {
+      setIsJJMoto(false);
+    }
+  }, [pathname]);
+
   const isPlatform = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register");
 
   if (isJJMoto || isPlatform) {
