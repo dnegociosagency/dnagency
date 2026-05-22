@@ -7,12 +7,12 @@ import styles from './Chatbot.module.css';
 
 export default function Chatbot() {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [isJJMoto, setIsJJMoto] = useState(() => {
-    return pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
-  });
+  const [isJJMoto, setIsJJMoto] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const hostname = typeof window !== "undefined" ? window.location.hostname : "";
     if (pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto") || hostname.includes("jjmoto") || hostname.includes("jj-moto-pecas")) {
       setIsJJMoto(true);
@@ -23,7 +23,7 @@ export default function Chatbot() {
 
   const isPlatform = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register");
 
-  if (isJJMoto || isPlatform) {
+  if (!mounted || isJJMoto || isPlatform) {
     return null;
   }
 

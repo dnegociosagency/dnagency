@@ -6,27 +6,26 @@ import { usePathname } from "next/navigation";
 import { ShaderAnimation } from "@/components/ui/shader-animation";
 
 export default function Preloader() {
+  const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
   const isFirstLoad = useRef(true);
-  const [isJJMoto, setIsJJMoto] = useState(() => {
-    return pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
-  });
+  const [isJJMoto, setIsJJMoto] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const hostname = typeof window !== "undefined" ? window.location.hostname : "";
-    if (pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto") || hostname.includes("jjmoto") || hostname.includes("jj-moto-pecas")) {
-      setIsJJMoto(true);
-    } else {
-      setIsJJMoto(false);
+    const isJJMotoRoute = pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto") || hostname.includes("jjmoto") || hostname.includes("jj-moto-pecas");
+    setIsJJMoto(isJJMotoRoute);
+    
+    if (isJJMotoRoute) {
+      setIsLoading(false);
     }
   }, [pathname]);
 
   useEffect(() => {
-    if (isJJMoto) {
-      setIsLoading(false);
-      return;
-    }
+    if (!mounted || isJJMoto) return;
+
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
     window.scrollTo(0, 0);
@@ -37,9 +36,9 @@ export default function Preloader() {
     }, isFirstLoad.current ? 1800 : 800);
 
     return () => clearTimeout(timer);
-  }, [pathname, isJJMoto]);
+  }, [pathname, isJJMoto, mounted]);
 
-  if (isJJMoto) {
+  if (!mounted || isJJMoto) {
     return null;
   }
 

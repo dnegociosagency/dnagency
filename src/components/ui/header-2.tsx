@@ -16,13 +16,13 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const scrolled = useScroll(10);
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   
   const isAcademy = pathname === "/academy";
-  const [isJJMoto, setIsJJMoto] = useState(() => {
-    return pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
-  });
+  const [isJJMoto, setIsJJMoto] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const hostname = typeof window !== "undefined" ? window.location.hostname : "";
     if (pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto") || hostname.includes("jjmoto") || hostname.includes("jj-moto-pecas")) {
       setIsJJMoto(true);
@@ -34,7 +34,7 @@ export function Header() {
   const isPlatformRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register") || isJJMoto;
   const [showAcademyHeader, setShowAcademyHeader] = useState(false);
 
-  if (isPlatformRoute) {
+  if (!mounted || isPlatformRoute) {
     return null;
   }
 

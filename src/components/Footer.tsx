@@ -200,12 +200,12 @@ export default function Footer() {
   const giantRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = React.useState(false);
 
-  const [isJJMoto, setIsJJMoto] = React.useState(() => {
-    return pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
-  });
+  const [isJJMoto, setIsJJMoto] = React.useState(false);
 
   React.useEffect(() => {
+    setMounted(true);
     const hostname = typeof window !== "undefined" ? window.location.hostname : "";
     if (pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto") || hostname.includes("jjmoto") || hostname.includes("jj-moto-pecas")) {
       setIsJJMoto(true);
@@ -217,7 +217,7 @@ export default function Footer() {
   const isPlatformRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register") || isJJMoto;
 
   useEffect(() => {
-    if (typeof window === "undefined" || !wrapperRef.current) return;
+    if (!mounted || typeof window === "undefined" || !wrapperRef.current) return;
     const ctx = gsap.context(() => {
       gsap.fromTo(
         giantRef.current,
@@ -237,9 +237,9 @@ export default function Footer() {
       );
     }, wrapperRef);
     return () => ctx.revert();
-  }, [isPlatformRoute]);
+  }, [isPlatformRoute, mounted]);
 
-  if (isPlatformRoute) {
+  if (!mounted || isPlatformRoute) {
     return null;
   }
 
