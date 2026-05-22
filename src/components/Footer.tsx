@@ -201,7 +201,8 @@ export default function Footer() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
 
-  const isPlatformRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register");
+  const isJJMoto = pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
+  const isPlatformRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register") || isJJMoto;
 
   useEffect(() => {
     if (typeof window === "undefined" || !wrapperRef.current) return;

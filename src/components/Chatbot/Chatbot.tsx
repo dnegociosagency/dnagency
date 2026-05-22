@@ -1,11 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import ChatbotWindow from './ChatbotWindow';
 import styles from './Chatbot.module.css';
 
 export default function Chatbot() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  const isJJMoto = pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto");
+  const isPlatform = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register");
+
+  if (isJJMoto || isPlatform) {
+    return null;
+  }
 
   return (
     <div className={styles.chatbotWrapper}>

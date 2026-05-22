@@ -3,6 +3,33 @@ import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
 export async function proxy(request: NextRequest) {
+  const url = request.nextUrl.clone();
+  const host = request.headers.get("host") || "";
+
+  // Se for o subdomínio da unidade de Parauapebas
+  if (host.includes("jjmotoparauapebas") || host.includes("parauapebas.jjmoto")) {
+    if (!url.pathname.startsWith("/jj-moto-pecas") && !url.pathname.startsWith("/images") && !url.pathname.startsWith("/logos")) {
+      url.pathname = `/jj-moto-pecas/parauapebas${url.pathname === "/" ? "" : url.pathname}`;
+      return NextResponse.rewrite(url);
+    }
+  }
+
+  // Se for o subdomínio da unidade de Marabá
+  if (host.includes("jjmotomaraba") || host.includes("maraba.jjmoto")) {
+    if (!url.pathname.startsWith("/jj-moto-pecas") && !url.pathname.startsWith("/images") && !url.pathname.startsWith("/logos")) {
+      url.pathname = `/jj-moto-pecas/maraba${url.pathname === "/" ? "" : url.pathname}`;
+      return NextResponse.rewrite(url);
+    }
+  }
+
+  // Se for o subdomínio da unidade de Canaã
+  if (host.includes("jjmotocanaa") || host.includes("canaa.jjmoto")) {
+    if (!url.pathname.startsWith("/jj-moto-pecas") && !url.pathname.startsWith("/images") && !url.pathname.startsWith("/logos")) {
+      url.pathname = `/jj-moto-pecas/canaa${url.pathname === "/" ? "" : url.pathname}`;
+      return NextResponse.rewrite(url);
+    }
+  }
+
   const { pathname } = request.nextUrl;
 
   // Defina as rotas que precisam de proteção
@@ -94,8 +121,9 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - images, logos (public assets folders for JJ Moto Peças)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|images|logos).*)",
   ],
 };
 
