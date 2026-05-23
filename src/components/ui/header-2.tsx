@@ -34,10 +34,6 @@ export function Header() {
   const isPlatformRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/register") || isJJMoto;
   const [showAcademyHeader, setShowAcademyHeader] = useState(false);
 
-  if (!mounted || isPlatformRoute) {
-    return null;
-  }
-
   useEffect(() => {
     if (!isAcademy) return;
     
@@ -60,6 +56,10 @@ export function Header() {
     
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isAcademy]);
+
+  if (!mounted || isPlatformRoute) {
+    return null;
+  }
 
   const isVisible = isAcademy ? showAcademyHeader : true;
 

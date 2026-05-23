@@ -86,24 +86,24 @@ export default function BackgroundEffects() {
           <motion.div
             key={i}
             initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-              scale: Math.random() * 0.5 + 0.5,
-              opacity: Math.random() * 0.5 + 0.3,
+              x: ((i * 47 + 13) % 100) + "%",
+              y: ((i * 59 + 29) % 100) + "%",
+              scale: ((i * 17 + 5) % 50) / 100 + 0.5,
+              opacity: ((i * 23 + 7) % 50) / 100 + 0.3,
             }}
             animate={{
               y: ["0%", "-30%", "0%"],
-              x: ["0%", (Math.random() - 0.5) * 10 + "%", "0%"],
+              x: ["0%", (((i * 31 + 11) % 10) - 5) + "%", "0%"],
             }}
             transition={{
-              duration: 15 + Math.random() * 10,
+              duration: 15 + ((i * 13 + 3) % 10),
               repeat: Infinity,
               ease: "linear",
             }}
             className="absolute w-1.5 h-1.5 rounded-full bg-jj-white filter blur-[0.5px]"
             style={{
-              left: Math.random() * 100 + "%",
-              top: Math.random() * 100 + "%",
+              left: ((i * 67 + 41) % 100) + "%",
+              top: ((i * 73 + 17) % 100) + "%",
             }}
           />
         ))}

@@ -55,18 +55,18 @@ export default function HeroCinematico() {
             key={i}
             className="absolute bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm"
             style={{
-              width: Math.random() * 200 + 100,
-              height: Math.random() * 100 + 50,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              rotate: Math.random() * 45 - 22.5,
+              width: ((i * 37 + 11) % 200) + 100,
+              height: ((i * 43 + 23) % 100) + 50,
+              left: `${((i * 59 + 17) % 90) + 5}%`,
+              top: `${((i * 67 + 31) % 80) + 10}%`,
+              rotate: ((i * 73 + 41) % 45) - 22.5,
             }}
             animate={{
               y: [0, -20, 0],
               opacity: [0.1, 0.3, 0.1],
             }}
             transition={{
-              duration: Math.random() * 5 + 5,
+              duration: ((i * 29 + 13) % 5) + 5,
               repeat: Infinity,
               ease: "easeInOut"
             }}

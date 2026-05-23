@@ -63,7 +63,7 @@ export default function PandemiaProvaDeFogo() {
                 key={i}
                 className="w-4 md:w-8 bg-gradient-to-t from-[--color-brand-primary] to-emerald-400 rounded-t-sm"
                 initial={{ height: "10%" }}
-                whileInView={{ height: `${Math.random() * 60 + 40}%` }}
+                whileInView={{ height: `${((i * 7 + 13) % 60) + 40}%` }}
                 viewport={{ once: false, margin: "-100px" }}
                 transition={{ duration: 1.5, delay: i * 0.1, ease: "easeOut" }}
               />

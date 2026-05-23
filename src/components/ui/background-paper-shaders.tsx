@@ -75,8 +75,11 @@ export function ShaderPlane({
 
   useFrame((state) => {
     if (mesh.current) {
-      uniforms.time.value = state.clock.elapsedTime * 0.5 // slowed down for elegance
-      uniforms.intensity.value = 1.0 + Math.sin(state.clock.elapsedTime * 1) * 0.2
+      const material = mesh.current.material as THREE.ShaderMaterial;
+      if (material && material.uniforms) {
+        material.uniforms.time.value = state.clock.elapsedTime * 0.5;
+        material.uniforms.intensity.value = 1.0 + Math.sin(state.clock.elapsedTime * 1) * 0.2;
+      }
     }
   })
 

@@ -23,7 +23,7 @@ export default function FinalCinematico() {
         >
           {/* Mock Logo or text representing D' Negócios */}
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50 tracking-tighter">
-            D' Negócios
+            {"D' Negócios"}
           </h2>
         </motion.div>
 
