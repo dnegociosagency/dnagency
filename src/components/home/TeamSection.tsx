@@ -59,6 +59,14 @@ const team = [
     image: "/team/joana.png",
     index: "06",
   },
+  {
+    id: 7,
+    name: "Juliana",
+    role: "SDR & Prospecção - Cadana",
+    description: "Especialista em prospecção ativa de novos clientes e expansão comercial, conectando soluções inovadoras de pagamento e contratação da Cadana ao mercado.",
+    image: "/team/juliana.png",
+    index: "07",
+  },
 ];
 
 export default function TeamSection() {

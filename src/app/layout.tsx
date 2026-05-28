@@ -19,6 +19,11 @@ export const metadata: Metadata = {
     default: "Agência DN | Marketing Digital & Performance",
   },
   description: "Agência de marketing digital focada em performance, tráfego pago e desenvolvimento de alta conversão.",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
   keywords: ["marketing digital", "tráfego pago", "performance", "web design", "agência de marketing", "conversão"],
   authors: [{ name: "Agência DN" }],
   openGraph: {

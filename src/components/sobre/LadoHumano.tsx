@@ -45,6 +45,12 @@ const team = [
     role: "Paid Traffic Analyst",
     image: "/team/joana.png",
   },
+  {
+    id: 7,
+    name: "Juliana",
+    role: "SDR & Prospecção - Cadana",
+    image: "/team/juliana.png",
+  },
 ];
 
 export default function LadoHumano() {
