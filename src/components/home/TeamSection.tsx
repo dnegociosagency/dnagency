@@ -58,6 +58,7 @@ const team = [
     description: "Especialista em tráfego pago orientado por performance. Cria, monitora e otimiza campanhas estratégicas para maximizar conversões, alcance e retorno sobre investimento.",
     image: "/team/joana.png",
     index: "06",
+    position: "object-top",
   },
   {
     id: 7,
@@ -286,7 +287,7 @@ export default function TeamSection() {
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105"
+                    className={`object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 ${member.position || "object-center"}`}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>

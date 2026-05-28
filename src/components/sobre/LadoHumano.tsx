@@ -44,6 +44,7 @@ const team = [
     name: "Joana",
     role: "Paid Traffic Analyst",
     image: "/team/joana.png",
+    position: "object-top",
   },
   {
     id: 7,
@@ -121,7 +122,7 @@ export default function LadoHumano() {
                       src={member.image}
                       alt={member.name}
                       fill
-                      className="object-cover"
+                      className={`object-cover ${member.position || "object-center"}`}
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </motion.div>
