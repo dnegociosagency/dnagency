@@ -7,41 +7,64 @@ import { Header } from "@/components/ui/header-2";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import { Providers } from "@/lib/query-provider";
+import SchemaMarkup from "@/components/SchemaMarkup";
+
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
 
+const BASE_URL = "https://www.agenciadnegocios.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: {
-    template: "%s | Agência DN",
-    default: "Agência DN | Marketing Digital & Performance",
+    template: "%s | DN Agency",
+    default: "DN Agency | Premium Conversion-First Web Design & Growth",
   },
-  description: "Agência de marketing digital focada em performance, tráfego pago e desenvolvimento de alta conversão.",
+  description: "DN Agency is a high-end web design and performance growth agency. We build custom websites, high-converting landing pages, and scale paid search & social campaigns for businesses across the US & Canada.",
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
     apple: "/icon.png",
   },
-  keywords: ["marketing digital", "tráfego pago", "performance", "web design", "agência de marketing", "conversão"],
-  authors: [{ name: "Agência DN" }],
+  authors: [{ name: "DN Agency" }],
+  alternates: {
+    canonical: BASE_URL,
+  },
   openGraph: {
-    title: "Agência DN | Performance e Estratégia",
-    description: "Aceleramos o crescimento da sua empresa com estratégias de marketing focadas em ROI.",
-    url: "https://agenciadn.com.br",
-    siteName: "Agência DN",
-    locale: "pt_BR",
+    title: "DN Agency | Premium Design & Digital Growth",
+    description: "We scale businesses across the US and Canada with conversion-first web design and high-performance digital marketing.",
+    url: BASE_URL,
+    siteName: "DN Agency",
+    locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "DN Agency — Premium Conversion-First Web Design & Growth",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agência DN | Performance e Estratégia",
-    description: "Aceleramos o crescimento da sua empresa com estratégias de marketing focadas em ROI.",
+    title: "DN Agency | Premium Design & Digital Growth",
+    description: "We scale businesses across the US and Canada with conversion-first web design and high-performance digital marketing.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -53,15 +76,22 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="pt-BR"
+      lang="en"
       className={`dark ${inter.variable} font-sans antialiased`}
     >
+      <head>
+        <SchemaMarkup />
+      </head>
       <body className="min-h-screen flex flex-col overflow-x-hidden">
         <Preloader />
         <Providers>
           <SmoothScroll>
             <Header />
-            <main className="flex-grow">{children}</main>
+            <main className="flex-grow">
+              <ErrorBoundary name="MainPageContent">
+                {children}
+              </ErrorBoundary>
+            </main>
             <Footer />
           </SmoothScroll>
           <Chatbot />

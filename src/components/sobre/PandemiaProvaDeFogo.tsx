@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,13 +9,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function PandemiaProvaDeFogo() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0, 1, 1, 0]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -29,8 +42,8 @@ export default function PandemiaProvaDeFogo() {
             duration: 1, 
             scrollTrigger: {
               trigger: text,
-              start: "top 80%",
-              end: "bottom 60%",
+              start: "top 85%",
+              end: "bottom 65%",
               scrub: 1,
             }
           }
@@ -41,18 +54,18 @@ export default function PandemiaProvaDeFogo() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative min-h-[150vh] bg-black overflow-hidden flex flex-col items-center justify-center py-32">
+    <section data-theme="dark" ref={containerRef} className="relative min-h-[150vh] bg-brand-darker overflow-hidden flex flex-col items-center justify-center py-32 transition-colors duration-300">
       {/* Intense Background */}
       <motion.div 
-        className="absolute inset-0 z-0 bg-gradient-to-b from-[#020505] via-[#0a1f1d] to-[#020505] opacity-50"
-        style={{ y: backgroundY }}
+        className="absolute inset-0 z-0 bg-gradient-to-b from-brand-dark via-brand-light/30 dark:via-[#0a1f1d] to-brand-dark opacity-50 transition-colors duration-300"
+        style={isMobile ? {} : { y: backgroundY }}
       />
-      <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png')] opacity-[0.05] dark:opacity-10 mix-blend-overlay pointer-events-none"></div>
 
       <div className="relative z-10 w-full max-w-4xl px-6 flex flex-col gap-[30vh] text-center">
         
-        <h2 className="reveal-text text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-          Enquanto empresas fechavam...
+        <h2 className="reveal-text text-4xl md:text-6xl lg:text-7xl font-bold text-brand-white leading-tight">
+          While businesses were closing down...
         </h2>
 
         <div className="reveal-text flex flex-col items-center justify-center">
@@ -69,16 +82,17 @@ export default function PandemiaProvaDeFogo() {
               />
             ))}
           </div>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-            nós transformávamos tráfego em sobrevivência.
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-brand-white leading-tight">
+            we transformed traffic into pure survival.
           </h2>
         </div>
 
-        <h2 className="reveal-text text-3xl md:text-5xl lg:text-6xl font-light text-white/70 leading-tight pb-[20vh]">
-          Foi ali que nasceu a agência que gostaríamos de ter contratado.
+        <h2 className="reveal-text text-3xl md:text-5xl lg:text-6xl font-light text-brand-white/70 leading-tight pb-[20vh]">
+          That was the exact moment the agency we always wanted to hire was born.
         </h2>
 
       </div>
     </section>
   );
 }
+

@@ -18,23 +18,23 @@ export default function ProcessSection() {
   const steps = [
     { 
       number: "01", 
-      title: "Diagnóstico e Planejamento", 
-      desc: "Analisamos seu cenário atual, identificamos gargalos e definimos metas claras. Criamos um plano de ação personalizado focado em ROI." 
+      title: "Audit & Growth Roadmap", 
+      desc: "We analyze your current digital funnel, identify conversions bottlenecks, and map out clear ROI targets with a custom roadmap." 
     },
     { 
       number: "02", 
-      title: "Estruturação", 
-      desc: "Preparamos o terreno. Otimização de landing pages, configuração de pixels, tagueamento avançado e criação dos primeiros criativos." 
+      title: "Funnel & Creative Setup", 
+      desc: "We build out your landing pages, configure advanced tracking (pixels & APIs), and design custom scroll-stopping creatives." 
     },
     { 
       number: "03", 
-      title: "Execução e Tração", 
-      desc: "Lançamos as campanhas e começamos a capturar demanda. Monitoramento diário para garantir a saúde das métricas iniciais." 
+      title: "Launch & Acquisition", 
+      desc: "We push campaigns live to capture high-intent traffic. Daily oversight ensures campaign health, CTR stability, and lead quality." 
     },
     { 
       number: "04", 
-      title: "Otimização e Escala", 
-      desc: "Com dados reais em mãos, cortamos o que não funciona e injetamos orçamento nas campanhas vencedoras. Escalamos seu faturamento com previsibilidade." 
+      title: "Scale & Revenue Growth", 
+      desc: "Armed with clean data, we cut underperforming angles and shift budgets to winning campaigns to scale your revenue predictably." 
     },
   ];
 
@@ -61,7 +61,7 @@ export default function ProcessSection() {
   }, { scope: containerRef });
 
   return (
-    <section id="metodo" className="bg-[--color-brand-darker] relative overflow-hidden" ref={containerRef}>
+    <section data-theme="dark" id="metodo" className="bg-[--color-brand-darker] relative overflow-hidden" ref={containerRef}>
       <DynamicGridBackground />
       {/* Background Cinematic Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[--color-brand-primary] rounded-full blur-[250px] opacity-[0.1] pointer-events-none z-0" />
@@ -77,7 +77,7 @@ export default function ProcessSection() {
               viewport={{ once: true }}
               className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[--color-brand-primary]/30 bg-[--color-brand-primary]/5 backdrop-blur-sm"
             >
-              <span className="text-sm font-semibold tracking-wider text-[--color-brand-primary] uppercase">Nosso Método</span>
+              <span className="text-sm font-semibold tracking-wider text-[--color-brand-primary] uppercase">Our Method</span>
             </motion.div>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
@@ -86,7 +86,7 @@ export default function ProcessSection() {
               transition={{ duration: 0.8 }}
               className="text-4xl md:text-6xl font-bold text-white tracking-tighter mb-6"
             >
-              Engenharia de <br/><span className="text-[--color-brand-primary]">Vendas</span>
+              Revenue <br/><span className="text-[--color-brand-primary]">Engineering</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -95,7 +95,7 @@ export default function ProcessSection() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-white/70 text-lg md:text-xl font-medium max-w-lg"
             >
-              Um processo validado matematicamente para transformar cliques perdidos em clientes fiéis. Role para conhecer nossas etapas.
+              A mathematically structured workflow engineered to turn clicks into customers. Scroll to explore our process.
             </motion.p>
           </div>
 

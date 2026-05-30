@@ -1,10 +1,23 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function PrincipiosProposito() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -17,29 +30,33 @@ export default function PrincipiosProposito() {
   const opacity3 = useTransform(scrollYProgress, [0.6, 0.7, 0.9, 1.0], [0, 1, 1, 1]);
 
   return (
-    <section ref={containerRef} className="h-[200vh] bg-[#000000] flex items-center justify-center relative">
+    <section 
+      data-theme="dark"
+      ref={containerRef} 
+      className="min-h-[150vh] md:h-[200vh] bg-brand-dark flex items-center justify-center relative transition-colors duration-300"
+    >
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center w-full px-6">
         
         <div className="max-w-4xl mx-auto text-center space-y-12 md:space-y-16">
           <motion.h2 
             style={{ opacity: opacity1 }}
-            className="text-3xl md:text-5xl lg:text-7xl font-light text-white tracking-wide"
+            className="text-3xl md:text-5xl lg:text-7xl font-light text-brand-white tracking-wide"
           >
-            {"\"Tudo o que fizerem...\""}
+            {"\"Whatever you do...\""}
           </motion.h2>
 
           <motion.h2 
             style={{ opacity: opacity2 }}
-            className="text-3xl md:text-5xl lg:text-7xl font-light text-white tracking-wide"
+            className="text-3xl md:text-5xl lg:text-7xl font-light text-brand-white tracking-wide"
           >
-            {"\"façam de todo o coração...\""}
+            {"\"work at it with all your heart...\""}
           </motion.h2>
 
           <motion.h2 
             style={{ opacity: opacity3 }}
-            className="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-wide"
+            className="text-3xl md:text-5xl lg:text-7xl font-bold text-brand-white tracking-wide"
           >
-            {"\"como para o Senhor.\""}
+            {"\"as for the Lord.\""}
           </motion.h2>
         </div>
 
@@ -47,3 +64,4 @@ export default function PrincipiosProposito() {
     </section>
   );
 }
+

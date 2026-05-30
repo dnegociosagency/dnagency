@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { ShaderAnimation } from "@/components/ui/shader-animation";
+import Image from "next/image";
 
 export default function Preloader() {
   const [mounted, setMounted] = useState(false);
@@ -15,32 +15,34 @@ export default function Preloader() {
   useEffect(() => {
     setMounted(true);
     const hostname = typeof window !== "undefined" ? window.location.hostname : "";
-    const isJJMotoRoute = pathname.startsWith("/jj-moto-pecas") || pathname.includes("jjmoto") || hostname.includes("jjmoto") || hostname.includes("jj-moto-pecas");
+    const isJJMotoRoute =
+      pathname.startsWith("/jj-moto-pecas") ||
+      pathname.includes("jjmoto") ||
+      hostname.includes("jjmoto") ||
+      hostname.includes("jj-moto-pecas");
     setIsJJMoto(isJJMotoRoute);
-    
-    if (isJJMotoRoute) {
-      setIsLoading(false);
-    }
+
+    if (isJJMotoRoute) setIsLoading(false);
   }, [pathname]);
 
   useEffect(() => {
     if (!mounted || isJJMoto) return;
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
     window.scrollTo(0, 0);
 
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      isFirstLoad.current = false;
-    }, isFirstLoad.current ? 1800 : 800);
+    const timer = setTimeout(
+      () => {
+        setIsLoading(false);
+        isFirstLoad.current = false;
+      },
+      isFirstLoad.current ? 1400 : 600
+    );
 
     return () => clearTimeout(timer);
   }, [pathname, isJJMoto, mounted]);
 
-  if (!mounted || isJJMoto) {
-    return null;
-  }
+  if (!mounted || isJJMoto) return null;
 
   return (
     <AnimatePresence>
@@ -48,33 +50,45 @@ export default function Preloader() {
         <motion.div
           key="preloader"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.05 }}
-          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[1000] bg-[#040807] flex flex-col items-center justify-center overflow-hidden"
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="fixed inset-0 z-[1000] bg-[#040807] flex flex-col items-center justify-center"
         >
-          {/* Background Shader Animation */}
-          <ShaderAnimation />
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <Image
+              src="/logo.png"
+              alt="DN Agency"
+              width={72}
+              height={28}
+              className="object-contain invert"
+              style={{ height: "28px", width: "auto" }}
+              priority
+            />
+          </motion.div>
 
-          <div className="flex flex-col items-center gap-6 relative z-10">
-            <motion.span 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-[--color-brand-primary] text-xs font-medium tracking-[0.3em] uppercase"
-            >
-              Loading...
-            </motion.span>
-            
-            {/* Sleek Progress Bar */}
-            <div className="w-64 h-[1px] bg-white/10 overflow-hidden relative">
-              <motion.div
-                initial={{ x: "-100%" }}
-                animate={{ x: "100%" }}
-                transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-0 bottom-0 left-0 w-full bg-gradient-to-r from-transparent via-[--color-brand-primary] to-transparent"
-              />
-            </div>
-          </div>
+          {/* Barra de progresso fina */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.3 }}
+            className="mt-10 w-48 h-[1px] bg-white/10 overflow-hidden relative rounded-full"
+          >
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: "105%" }}
+              transition={{
+                duration: 1.0,
+                ease: [0.4, 0, 0.2, 1],
+                repeat: Infinity,
+              }}
+              className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-transparent via-[#2f6b65] to-transparent"
+            />
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -8,19 +8,19 @@ const testimonials = [
   {
     name: "Pércio",
     role: "CEO, JJ Moto Peças",
-    content: "A Agência DN transformou nossa captação. Saímos de um Custo Por Lead altíssimo para uma máquina previsível e lucrativa em apenas 3 meses.",
+    content: "DN Agency transformed our client acquisition. We went from a high Cost Per Lead to a predictable and highly profitable acquisition engine in just 3 months.",
     rating: 5
   },
   {
     name: "Rhenan Veres",
     role: "CEO, Dentista Para todos",
-    content: "O design do nosso novo site junto com a estratégia de tráfego dobrou nossas vendas online. O nível de profissionalismo e proximidade deles é incomparável.",
+    content: "The design of our new website combined with their paid traffic strategy doubled our online sales. Their level of professionalism and dedication is unmatched.",
     rating: 5
   },
   {
     name: "Laís",
     role: "CEO, Connect Imoveis Litoral",
-    content: "Não é apenas uma agência, são parceiros de negócio. Eles entendem de métricas que importam: faturamento e lucro no bolso.",
+    content: "They are not just an agency, they are growth partners. They understand the metrics that actually matter: sales and bottom-line profit.",
     rating: 5
   }
 ];
@@ -53,7 +53,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section ref={containerRef} className="relative bg-[--color-brand-dark] py-32 px-6 overflow-hidden">
+    <section data-theme="dark" ref={containerRef} className="relative bg-[--color-brand-dark] py-32 px-6 overflow-hidden">
       {/* Background Glows */}
       <motion.div
         style={{ y: yBackground }}
@@ -68,7 +68,7 @@ export default function TestimonialsSection() {
             viewport={{ once: true }}
             className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[--color-brand-primary]/30 bg-[--color-brand-primary]/5 backdrop-blur-sm"
           >
-            <span className="text-sm font-semibold tracking-wider text-[--color-brand-primary] uppercase">Resultados Comprovados</span>
+            <span className="text-sm font-semibold tracking-wider text-[--color-brand-primary] uppercase">Proven Results</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -77,8 +77,8 @@ export default function TestimonialsSection() {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-5xl font-bold text-white tracking-tighter mb-6"
           >
-            Não acredite apenas em nós. <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[--color-brand-primary]">Ouça nossos clientes.</span>
+            Don't just take our word for it. <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[--color-brand-primary]">Hear from our clients.</span>
           </motion.h2>
         </div>
 

@@ -18,23 +18,23 @@ export default async function CoursePlayerPage({
 
   // Mock data for the layout structure
   const course = {
-    title: "Método DN: Escala de Vendas",
+    title: "DN Method: Scaling Sales",
     modules: [
       {
         id: "m1",
-        title: "Módulo 1: Fundamentos da Conversão",
+        title: "Module 1: Conversion Fundamentals",
         lessons: [
-          { id: "l1", title: "A mentalidade de escala", duration: "12:45", isCompleted: true },
-          { id: "l2", title: "Desenhando seu funil principal", duration: "24:10", isCompleted: true },
-          { id: "l3", title: "Métricas que importam", duration: "18:20", isCompleted: false },
+          { id: "l1", title: "The scaling mindset", duration: "12:45", isCompleted: true },
+          { id: "l2", title: "Designing your core funnel", duration: "24:10", isCompleted: true },
+          { id: "l3", title: "Metrics that matter", duration: "18:20", isCompleted: false },
         ]
       },
       {
         id: "m2",
-        title: "Módulo 2: O Sistema VSL",
+        title: "Module 2: The VSL System",
         lessons: [
-          { id: "l4", title: "Estrutura do VSL Perfeito", duration: "45:00", isCompleted: false },
-          { id: "l5", title: "Gatilhos Mentais Avançados", duration: "32:15", isCompleted: false },
+          { id: "l4", title: "Perfect VSL Structure", duration: "45:00", isCompleted: false },
+          { id: "l5", title: "Advanced Mental Triggers", duration: "32:15", isCompleted: false },
         ]
       }
     ]
@@ -50,13 +50,13 @@ export default async function CoursePlayerPage({
           </Link>
           <div>
             <h1 className="text-sm font-bold truncate max-w-xs md:max-w-md">{course.title}</h1>
-            <p className="text-xs text-[--color-brand-primary]">Progresso: 45%</p>
+            <p className="text-xs text-[--color-brand-primary]">Progress: 45%</p>
           </div>
         </div>
         
         <div className="flex items-center gap-4">
           <button className="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-full text-sm font-medium transition-colors">
-            <MessageCircle className="w-4 h-4" /> Suporte
+            <MessageCircle className="w-4 h-4" /> Support
           </button>
         </div>
       </header>
@@ -81,37 +81,37 @@ export default async function CoursePlayerPage({
                </div>
                <div className="flex justify-between text-xs text-white/70 font-medium">
                  <span>04:12 / 18:20</span>
-                 <span>HD • Velocidade 1x</span>
+                 <span>HD • Speed 1x</span>
                </div>
             </div>
           </div>
 
           {/* Lesson Content Area */}
           <div className="max-w-4xl mx-auto w-full p-6 md:p-10">
-            <h2 className="text-3xl font-black mb-4">Métricas que importam</h2>
+            <h2 className="text-3xl font-black mb-4">Metrics That Matter</h2>
             
             {/* Tabs */}
             <div className="flex items-center gap-6 border-b border-white/10 mb-8">
               <button className="pb-3 text-sm font-bold text-[--color-brand-primary] border-b-2 border-[--color-brand-primary]">
-                Visão Geral
+                Overview
               </button>
               <button className="pb-3 text-sm font-bold text-white/40 hover:text-white transition-colors border-b-2 border-transparent">
-                Materiais Complementares
+                Supplementary Materials
               </button>
             </div>
 
             <div className="prose prose-invert prose-emerald max-w-none">
               <p className="text-white/70 leading-relaxed text-lg">
-                Nesta aula, vamos destrinchar os principais KPIs (Key Performance Indicators) que você precisa acompanhar diariamente para garantir que o seu funil de vendas não está sangrando dinheiro. Esqueça métricas de vaidade.
+                In this class, we will break down the key KPIs (Key Performance Indicators) that you need to track daily to ensure your sales funnel is not bleeding money. Forget vanity metrics.
               </p>
               
               <div className="mt-8 p-6 bg-white/5 border border-[--color-brand-primary]/20 rounded-2xl flex items-start gap-4">
                 <FileText className="w-6 h-6 text-[--color-brand-primary] shrink-0 mt-1" />
                 <div>
-                  <h4 className="font-bold text-white mb-1">Planilha de Controle de KPIs.xlsx</h4>
-                  <p className="text-sm text-white/50 mb-3">Baixe a planilha oficial usada na Agência DN para tracking diário.</p>
+                  <h4 className="font-bold text-white mb-1">KPI Control Spreadsheet.xlsx</h4>
+                  <p className="text-sm text-white/50 mb-3">Download the official spreadsheet used at DN Agency for daily tracking.</p>
                   <button className="text-sm font-bold text-[--color-brand-primary] hover:text-white transition-colors">
-                    Fazer Download
+                    Download
                   </button>
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default async function CoursePlayerPage({
         {/* Sidebar (Modules List) */}
         <aside className="w-full md:w-80 lg:w-96 bg-[#070d0c] border-l border-white/5 flex flex-col flex-shrink-0 z-10 shadow-[-20px_0_50px_rgba(0,0,0,0.5)]">
           <div className="p-4 border-b border-white/5 bg-black/20">
-            <h3 className="font-bold text-sm uppercase tracking-widest text-white/50">Conteúdo do Curso</h3>
+            <h3 className="font-bold text-sm uppercase tracking-widest text-white/50">Course Content</h3>
           </div>
           
           <div className="flex-1 overflow-y-auto">

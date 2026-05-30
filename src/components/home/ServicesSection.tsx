@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useRef, useState } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
@@ -32,7 +32,7 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden ${className}`}
+      className={`relative rounded-3xl border border-black/5 dark:border-white/5 bg-black/5 dark:bg-white/[0.02] overflow-hidden ${className}`}
     >
       <div
         className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 ease-in-out"
@@ -84,33 +84,33 @@ export default function ServicesSection() {
 
   const services = [
     {
-      title: "Tráfego Pago & Performance",
-      desc: "Gestão avançada de mídia em Meta Ads, Google Ads e TikTok Ads focada em ROAS e redução de CAC.",
+      title: "Paid Media & Performance",
+      desc: "Advanced media management on Meta Ads, Google Ads, and TikTok Ads laser-focused on ROAS and CAC reduction.",
       icon: <BarChart3 className="w-8 h-8 text-[--color-brand-primary]" />,
       color: "from-blue-500/10 to-transparent border-blue-500/20"
     },
     {
-      title: "Desenvolvimento Web & Landing Pages",
-      desc: "Sites de altíssima performance, otimizados para conversão e com design focado em experiência do usuário (UX/UI).",
+      title: "Conversion-First Web Development",
+      desc: "High-performance websites and landing pages optimized to convert visitors into customers with premium UX/UI.",
       icon: <Globe className="w-8 h-8 text-[--color-brand-primary]" />,
       color: "from-emerald-500/10 to-transparent border-emerald-500/20"
     },
     {
-      title: "SEO Estratégico",
-      desc: "Posicionamento orgânico no topo do Google. Auditoria técnica, link building e otimização de conteúdo.",
+      title: "Organic SEO & Growth Strategy",
+      desc: "Dominating organic search results. Technical audits, high-intent keywords, and content optimization.",
       icon: <Search className="w-8 h-8 text-[--color-brand-primary]" />,
       color: "from-amber-500/10 to-transparent border-amber-500/20"
     },
     {
-      title: "Branding & Design",
-      desc: "Construção de identidade visual forte, materiais institucionais e criativos de alta conversão para anúncios.",
+      title: "Branding & Premium Design",
+      desc: "Building memorable visual identities, high-end layouts, and ad creatives designed to command higher prices.",
       icon: <PenTool className="w-8 h-8 text-[--color-brand-primary]" />,
       color: "from-purple-500/10 to-transparent border-purple-500/20"
     }
   ];
 
   return (
-    <section ref={sectionRef} id="servicos" className="relative bg-[--color-brand-dark] py-20 md:py-40 px-4 md:px-6 overflow-hidden perspective-[1000px]">
+    <section data-theme="dark" ref={sectionRef} id="servicos" className="relative bg-[--color-brand-dark] py-20 md:py-40 px-4 md:px-6 overflow-hidden perspective-[1000px]">
       
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
@@ -138,12 +138,12 @@ export default function ServicesSection() {
           className="mb-10 md:mb-20 flex flex-col md:flex-row justify-between items-end gap-4 md:gap-6 border-b border-white/10 pb-8 md:pb-10"
         >
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter">
-              Nossos <span className="text-[--color-brand-primary]">Serviços</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-[--foreground] tracking-tighter">
+              Our <span className="text-[--color-brand-primary]">Services</span>
             </h2>
           </div>
-          <p className="text-white/60 max-w-sm text-right hidden md:block text-lg">
-            Soluções full-service integradas para acelerar o crescimento da sua empresa.
+          <p className="text-[--foreground]/60 max-w-sm text-right hidden md:block text-lg">
+            Integrated growth solutions engineered to scale your revenue.
           </p>
         </motion.div>
 
@@ -157,19 +157,19 @@ export default function ServicesSection() {
             <motion.div key={index} variants={itemVariants} className="h-full">
               <SpotlightCard className="h-full p-6 md:p-10 flex flex-col justify-between min-h-[260px] md:min-h-[340px] group transition-transform duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]">
                 <div className="relative z-10">
-                  <div className={`mb-8 w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br ${service.color} border border-white/10 group-hover:scale-110 group-hover:border-[--color-brand-primary]/50 transition-all duration-500`}>
+                  <div className={`mb-8 w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br ${service.color} border border-black/10 dark:border-white/10 group-hover:scale-110 group-hover:border-[--color-brand-primary]/50 transition-all duration-500`}>
                     {service.icon}
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[--color-brand-primary] transition-colors duration-300">{service.title}</h3>
-                  <p className="text-white/60 leading-relaxed mb-8 text-lg">{service.desc}</p>
+                  <h3 className="text-2xl font-bold text-[--foreground] mb-4 group-hover:text-[--color-brand-primary] transition-colors duration-300">{service.title}</h3>
+                  <p className="text-[--foreground]/60 leading-relaxed mb-8 text-lg">{service.desc}</p>
                 </div>
 
                 <div className="relative z-10 flex justify-between items-center mt-auto">
                   <span className="text-sm font-bold text-[--color-brand-primary] uppercase tracking-wider opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                    Saiba mais
+                    Learn more
                   </span>
-                  <div className="w-12 h-12 rounded-full bg-transparent border border-white/10 text-white/40 flex items-center justify-center group-hover:bg-[--color-brand-primary] group-hover:text-white group-hover:border-[--color-brand-primary] transition-all duration-500 group-hover:rotate-45">
+                  <div className="w-12 h-12 rounded-full bg-transparent border border-black/10 dark:border-white/10 text-[--foreground]/40 flex items-center justify-center group-hover:bg-[--color-brand-primary] group-hover:text-white group-hover:border-[--color-brand-primary] transition-all duration-500 group-hover:rotate-45">
                     <ArrowUpRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -184,9 +184,9 @@ export default function ServicesSection() {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="mt-20 flex justify-center"
         >
-          <a href="https://wa.me/558899222054" target="_blank" rel="noopener noreferrer">
+          <a href="https://calendar.app.google/TJ85TG2Do9uLhC2K7" target="_blank" rel="noopener noreferrer">
             <MagneticButton className="px-8 py-4 bg-[--color-brand-primary] text-white hover:bg-[#255651] shadow-lg">
-              Agendar Diagnóstico Gratuito
+              Book a Strategy Call
             </MagneticButton>
           </a>
         </motion.div>

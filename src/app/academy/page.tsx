@@ -6,8 +6,8 @@ import AcademyCheckout from "@/components/academy/AcademyCheckout";
 import PixelWipeTransition from "@/components/ui/PixelWipeTransition";
 
 export const metadata = {
-  title: "Academy | Agência DN",
-  description: "Não é apenas um curso. É um ecossistema. Descubra o futuro dos seus negócios.",
+  title: "Academy | DN Agency",
+  description: "It's not just a course. It's an ecosystem. Discover the future of your business.",
 };
 
 export default function AcademyPage() {

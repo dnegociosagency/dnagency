@@ -31,7 +31,7 @@ export interface ThemeToggleProps {
   variant?: "default" | "appbar" | "icon";
   /** Content for the app bar when variant is "appbar" */
   appBarProps?: AppBarProps;
-  /** Starting theme. Default: "dark" */
+  /** Starting theme. Default: "light" */
   defaultTheme?: Theme;
   /** Height of the top bar in px. Default: 44 for default, 60 for appbar */
   barHeight?: number;
@@ -143,7 +143,7 @@ const EASING = "cubic-bezier(0.76, 0, 0.24, 1)";
 export function ThemeToggle({
   variant      = "default",
   appBarProps,
-  defaultTheme = "dark",
+  defaultTheme = "light",
   barHeight: explicitBarHeight,
   buttonSize   = 36,
   duration     = 550,

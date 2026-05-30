@@ -9,13 +9,22 @@ import PrincipiosProposito from "@/components/sobre/PrincipiosProposito";
 import FinalCinematico from "@/components/sobre/FinalCinematico";
 
 export const metadata: Metadata = {
-  title: "Sobre Nós | D' Negócios",
-  description: "Descubra a história e a engenharia por trás da D' Negócios. De clientes frustrados a uma agência global de performance pura.",
+  title: "About Us | DN Agency",
+  description: "Discover the story and growth engineering behind DN Agency. From frustrated clients to a global conversion-first agency helping businesses across the US & Canada.",
+  alternates: {
+    canonical: "https://www.agenciadnegocios.com/sobre",
+  },
+  openGraph: {
+    title: "About Us | DN Agency",
+    description: "Discover the story and growth engineering behind DN Agency. From frustrated clients to a global conversion-first agency.",
+    url: "https://www.agenciadnegocios.com/sobre",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function SobrePage() {
   return (
-    <div className="bg-black min-h-screen text-white selection:bg-[--color-brand-primary] selection:text-white">
+    <div className="selection:bg-[--color-brand-primary] selection:text-white">
       <HeroCinematico />
       <CaosParaEstrategia />
       <PandemiaProvaDeFogo />

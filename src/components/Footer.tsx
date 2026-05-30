@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { useEffect, useRef } from "react";
@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowUp, MessageCircle } from "lucide-react";
 
-// SVG inline de ícones sociais (lucide nessa versão não os inclui)
+// SVG inline de Ã­cones sociais (lucide nessa versÃ£o nÃ£o os inclui)
 const IconInstagram = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -31,7 +31,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// ─── Estilos injetados ─────────────────────────────────────────────────────
+// â”€â”€â”€ Estilos injetados â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const STYLES = `
 @keyframes dn-footer-breathe {
@@ -101,7 +101,7 @@ const STYLES = `
 }
 `;
 
-// ─── Magnetic Button ────────────────────────────────────────────────────────
+// â”€â”€â”€ Magnetic Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MagneticProps = Record<string, any> & { children?: React.ReactNode };
@@ -136,53 +136,53 @@ function MagneticButton({ className, children, as: Tag = "button", ...props }: M
   );
 }
 
-// ─── Marquee ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Marquee â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function MarqueeItem() {
   return (
     <div className="flex items-center space-x-10 px-6 text-white/35 font-bold tracking-[.28em] text-[11px] uppercase whitespace-nowrap">
-      <span>Tráfego Pago</span>
-      <span className="text-[--color-brand-primary]">✦</span>
+      <span>Paid Media</span>
+      <span className="text-[--color-brand-primary]">âœ¦</span>
       <span>Google Ads</span>
-      <span className="text-[--color-brand-primary]">✦</span>
+      <span className="text-[--color-brand-primary]">âœ¦</span>
       <span>Meta Ads</span>
-      <span className="text-[--color-brand-primary]">✦</span>
-      <span>Funis de Conversão</span>
-      <span className="text-[--color-brand-primary]">✦</span>
-      <span>Performance</span>
-      <span className="text-[--color-brand-primary]">✦</span>
-      <span>EUA & Canadá</span>
-      <span className="text-[--color-brand-primary]">✦</span>
+      <span className="text-[--color-brand-primary]">âœ¦</span>
+      <span>Conversion Funnels</span>
+      <span className="text-[--color-brand-primary]">âœ¦</span>
+      <span>Performance Marketing</span>
+      <span className="text-[--color-brand-primary]">âœ¦</span>
+      <span>USA & Canada</span>
+      <span className="text-[--color-brand-primary]">âœ¦</span>
     </div>
   );
 }
 
-// ─── Links ──────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const NAV_LINKS = [
   {
-    title: "Serviços",
+    title: "Services",
     items: [
-      { label: "Tráfego Pago", href: "#servicos" },
-      { label: "SEO & Orgânico", href: "#servicos" },
-      { label: "Funis de Venda", href: "#servicos" },
-      { label: "Web Design", href: "#servicos" },
+      { label: "Paid Media", href: "#servicos" },
+      { label: "SEO & Organic Search", href: "#servicos" },
+      { label: "Conversion Funnels", href: "#servicos" },
+      { label: "Premium Web Design", href: "#servicos" },
     ],
   },
   {
-    title: "Empresa",
+    title: "Agency",
     items: [
-      { label: "Como Funciona", href: "#processo" },
-      { label: "Mercados", href: "#global" },
+      { label: "Our Process", href: "#metodo" },
+      { label: "Markets", href: "#global" },
       { label: "Blog", href: "/blog" },
-      { label: "Contato", href: "https://wa.me/558899222054" },
+      { label: "Book a Call", href: "https://calendar.app.google/TJ85TG2Do9uLhC2K7" },
     ],
   },
   {
     title: "Legal",
     items: [
-      { label: "Política de Privacidade", href: "#" },
-      { label: "Termos de Uso", href: "#" },
+      { label: "Privacy Policy", href: "#" },
+      { label: "Terms of Service", href: "#" },
     ],
   },
 ];
@@ -192,7 +192,7 @@ const SOCIAL: { icon: React.ComponentType; href: string; label: string }[] = [
   { icon: IconYoutube, href: "#", label: "YouTube" },
 ];
 
-// ─── Main ───────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Main â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export default function Footer() {
   const pathname = usePathname();
@@ -280,18 +280,18 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Conteúdo central */}
+          {/* ConteÃºdo central */}
           <div className="relative z-10 mx-auto max-w-7xl px-6 pt-20 pb-8 md:px-12">
 
-            {/* Título */}
+            {/* TÃ­tulo */}
             <h2
               ref={headingRef}
               className="dn-text-glow text-5xl font-black tracking-tighter md:text-8xl text-center mb-4"
             >
-              Agência DN
+              DN Agency
             </h2>
             <p className="text-center text-white/45 text-base md:text-lg font-light mb-14 tracking-wide">
-              Performance Digital · EUA & Canadá
+              Digital Performance Â· USA & Canada
             </p>
 
             {/* Links + Redes */}
@@ -343,27 +343,27 @@ export default function Footer() {
 
               {/* Copyright */}
               <p className="text-[11px] font-semibold uppercase tracking-widest text-white/30 order-2 md:order-1">
-                © {new Date().getFullYear()} Agência DN · Todos os direitos reservados
+                Â© {new Date().getFullYear()} DN Agency Â· All rights reserved
               </p>
 
-              {/* Badge "feito com ❤" */}
+              {/* Badge "feito com â¤" */}
               <div className="dn-glass-pill flex items-center gap-2 rounded-full px-5 py-2.5 order-1 md:order-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Desenvolvido por</span>
-                <span className="text-sm font-black text-white">DN</span>
-                <span className="dn-heartbeat text-[--color-brand-primary] text-base leading-none">♥</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Crafted by</span>
+                <span className="text-sm font-black text-white">DN Studio</span>
+                <span className="dn-heartbeat text-[--color-brand-primary] text-base leading-none">â™¥</span>
               </div>
 
               {/* CTA WhatsApp + Voltar ao topo */}
               <div className="flex items-center gap-3 order-3">
                 <MagneticButton
                   as="a"
-                  href="https://wa.me/558899222054"
+                  href="https://calendar.app.google/TJ85TG2Do9uLhC2K7"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="dn-glass-pill flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white/70"
                 >
                   <MessageCircle className="h-4 w-4 text-[--color-brand-primary]" />
-                  WhatsApp
+                  Book Call
                 </MagneticButton>
 
                 <MagneticButton

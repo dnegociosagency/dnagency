@@ -8,38 +8,38 @@ import { motion } from "framer-motion";
 const posts = [
   {
     id: 1,
-    title: "Como escalar suas vendas com Tráfego Pago em 2026",
-    excerpt: "Descubra as estratégias mais recentes de otimização de campanhas no Meta e Google Ads para maximizar o seu ROAS.",
-    category: "Tráfego Pago",
-    date: "10 Maio, 2026",
-    readTime: "5 min de leitura",
+    title: "How to Scale Your Sales with Paid Traffic in 2026",
+    excerpt: "Discover the latest campaign optimization strategies on Meta and Google Ads to maximize your ROAS.",
+    category: "Paid Traffic",
+    date: "May 10, 2026",
+    readTime: "5 min read",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 2,
-    title: "Por que sua Landing Page não converte? (E como resolver)",
-    excerpt: "Os erros mais comuns em páginas de vendas e como aplicar copywriting e UX design para dobrar sua taxa de conversão.",
+    title: "Why Your Landing Page Doesn't Convert (And How to Fix It)",
+    excerpt: "The most common mistakes on sales pages and how to apply copywriting and UX design to double your conversion rate.",
     category: "Web Design",
-    date: "05 Maio, 2026",
-    readTime: "7 min de leitura",
+    date: "May 5, 2026",
+    readTime: "7 min read",
     image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 3,
-    title: "O Guia Definitivo de SEO Estratégico",
-    excerpt: "Aprenda a posicionar sua empresa no topo do Google sem depender exclusivamente de anúncios pagos.",
+    title: "The Ultimate Guide to Strategic SEO",
+    excerpt: "Learn how to rank your business at the top of Google without relying solely on paid ads.",
     category: "SEO",
-    date: "28 Abril, 2026",
-    readTime: "10 min de leitura",
+    date: "April 28, 2026",
+    readTime: "10 min read",
     image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 4,
-    title: "Branding vs Performance: Qual priorizar?",
-    excerpt: "Entenda por que as marcas mais fortes do mercado equilibram construção de marca com anúncios de resposta direta.",
-    category: "Estratégia",
-    date: "15 Abril, 2026",
-    readTime: "4 min de leitura",
+    title: "Branding vs Performance: Which to Prioritize?",
+    excerpt: "Understand why the strongest brands in the market balance brand-building with direct response ads.",
+    category: "Strategy",
+    date: "April 15, 2026",
+    readTime: "4 min read",
     image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800",
   }
 ];
@@ -48,7 +48,7 @@ export default function BlogClient() {
   return (
     <div className="w-full bg-gray-50 min-h-screen pb-20">
       
-      {/* Header Escuro (Para contrastar com a Navbar e dar destaque) */}
+      {/* Dark Header */}
       <div className="w-full bg-[--color-brand-darker] pt-32 pb-32 relative">
         <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
           <motion.h1 
@@ -57,7 +57,7 @@ export default function BlogClient() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
             className="text-5xl md:text-6xl font-bold text-white tracking-tighter mb-6"
           >
-            Insights & <span className="text-[--color-brand-primary]">Estratégias</span>
+            Insights & <span className="text-[--color-brand-primary]">Strategy</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -65,15 +65,15 @@ export default function BlogClient() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
             className="text-white/70 text-lg max-w-2xl mx-auto"
           >
-            Acompanhe nossos artigos e descubra as melhores táticas de marketing digital para alavancar os resultados da sua empresa.
+            Follow our articles and discover the best digital marketing tactics to boost your company&apos;s results.
           </motion.p>
         </div>
       </div>
 
-      {/* Container Principal Claro */}
+      {/* Main Light Container */}
       <div className="max-w-7xl mx-auto px-6 -mt-20 relative z-20">
         
-        {/* Grid de Posts */}
+        {/* Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {posts.map((post, index) => (
             <motion.article 
@@ -111,7 +111,7 @@ export default function BlogClient() {
                 </p>
                 
                 <Link href="#" className="inline-flex items-center gap-2 text-[--color-brand-primary] font-bold hover:text-[#255651] transition-colors">
-                  Ler Artigo Completo
+                  Read Full Article
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -127,20 +127,20 @@ export default function BlogClient() {
           transition={{ duration: 0.8 }}
           className="mt-24 bg-white border border-gray-200 shadow-lg rounded-3xl p-10 md:p-16 text-center relative overflow-hidden"
         >
-          {/* Decoração sutil de fundo */}
+          {/* Subtle background decoration */}
           <div className="absolute inset-0 bg-gradient-to-br from-[--color-brand-light]/30 to-transparent pointer-events-none" />
           
           <div className="relative z-10">
             <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Não perca nenhuma novidade
+              Never Miss an Update
             </h3>
             <p className="text-gray-600 mb-8 max-w-xl mx-auto text-lg">
-              Receba as melhores estratégias de marketing digital diretamente na sua caixa de entrada, uma vez por semana.
+              Get the best digital marketing strategies delivered straight to your inbox, once a week.
             </p>
             <form className="flex flex-col md:flex-row gap-4 max-w-lg mx-auto" action="#">
               <input 
                 type="email" 
-                placeholder="Seu melhor e-mail" 
+                placeholder="Your best email address" 
                 className="flex-1 bg-gray-50 border border-gray-300 rounded-full px-6 py-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-[--color-brand-primary] focus:ring-2 focus:ring-[--color-brand-primary]/20 transition-all shadow-sm"
                 required
               />
@@ -148,7 +148,7 @@ export default function BlogClient() {
                 type="submit"
                 className="bg-[--color-brand-primary] text-white px-8 py-4 rounded-full font-bold hover:bg-[#255651] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
-                Inscrever-se
+                Subscribe
               </button>
             </form>
           </div>

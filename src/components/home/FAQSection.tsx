@@ -6,20 +6,20 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Quanto tempo demora para ver os resultados?",
-    answer: "Trabalhamos com estratégias de performance imediata e longo prazo. Nas primeiras semanas, otimizamos campanhas e infraestrutura, e normalmente nossos clientes veem um aumento significativo em leads qualificados já no primeiro mês."
+    question: "How long does it take to see measurable results?",
+    answer: "We focus on both immediate traction and long-term scaling. During the first few weeks, we optimize tracking and creative assets. Most of our clients see an increase in qualified pipeline and leads within the first 30 days."
   },
   {
-    question: "Vocês atendem o meu nicho de mercado?",
-    answer: "Somos especialistas em vendas e escala. Se o seu negócio possui um modelo validado, seja B2B ou B2C, nosso ecossistema de marketing de performance pode ser adaptado para encontrar e converter seu cliente ideal."
+    question: "Do you work with my specific industry?",
+    answer: "We specialize in performance growth and conversion. If your business has a validated product or service — whether you run a local clinic, gym, barbershop, restaurant, or premium B2B offer — our growth systems can be custom-fitted to acquire your ideal clients."
   },
   {
-    question: "Qual o investimento mínimo recomendado?",
-    answer: "Não trabalhamos com pacotes fixos, mas com planos estruturados de acordo com seu faturamento atual e meta de crescimento. Agende uma reunião conosco para desenharmos uma proposta personalizada que faça sentido para o seu caixa."
+    question: "What is the minimum budget required to start?",
+    answer: "We don't sell generic packages; our strategies are tailored to your current revenue and scaling goals. Book a call with us so we can design a custom roadmap that aligns with your unit economics."
   },
   {
-    question: "O que está incluso no escopo de vocês?",
-    answer: "Diferente de agências tradicionais que vendem 'posts', nós entregamos tráfego pago, web design focado em conversão (Landing Pages de alta performance) e consultoria de growth, tudo integrado para alavancar seu ROI."
+    question: "What is included in your scope of work?",
+    answer: "Unlike traditional agencies that sell social media posts or basic templates, we deliver full-funnel solutions: high-converting premium web design, technical SEO, and advanced media buying (Google, Meta, TikTok) — all engineered to maximize your return on ad spend."
   }
 ];
 
@@ -35,7 +35,7 @@ export default function FAQSection() {
   const yBackground = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   return (
-    <section ref={containerRef} className="relative bg-[--color-brand-darker] py-16 md:py-32 px-4 md:px-6 overflow-hidden">
+    <section data-theme="dark" ref={containerRef} className="relative bg-[--color-brand-darker] py-16 md:py-32 px-4 md:px-6 overflow-hidden">
       {/* Background Glow */}
       <motion.div 
         style={{ y: yBackground }}
@@ -50,7 +50,7 @@ export default function FAQSection() {
             viewport={{ once: true }}
             className="inline-block mb-6 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
           >
-            <span className="text-sm font-semibold tracking-wider text-white/80 uppercase">Ficou com dúvida?</span>
+            <span className="text-sm font-semibold tracking-wider text-white/80 uppercase">Any Questions?</span>
           </motion.div>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export default function FAQSection() {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-5xl font-bold text-white tracking-tighter"
           >
-            Perguntas Frequentes
+            Frequently Asked Questions
           </motion.h2>
         </div>
 

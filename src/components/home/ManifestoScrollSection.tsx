@@ -3,27 +3,22 @@
 import React from 'react';
 import FlowArt, { FlowSection } from '@/components/ui/story-scroll';
 
-// ─── Design Tokens da DN ─────────────────────────────────────────────────────
-const DN_GREEN   = '#2f6b65';
-const DN_DARK    = '#040807';
-const DN_DARKER  = '#0a1211';
-const DN_CREAM   = '#f0f4f4';
-const DN_WHITE   = '#ffffff';
-
-// ─── Divisor reutilizável ─────────────────────────────────────────────────────
-function Divider({ color = 'rgba(255,255,255,0.15)' }: { color?: string }) {
-  return <hr style={{ borderColor: color }} className="my-[2vw] border-t border-0" />;
+// Auxiliar para junção de classes
+function cx(...parts: Array<string | undefined | false | null>): string {
+  return parts.filter(Boolean).join(' ');
 }
 
-// ─── Bloco de stat ────────────────────────────────────────────────────────────
-function Stat({ label, desc, color = 'rgba(255,255,255,0.6)' }: { label: string; desc: string; color?: string }) {
+// ─── Divisor dinâmico ─────────────────────────────────────────────────────────
+function Divider({ className }: { className?: string }) {
+  return <hr className={cx("my-[2vw] border-t border-brand-white/15", className)} />;
+}
+
+// ─── Bloco de stat dinâmico ───────────────────────────────────────────────────
+function Stat({ label, desc }: { label: string; desc: string }) {
   return (
     <div className="min-w-[160px] flex-1">
-      <p className="mb-2 text-sm font-bold uppercase tracking-wider">{label}</p>
-      <p
-        className="text-[clamp(0.85rem,1.3vw,1.05rem)] leading-relaxed"
-        style={{ color }}
-      >
+      <p className="mb-2 text-sm font-bold uppercase tracking-wider opacity-90">{label}</p>
+      <p className="text-[clamp(0.85rem,1.3vw,1.05rem)] leading-relaxed opacity-70">
         {desc}
       </p>
     </div>
@@ -33,80 +28,78 @@ function Stat({ label, desc, color = 'rgba(255,255,255,0.6)' }: { label: string;
 // ─── Componente principal ─────────────────────────────────────────────────────
 export default function ManifestoScrollSection() {
   return (
-    <section id="manifesto-scroll" aria-label="Manifesto DN">
-      <FlowArt aria-label="Manifesto da Agência DN">
+    <section data-theme="dark" id="manifesto-scroll" aria-label="DN Manifesto" className="w-full">
+      <FlowArt aria-label="DN Agency Manifesto">
 
-        {/* ── 01 Quem Somos ─────────────────────────────────────────────────── */}
+        {/* ── 01 Who We Are (Sempre verde, excelente contraste) ──────────────── */}
         <FlowSection
-          aria-label="Quem somos"
-          style={{ backgroundColor: DN_GREEN, color: DN_WHITE }}
+          aria-label="Who we are"
+          className="bg-brand-primary text-white"
         >
           <p className="text-xs font-bold uppercase tracking-[0.2em] opacity-80">
-            01 — Quem Somos
+            01 — Who We Are
           </p>
 
-          <Divider color="rgba(255,255,255,0.25)" />
+          <Divider className="border-white/20" />
 
           <h2 className="text-[clamp(3.5rem,12vw,13rem)] font-black leading-[0.85] uppercase tracking-tight">
-            Crescer
+            Growth
             <br />
-            Com
+            Through
             <br />
-            Método
+            Method
           </h2>
 
-          <Divider color="rgba(255,255,255,0.25)" />
+          <Divider className="border-white/20" />
 
           <p className="mt-auto max-w-[52ch] text-[clamp(1rem,2.5vw,1.8rem)] font-light leading-relaxed opacity-90">
-            Não somos uma agência comum. Somos engenheiros de crescimento — combinando
-            inteligência de dados, design de conversão e mídia paga para escalar negócios
-            de forma previsível e sustentável.
+            We are not a typical agency. We are growth engineers — combining data 
+            intelligence, conversion-focused design, and paid media to scale businesses 
+            predictably and sustainably.
           </p>
         </FlowSection>
 
-        {/* ── 02 Nossa Missão ───────────────────────────────────────────────── */}
+        {/* ── 02 Our Mission (Dinâmico: Branco no Light / Escuro no Dark) ─────── */}
         <FlowSection
-          aria-label="Nossa missão"
-          style={{ backgroundColor: DN_DARK, color: DN_WHITE }}
+          aria-label="Our mission"
+          className="bg-brand-dark text-brand-white transition-colors duration-300"
         >
           <p className="text-xs font-bold uppercase tracking-[0.2em] opacity-60">
-            02 — Nossa Missão
+            02 — Our Mission
           </p>
 
           <Divider />
 
           <h2 className="text-[clamp(3.5rem,12vw,13rem)] font-black leading-[0.85] uppercase tracking-tight">
-            Resultado
+            Revenue
             <br />
-            Acima
+            Above
             <br />
-            De Tudo
+            All
           </h2>
 
           <Divider />
 
-          <p className="max-w-[52ch] text-[clamp(1rem,2.5vw,1.8rem)] font-light leading-relaxed opacity-80">
-            Cada centavo investido em mídia deve ter um retorno mensurável. Trabalhamos
-            para que o seu CAC caia e o seu LTV suba — todo mês.
+          <p className="max-w-[52ch] text-[clamp(1rem,2.5vw,1.8rem)] font-light leading-relaxed opacity-85">
+            Every dollar spent on paid media must yield a measurable return. We work 
+            to drive down customer acquisition costs (CAC) and increase lifetime value (LTV) 
+            — month after month.
           </p>
 
           <Divider />
 
           <div className="flex flex-wrap gap-[3vw]">
             <Stat
-              label="Tráfego Pago"
-              desc="Campanhas de alta intenção no Google, Meta e TikTok otimizadas diariamente para o máximo ROI."
-              color="rgba(255,255,255,0.55)"
+              label="Paid Media"
+              desc="High-intent search and social campaigns optimized daily for maximum return on investment."
             />
             <Stat
-              label="Conteúdo Estratégico"
-              desc="Criativos que param o scroll e histórias que vendem — sem achismo, com teste A/B contínuo."
-              color="rgba(255,255,255,0.55)"
+              label="Strategic Creative"
+              desc="Scroll-stopping creatives and high-impact messaging — backed by continuous A/B testing."
             />
             <Stat
-              label="CRO & UX"
-              desc="Landing pages desenhadas para converter. Cada elemento posicionado para empurrar o usuário à ação."
-              color="rgba(255,255,255,0.55)"
+              label="CRO & UX Design"
+              desc="Landing pages engineered to convert. Every element is structured to prompt visitor action."
             />
           </div>
 
@@ -114,119 +107,110 @@ export default function ManifestoScrollSection() {
 
           <div className="flex flex-wrap gap-[3vw]">
             <Stat
-              label="Analytics Avançado"
-              desc="Dashboards em tempo real, atribuição multi-toque e relatórios que mostram o que realmente importa."
-              color="rgba(255,255,255,0.55)"
+              label="Advanced Analytics"
+              desc="Real-time dashboards, multi-touch attribution, and clear reporting on metrics that matter."
             />
             <Stat
-              label="Automação de Marketing"
-              desc="Fluxos de e-mail, WhatsApp e remarketing que nutrem leads e reativam clientes no piloto automático."
-              color="rgba(255,255,255,0.55)"
+              label="Marketing Automation"
+              desc="Automated email, SMS, and remarketing workflows that nurture leads and reactivate customers."
             />
             <Stat
-              label="Inteligência Competitiva"
-              desc="Monitoramos seus concorrentes e identificamos oportunidades antes que o mercado perceba."
-              color="rgba(255,255,255,0.55)"
+              label="Competitor Intelligence"
+              desc="We monitor your competitors and uncover untapped opportunities before the market reacts."
             />
           </div>
 
           <Divider />
 
-          <p className="mt-auto ml-auto max-w-[50ch] text-right text-[clamp(1rem,2.5vw,1.8rem)] font-light leading-relaxed opacity-80">
-            Cada decisão que tomamos começa com uma pergunta: isso vai aumentar o faturamento do cliente?
+          <p className="mt-auto ml-auto max-w-[50ch] text-right text-[clamp(1rem,2.5vw,1.8rem)] font-light leading-relaxed opacity-85">
+            Every decision we make starts with a simple question: Will this drive client revenue?
           </p>
         </FlowSection>
 
-        {/* ── 03 Como Funciona ──────────────────────────────────────────────── */}
+        {/* ── 03 How It Works (Dinâmico: Creme no Light / Preto no Dark) ──────── */}
         <FlowSection
-          aria-label="Como funciona"
-          style={{ backgroundColor: DN_CREAM, color: '#000' }}
+          aria-label="How it works"
+          className="bg-brand-darker text-brand-white transition-colors duration-300"
         >
           <p className="text-xs font-bold uppercase tracking-[0.2em] opacity-60">
-            03 — Como Funciona
+            03 — How It Works
           </p>
 
-          <Divider color="rgba(0,0,0,0.15)" />
+          <Divider />
 
           <h2 className="text-[clamp(3.5rem,12vw,13rem)] font-black leading-[0.85] uppercase tracking-tight">
             Diagnose.
             <br />
-            Execute.
+            Launch.
             <br />
-            Escale.
-          </h2>
-
-          <Divider color="rgba(0,0,0,0.15)" />
-
-          <p className="max-w-[52ch] text-[clamp(1rem,2.5vw,1.8rem)] font-light leading-relaxed opacity-75">
-            Quatro etapas. Zero desperdício. Seu negócio começa a crescer a partir do
-            primeiro mês de parceria.
-          </p>
-
-          <Divider color="rgba(0,0,0,0.15)" />
-
-          <div className="flex flex-wrap gap-[3vw]">
-            <Stat
-              label="01 — Diagnóstico"
-              desc="Auditoria completa do seu cenário digital, concorrência e oportunidades. Definimos metas e KPIs reais."
-              color="rgba(0,0,0,0.55)"
-            />
-            <Stat
-              label="02 — Estruturação"
-              desc="Configuramos pixels, tagueamento avançado, landing pages e criativos antes de investir R$ 1 em mídia."
-              color="rgba(0,0,0,0.55)"
-            />
-            <Stat
-              label="03 — Execução"
-              desc="Campanhas no ar com monitoramento diário. Ajustes cirúrgicos para manter o custo por resultado sob controle."
-              color="rgba(0,0,0,0.55)"
-            />
-          </div>
-
-          <Divider color="rgba(0,0,0,0.15)" />
-
-          <div className="flex flex-wrap gap-[3vw]">
-            <Stat
-              label="04 — Otimização"
-              desc="Matamos o que não performa. Escalamos o que funciona. Relatório completo toda semana."
-              color="rgba(0,0,0,0.55)"
-            />
-            <Stat
-              label="05 — Expansão"
-              desc="Abrimos novos canais, testamos novas audiências e verticais para sustentar o crescimento."
-              color="rgba(0,0,0,0.55)"
-            />
-            <Stat
-              label="06 — Automação"
-              desc="Integramos CRM, chatbots e fluxos de nutrição para que seu negócio venda enquanto você dorme."
-              color="rgba(0,0,0,0.55)"
-            />
-          </div>
-        </FlowSection>
-
-        {/* ── 04 Resultados ─────────────────────────────────────────────────── */}
-        <FlowSection
-          aria-label="Nossos números"
-          style={{ backgroundColor: DN_DARKER, color: DN_WHITE }}
-        >
-          <p className="text-xs font-bold uppercase tracking-[0.2em] opacity-60">
-            04 — Nossos Números
-          </p>
-
-          <Divider />
-
-          <h2 className="text-[clamp(3.5rem,12vw,13rem)] font-black leading-[0.85] uppercase tracking-tight">
-            Dados
-            <br />
-            Que
-            <br />
-            Provam
+            Scale.
           </h2>
 
           <Divider />
 
           <p className="max-w-[52ch] text-[clamp(1rem,2.5vw,1.8rem)] font-light leading-relaxed opacity-80">
-            Não pedimos que acredite em nós. Pedimos que analise os números.
+            Four streamlined phases. Zero wasted spend. Watch your pipeline expand 
+            from month one.
+          </p>
+
+          <Divider />
+
+          <div className="flex flex-wrap gap-[3vw]">
+            <Stat
+              label="01 — Audit & Blueprint"
+              desc="Deep-dive audit of your current digital setup, competition, and opportunities. Setting real KPIs."
+            />
+            <Stat
+              label="02 — Funnel Building"
+              desc="We set up tracking, pixels, high-converting landing pages, and creatives before spending a single dollar."
+            />
+            <Stat
+              label="03 — Launch & Scale"
+              desc="Campaigns go live with daily optimization. Precise bidding and budget control to maintain efficiency."
+            />
+          </div>
+
+          <Divider />
+
+          <div className="flex flex-wrap gap-[3vw]">
+            <Stat
+              label="04 — Optimization"
+              desc="We cut underperforming ads, double down on winning campaigns, and deliver weekly performance reports."
+            />
+            <Stat
+              label="05 — Expansion"
+              desc="Testing new acquisition channels, audiences, and creative angles to sustain rapid growth."
+            />
+            <Stat
+              label="06 — Automation"
+              desc="Integrating CRMs, scheduling systems, and automated email flows so your business captures leads 24/7."
+            />
+          </div>
+        </FlowSection>
+
+        {/* ── 04 By the Numbers (Dinâmico: Branco no Light / Escuro no Dark) ───── */}
+        <FlowSection
+          aria-label="Our metrics"
+          className="bg-brand-dark text-brand-white transition-colors duration-300"
+        >
+          <p className="text-xs font-bold uppercase tracking-[0.2em] opacity-60">
+            04 — By the Numbers
+          </p>
+
+          <Divider />
+
+          <h2 className="text-[clamp(3.5rem,12vw,13rem)] font-black leading-[0.85] uppercase tracking-tight">
+            Metrics
+            <br />
+            That
+            <br />
+            Prove
+          </h2>
+
+          <Divider />
+
+          <p className="max-w-[52ch] text-[clamp(1rem,2.5vw,1.8rem)] font-light leading-relaxed opacity-85">
+            Don't take our word for it. Let the metrics do the talking.
           </p>
 
           <Divider />
@@ -234,45 +218,39 @@ export default function ManifestoScrollSection() {
           <div className="flex flex-wrap gap-[3vw]">
             <Stat
               label="+340%"
-              desc="de ROAS médio gerado para nossos clientes de e-commerce em 90 dias."
-              color="rgba(255,255,255,0.55)"
+              desc="average ROAS generated for our client accounts within the first 90 days."
             />
             <Stat
               label="-62%"
-              desc="de CAC (Custo de Aquisição de Cliente) após os primeiros 60 dias de otimização contínua."
-              color="rgba(255,255,255,0.55)"
+              desc="reduction in Customer Acquisition Cost (CAC) after our first 60 days of optimization."
             />
             <Stat
-              label="6+ anos"
-              desc="de experiência acumulada em tráfego pago, design e estratégia de crescimento digital."
-              color="rgba(255,255,255,0.55)"
+              label="6+ Years"
+              desc="of collective expertise in paid advertising, web engineering, and product strategy."
             />
           </div>
 
           <Divider />
 
-          <p className="max-w-[52ch] text-[clamp(1rem,2.5vw,1.8rem)] font-light leading-relaxed opacity-80">
-            O mercado digital mudou. Quem continua apostando em feeling e intuição está
-            entregando dinheiro para os concorrentes. Dados vencem.
+          <p className="max-w-[52ch] text-[clamp(1rem,2.5vw,1.8rem)] font-light leading-relaxed opacity-85">
+            The landscape has evolved. Relying on gut feeling or vanity metrics is costing 
+            you revenue. Data wins.
           </p>
 
           <Divider />
 
           <div className="flex flex-wrap gap-[3vw]">
             <Stat
-              label="100% transparente"
-              desc="Você acessa todos os dados, campanhas e relatórios em tempo real. Sem caixa preta."
-              color="rgba(255,255,255,0.55)"
+              label="100% Transparent"
+              desc="Real-time access to all campaign data, dashboards, and assets. No hidden agency black boxes."
             />
             <Stat
-              label="Sem contrato longo"
-              desc="Acreditamos no resultado como retenção. Se não performarmos, você não fica preso."
-              color="rgba(255,255,255,0.55)"
+              label="Flexible Terms"
+              desc="We retain clients through exceptional performance, not rigid, long-term contracts."
             />
             <Stat
-              label="Dedicação exclusiva"
-              desc="Cada cliente tem um squad dedicado. Nunca somos uma agência de prateleira."
-              color="rgba(255,255,255,0.55)"
+              label="Dedicated Squad"
+              desc="Every client gets a dedicated growth squad. You are never treated as just a ticket."
             />
           </div>
         </FlowSection>
@@ -281,3 +259,4 @@ export default function ManifestoScrollSection() {
     </section>
   );
 }
+
