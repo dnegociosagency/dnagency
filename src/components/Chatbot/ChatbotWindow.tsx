@@ -44,29 +44,10 @@ export default function ChatbotWindow({ onClose }: ChatbotWindowProps) {
 
     let savedUserId = localStorage.getItem('dn_user_id');
     if (!savedUserId) {
-      savedUserId = 'User-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      savedUserId = 'User-' + Date.now() + '-' + Math.random().toString(36).substring(2, 11);
       localStorage.setItem('dn_user_id', savedUserId);
     }
     setUserId(savedUserId);
-
-    // Inicializar Speech Recognition
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      const recognition = new SpeechRecognition();
-      recognition.lang = 'pt-BR';
-      recognition.continuous = false;
-      recognition.interimResults = false;
-
-      recognition.onstart = () => setIsRecording(true);
-      recognition.onend = () => setIsRecording(false);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      recognition.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript;
-        setInput((prev) => prev + (prev ? ' ' : '') + transcript);
-      };
-      recognitionRef.current = recognition;
-    }
   }, []);
 
   // Rolagem automática para o fim
@@ -176,14 +157,50 @@ export default function ChatbotWindow({ onClose }: ChatbotWindowProps) {
   };
 
   const toggleMic = () => {
+    if (!recognitionRef.current) {
+      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+          const recognition = new SpeechRecognition();
+          recognition.lang = 'pt-BR';
+          recognition.continuous = false;
+          recognition.interimResults = false;
+
+          recognition.onstart = () => setIsRecording(true);
+          recognition.onend = () => setIsRecording(false);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          recognition.onresult = (event: any) => {
+            const transcript = event.results[0][0].transcript;
+            setInput((prev) => prev + (prev ? ' ' : '') + transcript);
+          };
+          recognitionRef.current = recognition;
+        } catch (e) {
+          console.error("[ChatbotWindow] Erro ao inicializar SpeechRecognition:", e);
+          alert("Não foi possível acessar o microfone ou o reconhecimento de voz foi bloqueado pelo navegador.");
+          return;
+        }
+      } else {
+        alert("Seu navegador não suporta reconhecimento de voz.");
+        return;
+      }
+    }
+
     if (recognitionRef.current) {
       if (isRecording) {
-        recognitionRef.current.stop();
+        try {
+          recognitionRef.current.stop();
+        } catch (e) {
+          console.error("[ChatbotWindow] Erro ao parar SpeechRecognition:", e);
+        }
       } else {
-        recognitionRef.current.start();
+        try {
+          recognitionRef.current.start();
+        } catch (e) {
+          console.error("[ChatbotWindow] Erro ao iniciar SpeechRecognition:", e);
+          alert("Não foi possível iniciar o reconhecimento de voz. Verifique as permissões de microfone.");
+        }
       }
-    } else {
-      alert("Seu navegador não suporta reconhecimento de voz.");
     }
   };
 

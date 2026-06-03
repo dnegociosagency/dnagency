@@ -1,79 +1,28 @@
 "use client";
 
-import React, { useRef, Suspense, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, Environment } from "@react-three/drei";
-import * as THREE from "three";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Auxiliar de junção de classes
 function cx(...parts: Array<string | undefined | false | null>): string {
   return parts.filter(Boolean).join(' ');
 }
 
-function Laptop3D({ proxy }: { proxy: React.MutableRefObject<any> }) {
-  const group = useRef<THREE.Group>(null);
-  const { scene } = useGLTF("/laptop.glb");
-
-  useFrame(() => {
-    if (group.current) {
-      group.current.scale.setScalar(proxy.current.scale);
-      group.current.position.y = proxy.current.y;
-      group.current.position.z = proxy.current.z;
-      group.current.rotation.x = proxy.current.rotateX;
-      group.current.rotation.y = proxy.current.rotateY;
-      
-      if (proxy.current.opacity < 0.1) {
-        group.current.visible = false;
-      } else {
-        group.current.visible = true;
-      }
-    }
-  });
-
-  return (
-    <group ref={group}>
-      {/* Ajusta a escala e posição do modelo importado */}
-      <group rotation={[0.2, Math.PI, 0]} position={[0, -2, 0]}>
-        <primitive object={scene} scale={0.12} />
-      </group>
-    </group>
-  );
-}
-
-import ErrorBoundary from "@/components/ui/ErrorBoundary";
-
-export default function HeroMacBook() {
+export default function HeroDashboard() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const framesContainerRef = useRef<HTMLDivElement>(null);
+  const mockupRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
   const [isMobile, setIsMobile] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
-  const [webGLSupported, setWebGLSupported] = useState<boolean | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
     if (typeof window === "undefined") return;
-
-    // Detectar suporte a WebGL
-    try {
-      const canvas = document.createElement("canvas");
-      const supportsWebGL = !!(
-        window.WebGLRenderingContext &&
-        (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
-      );
-      setWebGLSupported(supportsWebGL);
-      console.log(`[HeroMacBook] Suporte a WebGL detectado: ${supportsWebGL}`);
-    } catch (e) {
-      setWebGLSupported(false);
-      console.error("[HeroMacBook] Erro ao detectar suporte a WebGL:", e);
-    }
 
     setIsDark(document.documentElement.classList.contains("dark"));
 
@@ -98,98 +47,51 @@ export default function HeroMacBook() {
     };
   }, []);
 
-  // Proxy object for GSAP to animate
-  const laptopProxy = useRef({
-    scale: 0.1,
-    y: -5,
-    z: -10,
-    rotateX: 0.5,
-    rotateY: Math.PI, // start facing away or closed
-    opacity: 1,
-  });
-
-  // Generate random frame placeholders
-  const frames = Array.from({ length: 40 }).map((_, i) => ({
-    id: i,
-    x: (Math.random() - 0.5) * 2000,
-    y: (Math.random() - 0.5) * 1500,
-    z: (Math.random() - 0.5) * 1000,
-    rotateX: Math.random() * 360,
-    rotateY: Math.random() * 360,
-    rotateZ: Math.random() * 360,
-    scale: Math.random() * 0.5 + 0.5,
-  }));
-
   useGSAP(() => {
-    if (!isMounted || isMobile || webGLSupported === false || !containerRef.current || !framesContainerRef.current) return;
+    if (!isMounted || isMobile || !containerRef.current || !mockupRef.current) return;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "+=4000",
+        end: "+=2000",
         scrub: 1,
         pin: true,
       },
     });
 
-    gsap.set(".explosion-frame", { opacity: 0, x: 0, y: 0, z: 0, scale: 0 });
     gsap.set(textRef.current, { opacity: 0, y: 50 });
+    gsap.set(mockupRef.current, { scale: 0.8, rotateX: 15, y: 100 });
 
-    // Step 1: Bring laptop closer and rotate into view
-    tl.to(laptopProxy.current, {
+    // Step 1: Bring mockup closer and straighten
+    tl.to(mockupRef.current, {
       scale: 1,
       y: 0,
-      z: 0,
-      rotateX: 0.1,
-      rotateY: 0, // spin around to reveal the screen side
+      rotateX: 0,
       duration: 2.5,
       ease: "power2.inOut",
     }, 0);
 
-    // Step 3: EXPLOSION of frames from behind the laptop
-    tl.to(".explosion-frame", {
-      opacity: (i: number) => Math.random() * 0.5 + 0.3,
-      x: (i: number) => frames[i].x,
-      y: (i: number) => frames[i].y,
-      z: (i: number) => frames[i].z,
-      rotateX: (i: number) => frames[i].rotateX,
-      rotateY: (i: number) => frames[i].rotateY,
-      rotateZ: (i: number) => frames[i].rotateZ,
-      scale: (i: number) => frames[i].scale,
-      duration: 3,
-      ease: "expo.out",
-      stagger: 0.01,
-    }, 2);
-
-    // Step 4: Fade in side text
+    // Step 2: Fade in side text
     tl.to(textRef.current, {
       opacity: 1,
       y: 0,
       duration: 1.5,
       ease: "power2.out",
-    }, 2.5);
+    }, 1.5);
 
-    // Step 5: Massive zoom into the laptop to transition to next section
-    tl.to(laptopProxy.current, {
+    // Step 3: Zoom into the mockup
+    tl.to(mockupRef.current, {
       opacity: 0,
-      scale: 20, // scales up massively to cover the screen
+      scale: 3, 
       duration: 2.5,
       ease: "power2.in",
-    }, 4.5);
+    }, 3.5);
 
-    // Continue frame movement towards camera
-    tl.to(".explosion-frame", {
-      z: "+=1000",
-      opacity: 0,
-      duration: 3,
-      stagger: 0.02,
-    }, 4.5);
+  }, { scope: containerRef, dependencies: [isMobile, isMounted] });
 
-  }, { scope: containerRef, dependencies: [isMobile] });
-
-  // Render simplificado e extremamente rápido no Mobile/Safari sem WebGL/ou antes de montar
-  if (!isMounted || isMobile || webGLSupported === false) {
+  // Render simplificado no Mobile ou antes de montar
+  if (!isMounted || isMobile) {
     return (
       <section className="relative w-full min-h-[80vh] bg-brand-dark flex flex-col items-center justify-center py-16 px-6 overflow-hidden transition-colors duration-300">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(47,107,101,0.08)_0%,transparent_70%)]" />
@@ -208,29 +110,31 @@ export default function HeroMacBook() {
             Learn the exact methodologies used by top-tier creative agencies to scale businesses predictably.
           </p>
           
-          {/* Mockup de Laptop 2D super responsivo e limpo */}
-          <div className="relative w-full max-w-[280px] aspect-[16/10] bg-brand-darker border border-brand-white/10 rounded-lg shadow-2xl p-2 flex items-center justify-center transition-colors duration-300">
-            <div className="absolute inset-0 bg-gradient-to-br from-[--color-brand-primary]/10 to-transparent rounded-lg pointer-events-none" />
-            <div className="w-full h-full border border-brand-white/5 rounded bg-brand-dark flex flex-col items-center justify-center p-3 text-center transition-colors duration-300">
-              <span className="text-[--color-brand-primary] font-mono text-xs font-bold mb-1">DN_ACADEMY_V1</span>
-              <span className="text-brand-white/30 font-mono text-[9px]">Scroll to discover modules</span>
-            </div>
-            {/* Laptop Base */}
-            <div className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 w-[112%] h-[6px] bg-brand-white/20 rounded-b-md shadow-md" />
+          {/* Mockup de Dashboard 2D UI */}
+          <div className="relative w-full max-w-[320px] aspect-[16/10] bg-brand-darker border border-brand-white/10 rounded-xl shadow-2xl p-3 flex flex-col transition-colors duration-300">
+             <div className="flex gap-1.5 mb-3">
+               <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+               <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+               <div className="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+             </div>
+             <div className="flex-1 rounded border border-brand-white/5 bg-brand-dark/50 flex flex-col items-center justify-center p-3 text-center">
+                <span className="text-[--color-brand-primary] font-mono text-xs font-bold mb-1">DN_ACADEMY_V1</span>
+                <span className="text-brand-white/30 font-mono text-[9px]">Scroll to discover modules</span>
+             </div>
           </div>
         </div>
       </section>
     );
   }
 
-  // Render do Desktop (com Three.js e Scroll-Explosion)
+  // Render do Desktop (com UI 2D premium e ScrollTrigger)
   return (
     <section ref={containerRef} className="relative w-full h-screen bg-brand-dark overflow-hidden flex flex-col items-center justify-center perspective-[2000px] transition-colors duration-300">
       
       {/* Absolute Background Lighting */}
       <div 
         className={cx(
-          "absolute inset-0 transition-opacity duration-500",
+          "absolute inset-0 transition-opacity duration-500 pointer-events-none",
           isDark 
             ? "bg-[radial-gradient(circle_at_center,rgba(47,107,101,0.12)_0%,rgba(4,8,7,1)_70%)]" 
             : "bg-[radial-gradient(circle_at_center,rgba(47,107,101,0.08)_0%,rgba(240,244,244,1)_70%)]"
@@ -254,44 +158,54 @@ export default function HeroMacBook() {
       <div ref={textRef} className="absolute left-10 md:left-20 top-1/2 -translate-y-1/2 z-20 max-w-sm pointer-events-none">
         <h2 className="text-3xl md:text-5xl font-bold text-brand-white leading-tight drop-shadow-xl">
           Performance controlled<br/>
-          <span className="text-[--color-brand-primary]">frame by frame.</span>
+          <span className="text-[--color-brand-primary]">pixel by pixel.</span>
         </h2>
       </div>
 
-      {/* Explosion Frames Container */}
-      <div ref={framesContainerRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full preserve-3d pointer-events-none z-10">
-        {frames.map((frame) => (
-          <div
-            key={frame.id}
-            className="explosion-frame absolute top-1/2 left-1/2 w-40 h-24 bg-brand-white/5 backdrop-blur-md border border-brand-white/10 rounded-lg shadow-2xl overflow-hidden flex items-center justify-center"
-            style={{ transformStyle: "preserve-3d", transform: "translate(-50%, -50%)" }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-[--color-brand-primary]/20 to-transparent" />
-            <span className="text-brand-white/20 text-xs font-mono">FR_{frame.id.toString().padStart(4, '0')}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* 3D Canvas MacBook */}
-      <div className="absolute inset-0 z-10 w-full h-full pointer-events-none">
-        <ErrorBoundary name="HeroMacBookCanvas" fallback={
-          <div className="absolute inset-0 flex items-center justify-center bg-brand-dark/40">
-            <span className="text-[10px] font-mono tracking-widest text-[#2f6b65] uppercase animate-pulse">Canvas 3D Indisponível</span>
-          </div>
-        }>
-          <Canvas camera={{ position: [0, 0, 15], fov: 45 }} dpr={[1, 1.5]}>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[10, 10, 10]} intensity={1} />
-            <directionalLight position={[-10, 10, -10]} intensity={0.5} />
-            <Environment preset="city" />
-            <Suspense fallback={null}>
-              <Laptop3D proxy={laptopProxy} />
-            </Suspense>
-          </Canvas>
-        </ErrorBoundary>
+      {/* CSS Dashboard Mockup replaces 3D MacBook */}
+      <div className="absolute inset-0 z-10 w-full h-full pointer-events-none flex items-center justify-center" style={{ perspective: "1500px" }}>
+         <div ref={mockupRef} className="w-[800px] h-[500px] bg-brand-darker border border-brand-white/10 rounded-2xl shadow-[0_30px_100px_-20px_rgba(47,107,101,0.4)] p-4 flex flex-col relative overflow-hidden backdrop-blur-xl">
+             {/* Window Controls */}
+             <div className="flex gap-2 mb-4">
+               <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+               <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+               <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+             </div>
+             {/* Mock Content */}
+             <div className="flex-1 rounded-xl border border-brand-white/5 bg-brand-dark/80 flex overflow-hidden">
+                {/* Sidebar */}
+                <div className="w-48 border-r border-brand-white/5 p-4 flex flex-col gap-3">
+                   <div className="h-6 rounded bg-brand-white/10 w-3/4 mb-4"></div>
+                   <div className="h-4 rounded bg-brand-white/5 w-full"></div>
+                   <div className="h-4 rounded bg-brand-white/5 w-5/6"></div>
+                   <div className="h-4 rounded bg-brand-white/5 w-4/6"></div>
+                </div>
+                {/* Main Area */}
+                <div className="flex-1 p-6 flex flex-col gap-4">
+                   <div className="flex justify-between items-center mb-4">
+                      <div className="h-8 rounded bg-brand-white/10 w-1/3"></div>
+                      <div className="h-8 rounded bg-[--color-brand-primary]/20 text-[--color-brand-primary] border border-[--color-brand-primary]/30 w-24 flex items-center justify-center text-[10px] font-bold tracking-widest uppercase">Active</div>
+                   </div>
+                   {/* Charts Area */}
+                   <div className="flex gap-4 mb-4">
+                      <div className="flex-1 h-32 rounded-xl bg-gradient-to-tr from-[--color-brand-primary]/20 to-brand-white/5 border border-brand-white/5"></div>
+                      <div className="flex-1 h-32 rounded-xl bg-gradient-to-tr from-[--color-brand-primary]/10 to-brand-white/5 border border-brand-white/5"></div>
+                      <div className="flex-1 h-32 rounded-xl bg-gradient-to-tr from-[--color-brand-primary]/5 to-brand-white/5 border border-brand-white/5"></div>
+                   </div>
+                   {/* Grid Area */}
+                   <div className="flex-1 rounded-xl border border-brand-white/5 bg-brand-white/5 p-4 flex flex-col gap-2">
+                      <div className="h-10 rounded border border-brand-white/5 bg-brand-dark w-full"></div>
+                      <div className="h-10 rounded border border-brand-white/5 bg-brand-dark w-full opacity-70"></div>
+                      <div className="h-10 rounded border border-brand-white/5 bg-brand-dark w-full opacity-40"></div>
+                   </div>
+                </div>
+             </div>
+             
+             {/* Glow Overlay */}
+             <div className="absolute inset-0 bg-gradient-to-tr from-[--color-brand-primary]/5 to-transparent pointer-events-none" />
+         </div>
       </div>
 
     </section>
   );
 }
-

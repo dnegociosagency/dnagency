@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -13,7 +13,8 @@ export default function Hero() {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024); // Ocultar globo em telas menores (tablet/celular)
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      setIsMobile(window.innerWidth < 1024 || isIOS); // Ocultar globo em telas menores ou iOS (estabilidade Safari)
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);

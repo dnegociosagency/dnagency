@@ -57,6 +57,20 @@ function ParticleSphere() {
 }
 
 export default function Scene3D() {
+  const [isSupported, setIsSupported] = React.useState(false);
+
+  React.useEffect(() => {
+    // Evita renderizar Canvas WebGL em iOS Safari e Mobile para estabilidade extrema
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isMobile = window.innerWidth < 1024;
+    
+    if (!isIOS && !isMobile) {
+      setIsSupported(true);
+    }
+  }, []);
+
+  if (!isSupported) return null;
+
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
       <Canvas camera={{ position: [0, 0, 7], fov: 60 }} dpr={[1, 1.5]}>

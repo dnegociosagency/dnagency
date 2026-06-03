@@ -53,7 +53,8 @@ export default function ExpansaoGlobal() {
     });
 
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      setIsMobile(window.innerWidth < 768 || isIOS);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
