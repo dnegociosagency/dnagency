@@ -14,6 +14,7 @@ export interface UnidadeData {
   instagram: string;
   facebook: string;
   youtube: string;
+  telefonesExtras?: { label?: string; numero: string }[];
 }
 
 export const UNIDADES: Record<string, UnidadeData> = {
@@ -21,8 +22,8 @@ export const UNIDADES: Record<string, UnidadeData> = {
     slug: "parauapebas",
     nome: "JJ Moto Peças Parauapebas",
     unidade: "Parauapebas - PA",
-    telefone: "(94) 3346-1234",
-    whatsapp: "5594991234567",
+    telefone: "(94) 93500-8113",
+    whatsapp: "5594935008113",
     mensagemWhatsapp: "Olá! Gostaria de fazer um orçamento de peças/acessórios na unidade de Parauapebas.",
     endereco: "Av. PA-275, Qd. 82, Lote 14 - Cidade Nova, Parauapebas - PA, 68515-000",
     linkMaps: "https://www.google.com/maps/search/?api=1&query=JJ+Moto+Pe%C3%A7as+Parauapebas",
@@ -32,14 +33,18 @@ export const UNIDADES: Record<string, UnidadeData> = {
     email: "parauapebas@jjmotopecas.com.br",
     instagram: "https://www.instagram.com/jjmotopecasparauapebas/",
     facebook: "https://www.facebook.com/jjmotopecas",
-    youtube: "https://www.youtube.com/@jjmotopecas"
+    youtube: "https://www.youtube.com/@jjmotopecas",
+    telefonesExtras: [
+      { label: "Cidade Jardim", numero: "(94) 93500-8113" },
+      { label: "Rio Verde", numero: "(94) 99285-6543" }
+    ]
   },
   maraba: {
     slug: "maraba",
     nome: "JJ Moto Peças Marabá",
     unidade: "Marabá - PA",
-    telefone: "(94) 3322-5678",
-    whatsapp: "5594992345678",
+    telefone: "(94) 99123-0888",
+    whatsapp: "5594991230888",
     mensagemWhatsapp: "Olá! Gostaria de fazer um orçamento de peças/acessórios na unidade de Marabá.",
     endereco: "Rodovia Transamazônica, Km 02, Qd. 10 - Nova Marabá, Marabá - PA, 68509-000",
     linkMaps: "https://www.google.com/maps/search/?api=1&query=JJ+Moto+Pe%C3%A7as+Maraba",
@@ -49,14 +54,19 @@ export const UNIDADES: Record<string, UnidadeData> = {
     email: "maraba@jjmotopecas.com.br",
     instagram: "http://instagram.com/jjmotopecasmaraba/",
     facebook: "https://www.facebook.com/jjmotopecas",
-    youtube: "https://www.youtube.com/@jjmotopecas"
+    youtube: "https://www.youtube.com/@jjmotopecas",
+    telefonesExtras: [
+      { label: "Matriz", numero: "(94) 99123-0888" },
+      { label: "Cidade Nova", numero: "(94) 99292-0888" },
+      { label: "São Félix", numero: "(94) 98421-5742" }
+    ]
   },
   ananindeua: {
     slug: "ananindeua",
     nome: "JJ Moto Peças Ananindeua",
     unidade: "Ananindeua - PA",
-    telefone: "(91) 3255-9012",
-    whatsapp: "5591993456789",
+    telefone: "(91) 98032-2772",
+    whatsapp: "5591980322772",
     mensagemWhatsapp: "Olá! Gostaria de fazer um orçamento de peças/acessórios na unidade de Ananindeua.",
     endereco: "Rodovia BR-316, Km 08 - Centro, Ananindeua - PA, 67030-000",
     linkMaps: "https://www.google.com/maps/search/?api=1&query=JJ+Moto+Pe%C3%A7as+Ananindeua",
@@ -66,6 +76,10 @@ export const UNIDADES: Record<string, UnidadeData> = {
     email: "ananindeua@jjmotopecas.com.br",
     instagram: "https://www.instagram.com/jjmotopecasananindeua/",
     facebook: "https://www.facebook.com/jjmotopecas",
-    youtube: "https://www.youtube.com/@jjmotopecas"
+    youtube: "https://www.youtube.com/@jjmotopecas",
+    telefonesExtras: [
+      { numero: "(91) 98032-2772" },
+      { numero: "(91) 98431-5468" }
+    ]
   }
 };

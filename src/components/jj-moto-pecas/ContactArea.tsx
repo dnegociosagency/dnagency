@@ -24,8 +24,10 @@ export default function ContactArea({ unidade }: ContactAreaProps) {
     },
     {
       id: "phone",
-      title: "Telefone & WhatsApp",
-      value: `${unidade.telefone} \n WhatsApp: (94) 99123-4567`, // Como usamos número padrão do dados, vamos expor de forma elegante
+      title: "Telefones & WhatsApp",
+      value: unidade.telefonesExtras && unidade.telefonesExtras.length > 0
+        ? unidade.telefonesExtras.map(t => t.label ? `${t.label}: ${t.numero}` : t.numero).join('\n')
+        : `${unidade.telefone}`,
       icon: Phone,
       color: "text-jj-red bg-jj-red/10 border-jj-red/20",
       action: {
