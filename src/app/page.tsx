@@ -1,39 +1,11 @@
-import dynamic from "next/dynamic";
+// Server Component — no "use client" directive
+// Above-the-fold sections imported statically for best LCP/FCP.
+// Below-the-fold sections are deferred inside LazyPageSections (Client Component).
 
-// --- Above the fold: loaded immediately for LCP/FCP ---
 import Hero from "@/components/home/Hero";
 import LogoTicker from "@/components/home/LogoTicker";
 import ServicesSection from "@/components/home/ServicesSection";
-
-// --- Below the fold: deferred to reduce initial JS bundle ---
-const ManifestoScrollSection = dynamic(
-  () => import("@/components/home/ManifestoScrollSection"),
-  { ssr: false }
-);
-const ProcessSection = dynamic(
-  () => import("@/components/home/ProcessSection"),
-  { ssr: false }
-);
-const PricingSection = dynamic(
-  () => import("@/components/home/PricingSection"),
-  { ssr: false }
-);
-const TestimonialsSection = dynamic(
-  () => import("@/components/home/TestimonialsSection"),
-  { ssr: false }
-);
-const TeamSection = dynamic(
-  () => import("@/components/home/TeamSection"),
-  { ssr: false }
-);
-const FAQSection = dynamic(
-  () => import("@/components/home/FAQSection"),
-  { ssr: false }
-);
-const CTASection = dynamic(
-  () => import("@/components/home/CTASection"),
-  { ssr: false }
-);
+import LazyPageSections from "@/components/home/LazyPageSections";
 
 export default function Home() {
   return (
@@ -41,14 +13,7 @@ export default function Home() {
       <Hero />
       <LogoTicker />
       <ServicesSection />
-      <ManifestoScrollSection />
-      <ProcessSection />
-      <PricingSection />
-      <TestimonialsSection />
-      <TeamSection />
-      <FAQSection />
-      <CTASection />
+      <LazyPageSections />
     </div>
   );
 }
-
