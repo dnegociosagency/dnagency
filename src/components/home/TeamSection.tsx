@@ -61,10 +61,18 @@ const team = [
   {
     id: 7,
     name: "Juliana",
-    role: "SDR & Business Development",
-    description: "Specializes in outbound sales strategy and market expansion, connecting premium business solutions with partners across North America.",
+    role: "GROWTH PARTNER | CANADA OFFICE",
+    description: "Leads international expansion by partnering closely with clients. Anticipates digital bottlenecks to deliver advanced qualified lead generation strategies, and leverages data-driven growth marketing to accelerate business scaling.",
     image: "/team/juliana.jpg",
     index: "07",
+  },
+  {
+    id: 8,
+    name: "Anabella",
+    role: "GROWTH PARTNER | US OFFICE",
+    description: "Leads international expansion by partnering closely with clients. Anticipates digital bottlenecks to deliver advanced qualified lead generation strategies, and leverages data-driven growth marketing to accelerate business scaling.",
+    image: "/team/anabella.png",
+    index: "08",
   },
 ];
 
@@ -151,15 +159,15 @@ export default function TeamSection() {
       const isEven = i % 2 === 0;
       gsap.fromTo(
         card,
-        { 
-          y: 120, 
-          rotationX: -15, 
+        {
+          y: 120,
+          rotationX: -15,
           rotationY: isEven ? 8 : -8,
-          z: -150 
+          z: -150
         },
         {
-          y: -40, 
-          rotationX: 10, 
+          y: -40,
+          rotationX: 10,
           rotationY: isEven ? -4 : 4,
           z: 50,
           ease: "none",

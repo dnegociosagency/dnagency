@@ -45,8 +45,14 @@ const team = [
   {
     id: 7,
     name: "Juliana",
-    role: "SDR & Prospecting - Canada",
+    role: "GROWTH PARTNER | CANADA OFFICE",
     image: "/team/juliana.jpg",
+  },
+  {
+    id: 8,
+    name: "Anabella",
+    role: "GROWTH PARTNER | US OFFICE",
+    image: "/team/anabella.png",
   },
 ];
 
