@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { motion, type HTMLMotionProps } from "framer-motion";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -17,24 +17,46 @@ type MagneticButtonProps = Omit<HTMLMotionProps<"button">, "ref"> & {
 export default function MagneticButton({ children, className, ...props }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  // Cache the bounding rect — only re-read on resize, not every mousemove
+  const rectCache = useRef<DOMRect | null>(null);
+  const rafId = useRef<number | null>(null);
 
-  const handleMouse = (e: React.MouseEvent<HTMLButtonElement>) => {
+  // Refresh cache on resize
+  useEffect(() => {
+    const updateRect = () => { rectCache.current = null; };
+    window.addEventListener("resize", updateRect, { passive: true });
+    return () => window.removeEventListener("resize", updateRect);
+  }, []);
+
+  // Cache rect on mouseenter (layout is stable at this point)
+  const handleMouseEnter = useCallback(() => {
+    if (ref.current) rectCache.current = ref.current.getBoundingClientRect();
+  }, []);
+
+  // Use RAF to batch the position update — prevents forced reflow on every event
+  const handleMouse = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    if (rafId.current) cancelAnimationFrame(rafId.current);
     const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current!.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
-  };
+    rafId.current = requestAnimationFrame(() => {
+      const rect = rectCache.current ?? ref.current?.getBoundingClientRect();
+      if (!rect) return;
+      const middleX = clientX - (rect.left + rect.width / 2);
+      const middleY = clientY - (rect.top + rect.height / 2);
+      setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
+    });
+  }, []);
 
-  const reset = () => {
+  const reset = useCallback(() => {
+    if (rafId.current) cancelAnimationFrame(rafId.current);
     setPosition({ x: 0, y: 0 });
-  };
+  }, []);
 
   const { x, y } = position;
 
   return (
     <motion.button
       ref={ref}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
       animate={{ x, y }}

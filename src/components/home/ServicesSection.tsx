@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useRef, useState } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
@@ -11,26 +11,40 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
+  const rectCache = useRef<DOMRect | null>(null);
+  const rafId = useRef<number | null>(null);
+
+  // Cache rect on mouseenter — layout is stable, no forced reflow
+  const handleMouseEnter = () => {
+    if (divRef.current) rectCache.current = divRef.current.getBoundingClientRect();
+    setOpacity(1);
+  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!divRef.current || isFocused) return;
-    const div = divRef.current;
-    const rect = div.getBoundingClientRect();
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    const { clientX, clientY } = e;
+    rafId.current = requestAnimationFrame(() => {
+      const rect = rectCache.current ?? divRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      setPosition({ x: clientX - rect.left, y: clientY - rect.top });
+    });
   };
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
-  const handleMouseEnter = () => setOpacity(1);
-  const handleMouseLeave = () => setOpacity(0);
+  const handleMouseLeave = () => {
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    setOpacity(0);
+  };
 
   return (
     <div
       ref={divRef}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onFocus={handleFocus}
       onBlur={handleBlur}
-      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={`relative rounded-3xl border border-black/5 dark:border-white/5 bg-black/5 dark:bg-white/[0.02] overflow-hidden ${className}`}
     >
@@ -45,6 +59,7 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
     </div>
   );
 }
+
 
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);

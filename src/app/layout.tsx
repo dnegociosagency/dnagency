@@ -11,6 +11,8 @@ import ClientShell from "@/components/ClientShell";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",   // show text immediately with fallback while font loads
+  preload: true,
 });
 
 const BASE_URL = "https://www.agenciadnegocios.com";
@@ -77,6 +79,10 @@ export default function RootLayout({
       className={`dark ${inter.variable} font-sans antialiased`}
     >
       <head>
+        {/* Preconnect to Google Fonts CDN to cut CSS critical path latency */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <SchemaMarkup />
       </head>
       <body className="min-h-screen flex flex-col overflow-x-hidden">
