@@ -1,0 +1,11 @@
+# Browserslist config — used by autoprefixer and other tools
+# Targets modern browsers including Safari 14+ and iOS 14+
+
+> 0.5%
+last 3 Chrome versions
+last 3 Firefox versions
+last 3 Edge versions
+last 4 Safari versions
+last 4 iOS versions
+not dead
+not IE 11

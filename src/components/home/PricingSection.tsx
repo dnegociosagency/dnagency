@@ -1,11 +1,9 @@
-﻿"use client";
+"use client";
 
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, type Variants, useMotionValue, useSpring } from "framer-motion";
 import { Check, X, ArrowRight, Zap } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
-import { Canvas } from "@react-three/fiber";
-import { ShaderPlane } from "@/components/ui/background-paper-shaders";
 
 export default function PricingSection() {
   const containerRef = useRef<HTMLDivElement>(null);

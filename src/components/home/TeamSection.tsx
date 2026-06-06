@@ -111,19 +111,14 @@ export default function TeamSection() {
   useGSAP(() => {
     if (!sectionRef.current) return;
 
-    // Configura a perspectiva no container dos cards para o efeito 3D
-    gsap.set(cardsRef.current, { perspective: 1500, transformStyle: "preserve-3d" });
-
-    // Título 3D reveal
+    // Título reveal — 2D only (sem 3D transforms que quebram Safari)
     gsap.fromTo(
       titleRef.current,
-      { opacity: 0, y: 80, rotationX: -40, z: -100, transformOrigin: "top center" },
+      { opacity: 0, y: 60 },
       {
         opacity: 1,
         y: 0,
-        rotationX: 0,
-        z: 0,
-        duration: 1.4,
+        duration: 1.2,
         ease: "power3.out",
         scrollTrigger: {
           trigger: titleRef.current,
@@ -133,72 +128,26 @@ export default function TeamSection() {
       }
     );
 
-    // Animação 3D dos Cards (Entrada + Scroll Imersivo)
+    // Cards — reveal simples com opacidade e translateY (sem rotação 3D)
     const cards = gsap.utils.toArray<HTMLElement>(".team-card");
     cards.forEach((card, i) => {
-      gsap.set(card, { transformOrigin: "center center", transformStyle: "preserve-3d" });
-
-      // 1. Reveal de opacidade e escala
+      // Reveal de opacidade e translateY
       gsap.fromTo(
         card,
-        { opacity: 0, scale: 0.85 },
+        { opacity: 0, y: 50 },
         {
           opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          delay: (i % 3) * 0.15,
+          y: 0,
+          duration: 1.0,
+          delay: (i % 3) * 0.12,
           ease: "power3.out",
           scrollTrigger: {
             trigger: card,
-            start: "top 85%",
+            start: "top 88%",
             toggleActions: "play none none reverse",
           },
         }
       );
-
-      // 2. 3D Scroll Scrub
-      const isEven = i % 2 === 0;
-      gsap.fromTo(
-        card,
-        {
-          y: 120,
-          rotationX: -15,
-          rotationY: isEven ? 8 : -8,
-          z: -150
-        },
-        {
-          y: -40,
-          rotationX: 10,
-          rotationY: isEven ? -4 : 4,
-          z: 50,
-          ease: "none",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 100%",
-            end: "bottom 0%",
-            scrub: 1.2,
-          },
-        }
-      );
-
-      // 3. Immersive Image Parallax
-      const parallaxContainer = card.querySelector(".team-parallax-container");
-      if (parallaxContainer) {
-        gsap.fromTo(
-          parallaxContainer,
-          { yPercent: -15 },
-          {
-            yPercent: 0,
-            ease: "none",
-            scrollTrigger: {
-              trigger: card,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.5,
-            },
-          }
-        );
-      }
     });
   }, { scope: sectionRef });
 
