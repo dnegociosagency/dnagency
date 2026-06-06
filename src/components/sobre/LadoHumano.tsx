@@ -53,6 +53,7 @@ const team = [
     name: "Anabella",
     role: "GROWTH PARTNER | US OFFICE",
     image: "/team/anabella.png",
+    position: "object-top",
   },
 ];
 

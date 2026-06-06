@@ -73,6 +73,7 @@ const team = [
     description: "Leads international expansion by partnering closely with clients. Anticipates digital bottlenecks to deliver advanced qualified lead generation strategies, and leverages data-driven growth marketing to accelerate business scaling.",
     image: "/team/anabella.png",
     index: "08",
+    position: "object-top",
   },
 ];
 

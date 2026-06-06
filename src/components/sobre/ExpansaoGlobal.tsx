@@ -27,19 +27,8 @@ export default function ExpansaoGlobal() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Detectar suporte a WebGL
-    try {
-      const canvas = document.createElement("canvas");
-      const supportsWebGL = !!(
-        window.WebGLRenderingContext &&
-        (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
-      );
-      setWebGLSupported(supportsWebGL);
-      console.log(`[ExpansaoGlobal] Suporte a WebGL detectado: ${supportsWebGL}`);
-    } catch (e) {
-      setWebGLSupported(false);
-      console.error("[ExpansaoGlobal] Erro ao detectar suporte a WebGL:", e);
-    }
+    // Forçar desativação do globo 3D WebGL
+    setWebGLSupported(false);
 
     setIsDark(document.documentElement.classList.contains("dark"));
 
