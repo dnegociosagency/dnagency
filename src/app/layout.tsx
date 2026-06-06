@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "@/components/SmoothScroll";
-
+import dynamic from "next/dynamic";
 import { Header } from "@/components/ui/header-2";
 import Footer from "@/components/Footer";
-import Chatbot from "@/components/Chatbot/Chatbot";
 import { Providers } from "@/lib/query-provider";
 import SchemaMarkup from "@/components/SchemaMarkup";
-
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
+
+// Deferred: Lenis smooth scroll + GSAP ticker only needed after hydration
+const SmoothScroll = dynamic(() => import("@/components/SmoothScroll"), { ssr: false });
+// Deferred: chatbot is never needed for initial render
+const Chatbot = dynamic(() => import("@/components/Chatbot/Chatbot"), { ssr: false });
 
 const inter = Inter({
   variable: "--font-inter",
