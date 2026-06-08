@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import { useEffect, useRef } from "react";
@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowUp, MessageCircle } from "lucide-react";
 
-// SVG inline de Ã­cones sociais (lucide nessa versÃ£o nÃ£o os inclui)
+// SVG inline de ícones sociais (lucide nessa versão não os inclui)
 const IconInstagram = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -31,7 +31,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// â”€â”€â”€ Estilos injetados â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Estilos injetados ─────────────────────────────────────────────────────
 
 const STYLES = `
 @keyframes dn-footer-breathe {
@@ -101,7 +101,7 @@ const STYLES = `
 }
 `;
 
-// â”€â”€â”€ Magnetic Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Magnetic Button ─────────────────────────────────────────────────────
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MagneticProps = Record<string, any> & { children?: React.ReactNode };
@@ -136,28 +136,28 @@ function MagneticButton({ className, children, as: Tag = "button", ...props }: M
   );
 }
 
-// â”€â”€â”€ Marquee â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Marquee ─────────────────────────────────────────────────────────────
 
 function MarqueeItem() {
   return (
     <div className="flex items-center space-x-10 px-6 text-white/35 font-bold tracking-[.28em] text-[11px] uppercase whitespace-nowrap">
       <span>Paid Media</span>
-      <span className="text-[--color-brand-primary]">âœ¦</span>
+      <span className="text-[--color-brand-primary]">✦</span>
       <span>Google Ads</span>
-      <span className="text-[--color-brand-primary]">âœ¦</span>
+      <span className="text-[--color-brand-primary]">✦</span>
       <span>Meta Ads</span>
-      <span className="text-[--color-brand-primary]">âœ¦</span>
+      <span className="text-[--color-brand-primary]">✦</span>
       <span>Conversion Funnels</span>
-      <span className="text-[--color-brand-primary]">âœ¦</span>
+      <span className="text-[--color-brand-primary]">✦</span>
       <span>Performance Marketing</span>
-      <span className="text-[--color-brand-primary]">âœ¦</span>
+      <span className="text-[--color-brand-primary]">✦</span>
       <span>USA & Canada</span>
-      <span className="text-[--color-brand-primary]">âœ¦</span>
+      <span className="text-[--color-brand-primary]">✦</span>
     </div>
   );
 }
 
-// â”€â”€â”€ Links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Links ───────────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
   {
@@ -192,7 +192,7 @@ const SOCIAL: { icon: React.ComponentType; href: string; label: string }[] = [
   { icon: IconYoutube, href: "#", label: "YouTube" },
 ];
 
-// â”€â”€â”€ Main â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Main ────────────────────────────────────────────────────────────────
 
 export default function Footer() {
   const pathname = usePathname();
@@ -280,10 +280,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ConteÃºdo central */}
+          {/* Conteúdo central */}
           <div className="relative z-10 mx-auto max-w-7xl px-6 pt-20 pb-8 md:px-12">
 
-            {/* TÃ­tulo */}
+            {/* Título */}
             <h2
               ref={headingRef}
               className="dn-text-glow text-5xl font-black tracking-tighter md:text-8xl text-center mb-4"
@@ -291,7 +291,7 @@ export default function Footer() {
               DN Agency
             </h2>
             <p className="text-center text-white/45 text-base md:text-lg font-light mb-14 tracking-wide">
-              Digital Performance Â· USA & Canada
+              Digital Performance · USA & Canada
             </p>
 
             {/* Links + Redes */}
@@ -343,14 +343,14 @@ export default function Footer() {
 
               {/* Copyright */}
               <p className="text-[11px] font-semibold uppercase tracking-widest text-white/30 order-2 md:order-1">
-                Â© {new Date().getFullYear()} DN Agency Â· All rights reserved
+                © {new Date().getFullYear()} DN Agency · All rights reserved
               </p>
 
-              {/* Badge "feito com â¤" */}
+              {/* Badge "feito com ♥" */}
               <div className="dn-glass-pill flex items-center gap-2 rounded-full px-5 py-2.5 order-1 md:order-2">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Crafted by</span>
-                <span className="text-sm font-black text-white">DN Studio</span>
-                <span className="dn-heartbeat text-[--color-brand-primary] text-base leading-none">â™¥</span>
+                <span className="text-sm font-black text-white">DN Dev</span>
+                <span className="dn-heartbeat text-[--color-brand-primary] text-base leading-none">♥</span>
               </div>
 
               {/* CTA WhatsApp + Voltar ao topo */}
