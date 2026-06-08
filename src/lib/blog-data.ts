@@ -537,7 +537,7 @@ export const blogPosts: BlogPost[] = [
     category: "Paid Traffic",
     date: "June 08, 2026",
     readTime: "6 min read",
-    image: "/images/blog_glsa_lead_phone.png",
+    image: "/images/blog_hvac_glsa.png",
     author: "Donis Alfredo",
     content: [
       {
