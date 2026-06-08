@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/ui/header-2";
 import Footer from "@/components/Footer";
@@ -7,13 +6,6 @@ import { Providers } from "@/lib/query-provider";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
 import ClientShell from "@/components/ClientShell";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",   // show text immediately with fallback while font loads
-  preload: true,
-});
 
 const BASE_URL = "https://www.agenciadnegocios.com";
 
@@ -67,7 +59,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -76,13 +67,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${inter.variable} font-sans antialiased`}
+      className="dark font-sans antialiased"
     >
       <head>
         {/* Preconnect to Google Fonts CDN to cut CSS critical path latency */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        {/* Satoshi Font for Body/Menu */}
+        <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap" rel="stylesheet" />
         <SchemaMarkup />
       </head>
       <body className="min-h-screen flex flex-col overflow-x-hidden">

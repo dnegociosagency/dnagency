@@ -1,151 +1,87 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import * as React from 'react';
+import {
+  FloatingIconsHero,
+  type FloatingIconsHeroProps,
+} from '@/components/ui/floating-icons-hero-section';
+
+// --- Custom Marketing Icons ---
+
+const IconGoogle = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21.9999 12.24C21.9999 11.4933 21.9333 10.76 21.8066 10.0533H12.3333V14.16H17.9533C17.7333 15.3467 17.0133 16.3733 15.9666 17.08V19.68H19.5266C21.1933 18.16 21.9999 15.4533 21.9999 12.24Z" fill="#4285F4"/>
+        <path d="M12.3333 22C15.2333 22 17.6866 21.0533 19.5266 19.68L15.9666 17.08C15.0199 17.7333 13.7933 18.16 12.3333 18.16C9.52659 18.16 7.14659 16.28 6.27992 13.84H2.59326V16.5133C4.38659 20.0267 8.05992 22 12.3333 22Z" fill="#34A853"/>
+        <path d="M6.2799 13.84C6.07324 13.2267 5.9599 12.58 5.9599 11.92C5.9599 11.26 6.07324 10.6133 6.2799 10L2.59326 7.32667C1.86659 8.78667 1.45326 10.32 1.45326 11.92C1.45326 13.52 1.86659 15.0533 2.59326 16.5133L6.2799 13.84Z" fill="#FBBC05"/>
+        <path d="M12.3333 5.68C13.8933 5.68 15.3133 6.22667 16.3866 7.24L19.6 4.02667C17.68 2.29333 15.2266 1.33333 12.3333 1.33333C8.05992 1.33333 4.38659 3.97333 2.59326 7.32667L6.27992 10C7.14659 7.56 9.52659 5.68 12.3333 5.68Z" fill="#EA4335"/>
+    </svg>
+);
+
+const IconGoogleAds = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.81 12.33L10.61 21.6c.6.72 1.69.72 2.29 0l7.29-8.75c.6-.72.6-1.89 0-2.61L12.9 1.5c-.6-.72-1.69-.72-2.29 0L2.81 9.72c-.6.72-.6 1.89 0 2.61z" fill="#F4B400"/>
+        <path d="M11.75 12L7.22 6.56l5.68-1.5 4.53 5.44-5.68 1.5z" fill="#4285F4"/>
+    </svg>
+);
+
+const IconGoogleLocalServices = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#34A853]" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        <path d="M9 12l2 2 4-4"></path>
+    </svg>
+);
+
+const IconMeta = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#0668E1]" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 8c-2.2 0-4 1.8-4 4s1.8 4 4 4c2.2 0 4-1.8 4-4 0-2.2-1.8-4-4-4zm8 0c-2.2 0-4 1.8-4 4 0 2.2 1.8 4 4 4s4-1.8 4-4-1.8-4-4-4z"/>
+        <path d="M12 12l4-4M12 12l-4-4"/>
+    </svg>
+);
+
+const IconInstagram = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#E1306C]" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+);
+
+const IconYouTube = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21.582 6.186A2.482 2.482 0 0 0 19.82 4.42C18.1 4 12 4 12 4s-6.1 0-7.82.42c-.98.26-1.74.98-1.762 1.766C2 7.94 2 12 2 12s0 4.06.418 5.814c.022.786.782 1.506 1.762 1.766C6.1 20 12 20 12 20s6.1 0 7.82-.42c.98-.26 1.74-.98 1.762-1.766C22 16.06 22 12 22 12s0-4.06-.418-5.814zM9.75 15.5V8.5L15.75 12 9.75 15.5z" fill="#FF0000"/>
+    </svg>
+);
+
+// Define the icons with their unique positions for the demo.
+const demoIcons: FloatingIconsHeroProps['icons'] = [
+  // Marketing specific icons (repeated for visual density)
+  { id: 1, icon: IconGoogleAds, className: 'top-[10%] left-[10%]' },
+  { id: 2, icon: IconMeta, className: 'top-[20%] right-[10%]' },
+  { id: 3, icon: IconInstagram, className: 'top-[80%] left-[15%]' },
+  { id: 4, icon: IconYouTube, className: 'bottom-[15%] right-[15%]' },
+  { id: 5, icon: IconGoogle, className: 'top-[15%] left-[35%]' },
+  { id: 6, icon: IconGoogleLocalServices, className: 'top-[5%] right-[30%]' },
+  { id: 7, icon: IconGoogleAds, className: 'bottom-[10%] left-[30%]' },
+  { id: 8, icon: IconInstagram, className: 'top-[40%] left-[5%]' },
+  { id: 9, icon: IconMeta, className: 'top-[75%] right-[30%]' },
+  { id: 10, icon: IconGoogle, className: 'top-[85%] left-[65%]' },
+  { id: 11, icon: IconGoogleLocalServices, className: 'top-[50%] right-[5%]' },
+  { id: 12, icon: IconYouTube, className: 'top-[55%] left-[10%]' },
+];
 
 export default function Hero() {
-  const [titleNumber, setTitleNumber] = useState(0);
-  const titles = useMemo(
-    () => ["Performance", "Growth", "Acquisition", "Conversions", "Scaling"],
-    []
-  );
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (titleNumber === titles.length - 1) {
-        setTitleNumber(0);
-      } else {
-        setTitleNumber(titleNumber + 1);
-      }
-    }, 2000);
-    return () => clearTimeout(timeoutId);
-  }, [titleNumber, titles]);
-
   return (
-    <div data-theme="dark" className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[--background] pt-28 md:pt-36">
-      {/* Ambient background glows */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vh] rounded-full bg-[rgba(47,107,101,0.08)] blur-[160px] pointer-events-none" />
-        <div className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-[#3b8780] blur-[150px] opacity-[0.04] pointer-events-none" />
-      </div>
-
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-16 flex flex-col items-center justify-center text-center">
-        
-        {/* Top Premium Badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-[#2f6b65]/30 bg-[#2f6b65]/5 backdrop-blur-md"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-[#2f6b65]" />
-          <span className="text-[#2f6b65] font-semibold text-xs tracking-widest uppercase">
-            Premium Growth Studio
-          </span>
-        </motion.div>
-
-        {/* Main Centered Heading with Vertical Scrolling Word Loop */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 tracking-tighter leading-[1.1] text-center max-w-5xl mx-auto"
-        >
-          <span className="text-white block mb-2">
-            High-End Web Design.
-          </span>
-          <span className="relative flex flex-col sm:flex-row items-center justify-center overflow-hidden text-center pt-1 pb-1">
-            <span className="bg-gradient-to-r from-[#5eead4] via-[#3b8780] to-[#2f6b65] bg-clip-text text-transparent mr-0 sm:mr-4 shrink-0 font-black">
-              Radical
-            </span>
-            <span className="relative flex h-[1.2em] w-full sm:w-[320px] md:w-[420px] lg:w-[480px] xl:w-[540px] justify-center sm:justify-start overflow-hidden">
-              {titles.map((title, index) => (
-                <motion.span
-                  key={index}
-                  className="absolute left-0 right-0 sm:right-auto sm:left-0 bg-gradient-to-r from-[#5eead4] via-[#3b8780] to-[#2f6b65] bg-clip-text text-transparent text-center sm:text-left whitespace-nowrap font-black"
-                  initial={{ opacity: 0, y: -60 }}
-                  transition={{ type: "spring", stiffness: 60, damping: 15 }}
-                  animate={
-                    titleNumber === index
-                      ? {
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : {
-                          y: titleNumber > index ? -80 : 80,
-                          opacity: 0,
-                        }
-                  }
-                >
-                  {title}
-                </motion.span>
-              ))}
-            </span>
-          </span>
-        </motion.h1>
-
-        {/* Description Text */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
-          className="text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mb-12 font-normal leading-relaxed tracking-wide"
-        >
-          We build custom, high-converting websites and scale paid search &amp; social campaigns to drive hyper-growth for businesses across the US &amp; Canada.
-        </motion.p>
-
-        {/* Action CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full sm:w-auto z-10"
-        >
-          <a
-            href="https://calendar.app.google/TJ85TG2Do9uLhC2K7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto"
-          >
-            <Button
-              className="w-full sm:w-auto rounded-full px-8 py-6 text-base font-bold 
-              bg-[#2f6b65] hover:bg-[#255651] text-white transition-all duration-300
-              hover:shadow-[0_0_35px_rgba(47,107,101,0.35)] flex items-center justify-center gap-2"
-            >
-              <span>Book a Strategy Call</span>
-              <ArrowRight size={18} />
-            </Button>
-          </a>
-
-          <a href="#servicos" className="w-full sm:w-auto">
-            <Button
-              variant="outline"
-              className="w-full sm:w-auto px-8 py-6 text-base font-bold bg-transparent 
-              hover:bg-white/5 text-white border border-white/15 hover:border-white/35 rounded-full transition-all duration-300"
-            >
-              Explore Our Services
-            </Button>
-          </a>
-        </motion.div>
-
-      </div>
-
-      {/* Scroll Down Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 pointer-events-none hidden sm:flex"
-      >
-        <span className="text-white/40 text-[10px] font-bold tracking-widest uppercase">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          className="w-[1.5px] h-8 bg-gradient-to-b from-white/40 to-transparent"
-        />
-      </motion.div>
-    </div>
+    <FloatingIconsHero
+      title={
+        <>
+          Marketing Built for One Purpose: <br className="hidden md:block" />
+          <span className="text-white/60 text-4xl md:text-6xl">Revenue Growth.</span>
+        </>
+      }
+      subtitle="We go beyond aesthetics. We engineer hyper-profitable funnels, deploy aggressive paid campaigns, and systematically scale your company to dominate your market in the US & Canada."
+      ctaText="Book a Strategy Call"
+      ctaHref="https://calendar.app.google/TJ85TG2Do9uLhC2K7"
+      icons={demoIcons}
+    />
   );
 }
