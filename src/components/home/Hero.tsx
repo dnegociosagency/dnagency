@@ -81,7 +81,7 @@ export default function Hero() {
       subtitle="We go beyond aesthetics. We engineer hyper-profitable funnels, deploy aggressive paid campaigns, and systematically scale your company to dominate your market in the US & Canada."
       ctaText="Book a Strategy Call"
       ctaHref="https://calendar.app.google/TJ85TG2Do9uLhC2K7"
-      icons={demoIcons}
+      icons={[]}
     />
   );
 }

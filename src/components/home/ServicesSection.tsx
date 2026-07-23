@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, Variants } from "framer-motion";
 import { ArrowUpRight, Target, Globe, BarChart3, Fingerprint, Search } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 
