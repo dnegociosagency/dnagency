@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { X, ArrowRight, CheckCircle, Loader2, ChartBar, Target, TrendingUp } from "lucide-react";
 
 // ─── Constantes ─────────────────────────────────────────────────────────────
@@ -16,13 +16,13 @@ const BENEFITS = [
 ];
 
 // ─── Variantes de animação ───────────────────────────────────────────────────
-const backdropVariants = {
+const backdropVariants: Variants = {
   hidden:  { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.3 } },
   exit:    { opacity: 0, transition: { duration: 0.25 } },
 };
 
-const panelVariants = {
+const panelVariants: Variants = {
   hidden:  { opacity: 0, scale: 0.9, y: 30 },
   visible: { opacity: 1, scale: 1,   y: 0,  transition: { type: "spring", stiffness: 280, damping: 26 } },
   exit:    { opacity: 0, scale: 0.92, y: 20, transition: { duration: 0.22 } },
