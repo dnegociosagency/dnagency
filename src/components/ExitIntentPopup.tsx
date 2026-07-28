@@ -161,18 +161,6 @@ export default function ExitIntentPopup() {
           aria-modal="true"
           aria-labelledby="popup-title"
         >
-          {/* ── Botão fechar (Aparece após 3s, fora do painel para evitar stopPropagation) ── */}
-          {showCloseButton && (
-            <button
-              onClick={(e) => { e.stopPropagation(); setIsVisible(false); }}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-[10000] flex items-center justify-center w-9 h-9 rounded-full text-white/80 hover:text-white hover:bg-white/15 cursor-pointer transition-all duration-200"
-              style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.5))" }}
-              aria-label="Fechar popup"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          )}
-
           <motion.div
             key="exit-popup-panel"
             variants={panelVariants}
@@ -180,7 +168,7 @@ export default function ExitIntentPopup() {
             animate="visible"
             exit="exit"
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl"
+            className="relative w-full max-w-lg rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl"
             style={{
               background: "linear-gradient(145deg, #0c1f1d 0%, #071410 100%)",
               boxShadow: "0 0 80px rgba(47,107,101,0.25), 0 25px 50px rgba(0,0,0,0.5)",
@@ -192,7 +180,19 @@ export default function ExitIntentPopup() {
               style={{ background: "rgba(47,107,101,0.4)" }}
             />
 
-            {/* ── Conteúdo ── */}
+            {/* ── Botão fechar (dentro do painel, acima do scroll) ── */}
+            {showCloseButton && (
+              <button
+                onClick={(e) => { e.stopPropagation(); setIsVisible(false); }}
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full text-white/70 hover:text-white hover:bg-white/10 cursor-pointer transition-all duration-200"
+                aria-label="Fechar popup"
+              >
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+            )}
+
+            {/* ── Conteúdo scrollável ── */}
+            <div className="max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl">
             <div className="relative z-10 p-5 sm:p-8 md:p-10">
               {formState !== "success" ? (
                 <>
@@ -343,6 +343,7 @@ export default function ExitIntentPopup() {
                   </button>
                 </motion.div>
               )}
+            </div>
             </div>
           </motion.div>
         </motion.div>
