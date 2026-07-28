@@ -6,7 +6,6 @@ import { X, ArrowRight, CheckCircle, Loader2, ChartBar, Target, TrendingUp } fro
 
 // ─── Constantes ─────────────────────────────────────────────────────────────
 const STORAGE_KEY = "dn_exit_popup_shown";
-const DELAY_MS = 30_000; // fallback: mostrar depois de 30s de inatividade
 
 // ─── Itens do diagnóstico ────────────────────────────────────────────────────
 const BENEFITS = [
@@ -33,6 +32,7 @@ type FormState = "idle" | "loading" | "success" | "error";
 
 export default function ExitIntentPopup() {
   const [isVisible, setIsVisible] = useState(false);
+  const [showCloseButton, setShowCloseButton] = useState(false);
   const [name,  setName]  = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -40,40 +40,76 @@ export default function ExitIntentPopup() {
   const [errorMsg, setErrorMsg] = useState("");
   const hasTriggered = useRef(false);
 
-  // ── Lógica de trigger ──────────────────────────────────────────────────────
+  // ── Lógica de trigger (Apenas por Exit-Intent / Ameaça de sair do site) ──
   const triggerPopup = useCallback(() => {
     if (hasTriggered.current) return;
     // Não exibir se já foi mostrado nessa sessão
     if (sessionStorage.getItem(STORAGE_KEY)) return;
+    
     hasTriggered.current = true;
     setIsVisible(true);
+    setShowCloseButton(false);
     sessionStorage.setItem(STORAGE_KEY, "1");
+
+    // O X só aparece depois de 3 segundos
+    setTimeout(() => {
+      setShowCloseButton(true);
+    }, 3000);
   }, []);
 
   useEffect(() => {
-    // Exit-intent via movimento do mouse saindo pelo topo
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 5) triggerPopup();
+    // 1. Desktop: Detectar quando o mouse sai da tela por cima
+    const handleMouseOut = (e: MouseEvent) => {
+      // Apenas disparamos se o cursor estiver saindo para o topo (em direção às abas)
+      if (e.clientY <= 20) {
+        triggerPopup();
+      }
     };
 
-    // Fallback: mostrar após DELAY_MS sem interação
-    const fallbackTimer = setTimeout(triggerPopup, DELAY_MS);
+    // 2. Mobile: Detectar scroll rápido para cima (intenção de ir para barra de URL)
+    let lastScrollTop = typeof window !== "undefined" ? window.scrollY : 0;
+    let lastScrollTime = Date.now();
 
-    document.addEventListener("mouseleave", handleMouseLeave);
+    const handleScroll = () => {
+      const st = window.scrollY;
+      const now = Date.now();
+      const timeDiff = now - lastScrollTime;
+      const distance = lastScrollTop - st; // positivo se rolando para cima
+
+      // Se rolou pelo menos 100px para cima em menos de 250ms e não está no topo
+      if (distance > 100 && timeDiff < 250 && st > 200) {
+        triggerPopup();
+      }
+
+      // Se o usuário rolou até o final da página (com margem de 10px)
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 10;
+      if (isAtBottom) {
+        triggerPopup();
+      }
+
+      lastScrollTop = st <= 0 ? 0 : st;
+      lastScrollTime = now;
+    };
+
+    document.addEventListener("mouseout", handleMouseOut);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    
     return () => {
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      clearTimeout(fallbackTimer);
+      document.removeEventListener("mouseout", handleMouseOut);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [triggerPopup]);
 
   // ── Fechar com ESC ─────────────────────────────────────────────────────────
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsVisible(false);
+      if (e.key === "Escape" && showCloseButton) {
+        setIsVisible(false);
+      }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [showCloseButton]);
 
   // ── Submit ──────────────────────────────────────────────────────────────────
   const handleSubmit = async (e: React.FormEvent) => {
@@ -120,11 +156,23 @@ export default function ExitIntentPopup() {
           exit="exit"
           className="fixed inset-0 z-[9999] flex items-center justify-center px-4"
           style={{ background: "rgba(4, 8, 7, 0.80)", backdropFilter: "blur(6px)" }}
-          onClick={() => setIsVisible(false)}
+          onClick={() => { if (showCloseButton) setIsVisible(false); }}
           role="dialog"
           aria-modal="true"
           aria-labelledby="popup-title"
         >
+          {/* ── Botão fechar (Aparece após 3s, fora do painel para evitar stopPropagation) ── */}
+          {showCloseButton && (
+            <button
+              onClick={(e) => { e.stopPropagation(); setIsVisible(false); }}
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-[10000] flex items-center justify-center w-9 h-9 rounded-full text-white/80 hover:text-white hover:bg-white/15 cursor-pointer transition-all duration-200"
+              style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.5))" }}
+              aria-label="Fechar popup"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
+
           <motion.div
             key="exit-popup-panel"
             variants={panelVariants}
@@ -132,7 +180,7 @@ export default function ExitIntentPopup() {
             animate="visible"
             exit="exit"
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/10 shadow-2xl"
+            className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl border border-white/10 shadow-2xl"
             style={{
               background: "linear-gradient(145deg, #0c1f1d 0%, #071410 100%)",
               boxShadow: "0 0 80px rgba(47,107,101,0.25), 0 25px 50px rgba(0,0,0,0.5)",
@@ -144,21 +192,12 @@ export default function ExitIntentPopup() {
               style={{ background: "rgba(47,107,101,0.4)" }}
             />
 
-            {/* ── Botão fechar ── */}
-            <button
-              onClick={() => setIsVisible(false)}
-              className="absolute top-4 right-4 z-10 flex items-center justify-center w-9 h-9 rounded-full text-white/40 hover:text-white hover:bg-white/10 transition-all duration-200"
-              aria-label="Fechar popup"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
             {/* ── Conteúdo ── */}
-            <div className="relative z-10 p-8 md:p-10">
+            <div className="relative z-10 p-5 sm:p-8 md:p-10">
               {formState !== "success" ? (
                 <>
                   {/* Badge */}
-                  <div className="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full border border-[#2f6b65]/40 bg-[#2f6b65]/10 text-[#3b8780] text-xs font-semibold tracking-widest uppercase">
+                  <div className="inline-flex items-center gap-1.5 mb-3 sm:mb-5 px-2.5 py-1 rounded-full border border-[#2f6b65]/40 bg-[#2f6b65]/10 text-[#3b8780] text-[10px] sm:text-xs font-semibold tracking-widest uppercase">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#2f6b65] animate-pulse" />
                     Oferta exclusiva · Grátis
                   </div>
@@ -166,7 +205,7 @@ export default function ExitIntentPopup() {
                   {/* Headline */}
                   <h2
                     id="popup-title"
-                    className="text-2xl md:text-3xl font-extrabold text-white leading-tight tracking-tight mb-2"
+                    className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-tight tracking-tight mb-2"
                   >
                     Antes de ir embora…{" "}
                     <span
@@ -176,19 +215,19 @@ export default function ExitIntentPopup() {
                       Diagnóstico Gratuito
                     </span>
                   </h2>
-                  <p className="text-white/55 text-sm leading-relaxed mb-6">
+                  <p className="text-white/55 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                     Descubra em minutos o que está travando o crescimento do seu negócio no digital. Nossa equipe analisa seus canais e entrega um plano de ação sem custo algum.
                   </p>
 
                   {/* Benefits */}
-                  <ul className="flex flex-col gap-2 mb-7">
+                  <ul className="flex flex-col gap-1.5 sm:gap-2 mb-4 sm:mb-7">
                     {BENEFITS.map(({ icon: Icon, label }) => (
-                      <li key={label} className="flex items-center gap-3 text-white/70 text-sm">
+                      <li key={label} className="flex items-center gap-2.5 sm:gap-3 text-white/70 text-xs sm:text-sm">
                         <span
-                          className="flex items-center justify-center w-7 h-7 rounded-lg flex-shrink-0"
+                          className="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex-shrink-0"
                           style={{ background: "rgba(47,107,101,0.15)", border: "1px solid rgba(47,107,101,0.3)" }}
                         >
-                          <Icon className="w-3.5 h-3.5 text-[#2f6b65]" />
+                          <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#2f6b65]" />
                         </span>
                         {label}
                       </li>
@@ -196,10 +235,10 @@ export default function ExitIntentPopup() {
                   </ul>
 
                   {/* Divider */}
-                  <div className="w-full h-px mb-6" style={{ background: "rgba(255,255,255,0.06)" }} />
+                  <div className="w-full h-px mb-4 sm:mb-6" style={{ background: "rgba(255,255,255,0.06)" }} />
 
                   {/* Form */}
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-3" noValidate>
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-2.5 sm:gap-3" noValidate>
                     <input
                       id="popup-name"
                       type="text"
@@ -207,7 +246,7 @@ export default function ExitIntentPopup() {
                       placeholder="Seu nome completo"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/30 outline-none transition-all duration-200"
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl text-xs sm:text-sm text-white placeholder-white/30 outline-none transition-all duration-200"
                       style={{
                         background: "rgba(255,255,255,0.05)",
                         border: "1px solid rgba(255,255,255,0.1)",
@@ -222,7 +261,7 @@ export default function ExitIntentPopup() {
                       placeholder="Seu melhor e-mail"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/30 outline-none transition-all duration-200"
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl text-xs sm:text-sm text-white placeholder-white/30 outline-none transition-all duration-200"
                       style={{
                         background: "rgba(255,255,255,0.05)",
                         border: "1px solid rgba(255,255,255,0.1)",
@@ -237,7 +276,7 @@ export default function ExitIntentPopup() {
                       placeholder="WhatsApp / Telefone"
                       value={phone}
                       onChange={(e) => setPhone(formatPhone(e.target.value))}
-                      className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/30 outline-none transition-all duration-200"
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl text-xs sm:text-sm text-white placeholder-white/30 outline-none transition-all duration-200"
                       style={{
                         background: "rgba(255,255,255,0.05)",
                         border: "1px solid rgba(255,255,255,0.1)",
@@ -253,7 +292,7 @@ export default function ExitIntentPopup() {
                     <button
                       type="submit"
                       disabled={formState === "loading"}
-                      className="mt-1 w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm text-white transition-all duration-200 disabled:opacity-60"
+                      className="mt-1 w-full flex items-center justify-center gap-2 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white transition-all duration-200 disabled:opacity-60"
                       style={{
                         background: "linear-gradient(135deg, #2f6b65, #3b8780)",
                         boxShadow: "0 0 30px rgba(47,107,101,0.35)",
@@ -311,3 +350,4 @@ export default function ExitIntentPopup() {
     </AnimatePresence>
   );
 }
+
