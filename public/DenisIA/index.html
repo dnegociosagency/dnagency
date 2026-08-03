@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chat com IA - Agência de Negócios</title>
+    <!-- Widget detection -->
+    <script>
+        if (window.location.search.includes('widget=true')) {
+            document.documentElement.classList.add('is-widget');
+        }
+    </script>
+    <style>
+        .is-widget .btn-voltar-site {
+            display: none !important;
+        }
+    </style>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <!-- Chat Styles -->
+    <link rel="stylesheet" href="assets/css/chat.css">
+    
+    <!-- Critical Styles for Login Screen to prevent caching issues -->
+    <style>
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100dvh;
+            background-color: #0f0f11;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.05), transparent 70%), #0f0f11;
+            z-index: 20000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .login-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .login-container {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 24px;
+        }
+
+        .login-container h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .login-container p {
+            font-size: 14px;
+            color: #a1a1aa;
+            margin-bottom: 32px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* User Profile Menu */
+        .user-profile-menu {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 0;
+            width: 100%;
+            background: rgba(24, 24, 27, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 200;
+        }
+
+        .user-profile-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-opt-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 10px 12px;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .profile-opt-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-opt-btn i {
+            width: 16px;
+            height: 16px;
+            color: #a1a1aa;
+        }
+        .profile-opt-btn:hover i {
+            color: #ffffff;
+        }
+
+        .btn-guest {
+            margin-top: 16px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #a1a1aa;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-guest:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen hidden">
+        <div class="login-container">
+            <img src="logodn%202.png" alt="DN" class="login-logo">
+            <h2>Bem-vindo à DN</h2>
+            <p>Faça login com sua conta Google para enviar mensagens e manter seu histórico salvo com segurança.</p>
+            
+            <div id="g_id_onload"
+                 data-client_id="297231667171-tdqihgqg6j904vr6b200h39vk96lmb33.apps.googleusercontent.com"
+                 data-callback="handleCredentialResponse"
+                 data-auto_prompt="false"
+                 data-auto_select="true">
+            </div>
+            <div class="g_id_signin" data-type="standard" data-theme="filled_black" data-size="large" data-shape="pill"></div>
+            
+            <button id="btn-continue-guest" class="btn-guest">Continuar desconectado</button>
+        </div>
+    </div>
+    
+    <!-- Custom Modals -->
+    <div id="custom-modal-overlay" class="custom-modal-overlay">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <h3 id="custom-modal-title">Título</h3>
+                <button id="btn-close-modal" class="icon-btn" style="width: 32px; height: 32px;"><i data-lucide="x"></i></button>
+            </div>
+            <div class="custom-modal-body" id="custom-modal-body"></div>
+            <div class="custom-modal-footer" id="custom-modal-footer"></div>
+        </div>
+    </div>
+
+    <div class="app-container sidebar-collapsed">
+        <!-- Overlay for mobile sidebar -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <button class="new-chat-btn" id="btn-new-chat">
+                    <div class="btn-content">
+                        <div class="icon-wrapper">
+                            <i data-lucide="plus"></i>
+                        </div>
+                        Nova Conversa
+                    </div>
+                </button>
+            </div>
+            
+            <div class="sidebar-scrollable">
+                <div class="history-group">
+                    <h4>Recentes</h4>
+                    <ul class="chat-list" id="chat-history-list">
+                        <!-- History items generated by JS or hardcoded -->
+                        <li class="chat-item active">
+                            <span class="chat-title" style="flex: 1;">Vamos Tirar do Papel?</span>
+                            <div class="chat-item-actions">
+                                <button class="btn-history-options" title="Opções"><i data-lucide="more-vertical"></i></button>
+                                <div class="history-options-menu">
+                                    <button class="history-opt-btn"><i data-lucide="share-2"></i> Compartilhar conversa</button>
+                                    <button class="history-opt-btn"><i data-lucide="pin"></i> Fixar</button>
+                                    <button class="history-opt-btn"><i data-lucide="edit-2"></i> Renomear</button>
+                                    <button class="history-opt-btn delete"><i data-lucide="trash-2"></i> Excluir</button>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="chat-item">
+                            <span class="chat-title" style="flex: 1;">Storyboard para Grupo de Promoções</span>
+                            <div class="chat-item-actions">
+                                <button class="btn-history-options" title="Opções"><i data-lucide="more-vertical"></i></button>
+                                <div class="history-options-menu">
+                                    <button class="history-opt-btn"><i data-lucide="share-2"></i> Compartilhar conversa</button>
+                                    <button class="history-opt-btn"><i data-lucide="pin"></i> Fixar</button>
+                                    <button class="history-opt-btn"><i data-lucide="edit-2"></i> Renomear</button>
+                                    <button class="history-opt-btn delete"><i data-lucide="trash-2"></i> Excluir</button>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="chat-item">
+                            <span class="chat-title" style="flex: 1;">Combinando Drop de Sete e Espada</span>
+                            <div class="chat-item-actions">
+                                <button class="btn-history-options" title="Opções"><i data-lucide="more-vertical"></i></button>
+                                <div class="history-options-menu">
+                                    <button class="history-opt-btn"><i data-lucide="share-2"></i> Compartilhar conversa</button>
+                                    <button class="history-opt-btn"><i data-lucide="pin"></i> Fixar</button>
+                                    <button class="history-opt-btn"><i data-lucide="edit-2"></i> Renomear</button>
+                                    <button class="history-opt-btn delete"><i data-lucide="trash-2"></i> Excluir</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile" id="user-profile-btn" style="cursor: pointer; position: relative;">
+                    <div class="avatar" id="sidebar-avatar">
+                        <i data-lucide="user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name" id="sidebar-user-name">Desconectado</span>
+                    </div>
+                    
+                    <!-- Profile Menu -->
+                    <div class="user-profile-menu" id="user-profile-menu">
+                        <button class="profile-opt-btn" id="btn-login-menu">
+                            <i data-lucide="log-in"></i> Entrar na conta
+                        </button>
+                        <button class="profile-opt-btn" id="btn-logout" style="display: none;">
+                            <i data-lucide="log-out"></i> Sair da conta
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area (Full Screen Mobile) -->
+        <main class="chat-area">
+            
+            <!-- Voice Status Overlay -->
+            <div id="voice-overlay" class="voice-overlay hidden">
+                <div class="voice-glow"></div>
+                <div class="voice-glow secondary" style="bottom: -100px; top: auto; animation-delay: 2s;"></div>
+                
+                <div class="voice-center-content">
+                    <div class="call-header">
+                        <h2 id="voice-mode-title">Atendente Turbo</h2>
+                        <span class="call-status">Conectado via Voz</span>
+                    </div>
+
+                    <div class="voice-waves-container">
+                        <!-- O próprio icone central (mic/alto-falante) fica aqui animando -->
+                        <div class="voice-status-icon" id="voice-icon-wrapper">
+                            <i data-lucide="mic"></i>
+                        </div>
+                        <div class="wave-rings">
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-3"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="voice-text-area">
+                        <h3 id="voice-status-text" class="status-indicator-text">Ouvindo...</h3>
+                        <div class="transcript-container">
+                            <p id="voice-transcript-text" class="voice-transcript"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="call-controls-dock">
+                    <button class="close-voice-btn" id="btn-close-voice" title="Encerrar Ligação">
+                        <i data-lucide="phone-off"></i>
+                    </button>
+                </div>
+            </div>
+
+            <header class="chat-header">
+                <div class="header-left">
+                    <a href="/" class="btn-voltar-site icon-btn" title="Voltar ao site" style="margin-right: 8px; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 14px; width: auto; padding: 0 12px; border-radius: 20px; background: rgba(255, 255, 255, 0.05); color: #fff;">
+                        <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i> Voltar
+                    </a>
+                    <button class="icon-btn sidebar-toggle-desktop" id="btn-toggle-sidebar" title="Alternar barra lateral">
+                        <i data-lucide="sidebar"></i>
+                    </button>
+                    <div class="mode-dropdown-container">
+                        <button class="mode-dropdown-btn" id="mode-dropdown-btn">
+                            <span class="mode-dropdown-label" id="current-mode-label">Turbo</span>
+                            <i data-lucide="chevron-down"></i>
+                        </button>
+                        
+                        <div class="mode-dropdown-menu" id="mode-dropdown-menu">
+                            <button class="mode-option active" data-mode="turbo">
+                                <div class="mode-option-text">
+                                    <span class="mode-option-title">Turbo</span>
+                                    <span class="mode-option-desc">Respostas rápidas e do dia a dia</span>
+                                </div>
+                                <div class="mode-option-check"><i data-lucide="check"></i></div>
+                            </button>
+                            <button class="mode-option" data-mode="pro">
+                                <div class="mode-option-text">
+                                    <span class="mode-option-title">Pro</span>
+                                    <span class="mode-option-desc">Pensamentos mais complexos</span>
+                                </div>
+                                <div class="mode-option-check"><i data-lucide="check"></i></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="webhook-toggle">
+                        <span class="toggle-label" id="webhook-label">Produção</span>
+                        <label class="switch">
+                            <input type="checkbox" id="webhook-switch">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <button class="icon-btn" title="Limpar Contexto" id="btn-clear-context">
+                        <i data-lucide="rotate-ccw"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="chat-scroll-container" id="chat-container">
+                <!-- Empty State -->
+                <div class="empty-state" id="empty-state">
+                    <div class="welcome-glow"></div>
+                    <div class="welcome-text">
+                        <div class="welcome-icon-wrapper">
+                            <img src="logodn%202.png" alt="DN" style="width: 70px; height: 70px; object-fit: contain; background: transparent;">
+                        </div>
+                        <h2 class="gradient-text">Como posso te ajudar?</h2>
+                        <p>Explore o poder do modelo <span id="welcome-mode-label">Turbo</span> para escalar suas vendas e automações.</p>
+                    </div>
+                    <div class="suggestions-grid">
+                        <button class="suggestion-card">
+                            <div class="sugg-icon"><i data-lucide="megaphone"></i></div>
+                            <div class="sugg-text">Estratégias de Tráfego Pago e Anúncios</div>
+                        </button>
+                        <button class="suggestion-card">
+                            <div class="sugg-icon"><i data-lucide="workflow"></i></div>
+                            <div class="sugg-text">Automação de Vendas e CRM</div>
+                        </button>
+                        <button class="suggestion-card">
+                            <div class="sugg-icon"><i data-lucide="search"></i></div>
+                            <div class="sugg-text">SEO e Produção de Conteúdo</div>
+                        </button>
+                        <button class="suggestion-card" data-action="schedule">
+                            <div class="sugg-icon"><i data-lucide="calendar"></i></div>
+                            <div class="sugg-text">Agendar Reunião Estratégica</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Messages will be injected here -->
+                <div class="messages-wrapper" id="messages-wrapper"></div>
+                
+                <!-- Extra padding at the bottom so the floating input doesn't hide messages -->
+                <div class="scroll-spacer"></div>
+            </div>
+
+            <div class="input-area floating-input">
+                <div class="input-container glow-effect">
+                    <button class="attachment-btn" title="Anexar arquivo">
+                        <i data-lucide="plus"></i>
+                    </button>
+                    <textarea id="chat-input" placeholder="Pergunte qualquer coisa..." rows="1"></textarea>
+                    
+                    <div class="input-actions-right" style="display: flex; gap: 4px; align-items: center;">
+                        <button class="voice-btn" id="btn-dictate" title="Ditar">
+                            <i data-lucide="mic"></i>
+                        </button>
+                        <button class="voice-btn" id="btn-call-ai" title="Iniciar Voz">
+                            <i data-lucide="audio-lines"></i>
+                        </button>
+                        <button class="send-btn" id="btn-send">
+                            <i data-lucide="arrow-up"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="input-footer">
+                    O Denis é uma IA e pode cometer erros.
+                </div>
+            </div>
+        </main>
+    <!-- Chat Logic -->
+    <script src="assets/js/chat.js?v=7"></script>
+</body>
+</html>
