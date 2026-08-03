@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
 <head>
+    <script>
+        // Remove index.html from URL automatically for cleaner sharing
+        if (window.location.pathname.endsWith('/index.html')) {
+            const cleanUrl = window.location.href.replace('/index.html', '/');
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Chat com IA - Agência de Negócios</title>
@@ -413,7 +420,7 @@
                     <button class="attachment-btn" title="Anexar arquivo">
                         <i data-lucide="plus"></i>
                     </button>
-                    <textarea id="chat-input" placeholder="Pergunte qualquer coisa..." rows="1"></textarea>
+                    <textarea id="chat-input" placeholder="Pergunte algo..." rows="1"></textarea>
                     
                     <div class="input-actions-right" style="display: flex; gap: 4px; align-items: center;">
                         <button class="voice-btn" id="btn-dictate" title="Ditar">

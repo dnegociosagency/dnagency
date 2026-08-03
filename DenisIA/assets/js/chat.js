@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         recognition = new SpeechRecognition();
-        recognition.lang = 'pt-BR';
+        recognition.lang = 'en-US';
         recognition.continuous = false; // default for dictation
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         recognition.interimResults = !isMobile;
@@ -391,16 +391,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!synth || !isVoiceModeActive) return;
         
         const utterance = new SpeechSynthesisUtterance(plainText);
-        utterance.lang = 'pt-BR';
+        utterance.lang = 'en-US';
         
         const voices = synth.getVoices();
         
-        let ptVoice = voices.find(v => (v.lang === 'pt-BR' || v.lang === 'pt_BR') && v.name.includes('Natural'));
-        if (!ptVoice) ptVoice = voices.find(v => (v.lang === 'pt-BR' || v.lang === 'pt_BR') && (v.name.includes('Antonio') || v.name.includes('Thiago') || v.name.includes('Daniel') || v.name.includes('Male')));
-        if (!ptVoice) ptVoice = voices.find(v => (v.lang === 'pt-BR' || v.lang === 'pt_BR') && (v.name.includes('Google') || v.name.includes('Premium')));
-        if (!ptVoice) ptVoice = voices.find(v => v.lang === 'pt-BR' || v.lang === 'pt_BR');
+        let enVoice = voices.find(v => (v.lang === 'en-US' || v.lang === 'en_US') && v.name.includes('Natural'));
+        if (!enVoice) enVoice = voices.find(v => (v.lang === 'en-US' || v.lang === 'en_US') && (v.name.includes('David') || v.name.includes('Mark') || v.name.includes('Zira') || v.name.includes('Male')));
+        if (!enVoice) enVoice = voices.find(v => (v.lang === 'en-US' || v.lang === 'en_US') && (v.name.includes('Google') || v.name.includes('Premium')));
+        if (!enVoice) enVoice = voices.find(v => v.lang === 'en-US' || v.lang === 'en_US' || v.lang.startsWith('en'));
         
-        if (ptVoice) utterance.voice = ptVoice;
+        if (enVoice) utterance.voice = enVoice;
         utterance.rate = 1.08;
         utterance.pitch = 1.05;
 
@@ -733,10 +733,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadHistoryFromStorage() {
+        if (!window.usuarioAtual || !window.usuarioAtual.email) return [];
         return JSON.parse(localStorage.getItem(getHistoryKey()) || '[]');
     }
 
     function saveToStorage(history) {
+        if (!window.usuarioAtual || !window.usuarioAtual.email) return;
         localStorage.setItem(getHistoryKey(), JSON.stringify(history));
     }
 
