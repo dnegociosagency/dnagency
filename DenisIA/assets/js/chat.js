@@ -175,13 +175,13 @@ document.addEventListener('DOMContentLoaded', () => {
         recognition.onstart = () => {
             processedResultsCount = 0;
             if (currentVoiceMode === 'call') {
-                el.voiceStatusText.textContent = "Ouvindo...";
+                el.voiceStatusText.textContent = "Listening...";
                 el.voiceIconWrapper.className = 'voice-status-icon listening';
                 el.voiceIconWrapper.innerHTML = '<i data-lucide="mic"></i>';
                 lucide.createIcons({ node: el.voiceIconWrapper });
             } else if (currentVoiceMode === 'dictation') {
                 el.btnDictate.style.color = '#ef4444'; // Red to indicate recording
-                el.chatInput.placeholder = "Ouvindo...";
+                el.chatInput.placeholder = "Listening...";
             }
         };
 
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     clearTimeout(silenceTimer);
                     silenceTimer = setTimeout(() => {
                         if (el.chatInput.value.trim()) {
-                            el.voiceStatusText.textContent = "Pensando...";
+                            el.voiceStatusText.textContent = "Thinking...";
                             el.voiceIconWrapper.className = 'voice-status-icon';
                             sendMessage();
                         }
@@ -238,12 +238,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Speech recognition error', event.error);
             if (currentVoiceMode === 'call') {
                 if (event.error !== 'no-speech') {
-                    el.voiceStatusText.textContent = "Erro no microfone";
+                    el.voiceStatusText.textContent = "Microphone error";
                     setTimeout(stopVoiceMode, 2000);
                 }
             } else {
                 el.btnDictate.style.color = '';
-                el.chatInput.placeholder = "Pergunte qualquer coisa...";
+                el.chatInput.placeholder = "Ask something...";
                 currentVoiceMode = null;
             }
         };
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (isVoiceModeActive) {
-            el.voiceStatusText.textContent = "Carregando voz...";
+            el.voiceStatusText.textContent = "Loading voice...";
         }
 
         try {
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             });
 
-            if (!response.ok) throw new Error("Erro na API ElevenLabs");
+            if (!response.ok) throw new Error("ElevenLabs API Error");
 
             const audioBlob = await response.blob();
             const audioUrl = URL.createObjectURL(audioBlob);
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             audio.onplay = () => {
                 if (isVoiceModeActive) {
-                    el.voiceStatusText.textContent = "Falando...";
+                    el.voiceStatusText.textContent = "Speaking...";
                     el.voiceIconWrapper.className = 'voice-status-icon speaking';
                     el.voiceIconWrapper.innerHTML = '<i data-lucide="volume-2"></i>';
                     lucide.createIcons({ node: el.voiceIconWrapper });
@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isVoiceModeActive) {
                     el.voiceTranscriptText.textContent = '';
                     
-                    el.voiceStatusText.textContent = "Ouvindo...";
+                    el.voiceStatusText.textContent = "Listening...";
                     el.voiceIconWrapper.className = 'voice-status-icon listening';
                     el.voiceIconWrapper.innerHTML = '<i data-lucide="mic"></i>';
                     lucide.createIcons({ node: el.voiceIconWrapper });
@@ -406,7 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         utterance.onstart = () => {
             if (isVoiceModeActive) {
-                el.voiceStatusText.textContent = "Falando...";
+                el.voiceStatusText.textContent = "Speaking...";
                 el.voiceIconWrapper.className = 'voice-status-icon speaking';
                 el.voiceIconWrapper.innerHTML = '<i data-lucide="volume-2"></i>';
                 lucide.createIcons({ node: el.voiceIconWrapper });
@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
             state.isAiSpeaking = false;
             if (isVoiceModeActive) {
                 el.voiceTranscriptText.textContent = '';
-                el.voiceStatusText.textContent = "Ouvindo...";
+                el.voiceStatusText.textContent = "Listening...";
                 el.voiceIconWrapper.className = 'voice-status-icon listening';
                 el.voiceIconWrapper.innerHTML = '<i data-lucide="mic"></i>';
                 lucide.createIcons({ node: el.voiceIconWrapper });
@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const userNameEl = document.getElementById('sidebar-user-name');
             const userAvatarEl = document.getElementById('sidebar-avatar');
             
-            if (userNameEl) userNameEl.textContent = 'Desconectado';
+            if (userNameEl) userNameEl.textContent = 'Guest';
             if (userAvatarEl) {
                 userAvatarEl.innerHTML = '<i data-lucide="user"></i>';
                 userAvatarEl.style.background = '';
@@ -637,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (loginScreen) {
                 const textEl = loginScreen.querySelector('p');
                 if (textEl) {
-                    textEl.textContent = 'Você saiu da conta. Faça login para continuar.';
+                    textEl.textContent = 'You logged out. Log in to continue.';
                 }
                 loginScreen.classList.remove('hidden');
             }
@@ -652,11 +652,11 @@ document.addEventListener('DOMContentLoaded', () => {
         el.webhookSwitch.addEventListener('change', (e) => {
             if (e.target.checked) {
                 state.currentWebhookUrl = state.webhookTestUrl;
-                el.webhookLabel.textContent = "Teste";
+                el.webhookLabel.textContent = "Test";
                 el.webhookLabel.style.color = "#f59e0b"; // Amber color
             } else {
                 state.currentWebhookUrl = state.webhookProdUrl;
-                el.webhookLabel.textContent = "Produção";
+                el.webhookLabel.textContent = "Production";
                 el.webhookLabel.style.color = "var(--text-secondary)";
             }
         });
@@ -802,20 +802,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 <i data-lucide="message-square"></i>
                 <span class="chat-title" style="flex: 1;">${pinIcon}${session.title}</span>
                 <div class="chat-item-actions">
-                    <button class="btn-history-options" title="Opções"><i data-lucide="more-vertical"></i></button>
+                    <button class="btn-history-options" title="Options"><i data-lucide="more-vertical"></i></button>
                     <div class="history-options-menu">
                         <button class="history-opt-btn btn-share">
-                            <div class="history-opt-btn-left"><i data-lucide="share-2"></i> Compartilhar conversa</div>
+                            <div class="history-opt-btn-left"><i data-lucide="share-2"></i> Share chat</div>
                         </button>
                         <button class="history-opt-btn btn-pin">
-                            <div class="history-opt-btn-left"><i data-lucide="pin"></i> ${session.pinned ? 'Desfixar' : 'Fixar'}</div>
+                            <div class="history-opt-btn-left"><i data-lucide="pin"></i> ${session.pinned ? 'Unpin' : 'Pin'}</div>
                         </button>
                         <button class="history-opt-btn btn-rename">
-                            <div class="history-opt-btn-left"><i data-lucide="edit-2"></i> Renomear</div>
+                            <div class="history-opt-btn-left"><i data-lucide="edit-2"></i> Rename</div>
                         </button>
                         <div class="history-opt-divider"></div>
                         <button class="history-opt-btn delete btn-delete">
-                            <div class="history-opt-btn-left"><i data-lucide="trash-2"></i> Apagar</div>
+                            <div class="history-opt-btn-left"><i data-lucide="trash-2"></i> Delete</div>
                         </button>
                     </div>
                 </div>
@@ -858,24 +858,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 menu.classList.remove('show'); // close menu
                 li.classList.remove('menu-open');
                 
-                const chatText = session.messages.map(m => `${m.role === 'user' ? 'Você' : 'IA'}: ${m.text}`).join('\n\n');
+                const chatText = session.messages.map(m => `${m.role === 'user' ? 'You' : 'AI'}: ${m.text}`).join('\n\n');
                 showCustomModal(
-                    'Compartilhar conversa',
-                    `<p style="margin: 0 0 10px 0;">Copie o texto da conversa abaixo:</p>
+                    'Share chat',
+                    `<p style="margin: 0 0 10px 0;">Copy the chat text below:</p>
                      <textarea id="share-text-input" style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: var(--radius-sm); padding: 10px; font-family: inherit; font-size: 14px; resize: none; margin-top: 5px;" readonly>${chatText}</textarea>`,
-                    `<button class="btn-cancel">Cancelar</button>
-                     <button class="btn-confirm" id="btn-copy-link">Copiar Texto</button>`,
+                    `<button class="btn-cancel">Cancel</button>
+                     <button class="btn-confirm" id="btn-copy-link">Copy Text</button>`,
                     (closeModal, bodyEl, footerEl) => {
                         const input = bodyEl.querySelector('#share-text-input');
                         input.select();
                         const copyBtn = footerEl.querySelector('#btn-copy-link');
                         copyBtn.onclick = () => {
                             navigator.clipboard.writeText(chatText).then(() => {
-                                copyBtn.textContent = 'Copiado!';
+                                copyBtn.textContent = 'Copied!';
                                 copyBtn.style.background = '#10b981'; // Green
                                 setTimeout(closeModal, 1000);
                             }).catch(() => {
-                                alert('Erro ao copiar');
+                                alert('Error copying');
                             });
                         };
                     }
@@ -897,10 +897,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.classList.remove('menu-open');
                 
                 showCustomModal(
-                    'Renomear conversa',
-                    `<input type="text" id="rename-input" value="${session.title}" placeholder="Novo nome da conversa">`,
-                    `<button class="btn-cancel">Cancelar</button>
-                     <button class="btn-confirm" id="btn-save-rename">Salvar</button>`,
+                    'Rename chat',
+                    `<input type="text" id="rename-input" value="${session.title}" placeholder="New chat name">`,
+                    `<button class="btn-cancel">Cancel</button>
+                     <button class="btn-confirm" id="btn-save-rename">Save</button>`,
                     (closeModal, bodyEl, footerEl) => {
                         const input = bodyEl.querySelector('#rename-input');
                         input.focus();
@@ -931,11 +931,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.classList.remove('menu-open');
                 
                 showCustomModal(
-                    'Excluir chat?',
-                    `<p style="margin:0;">Isso excluirá a conversa <strong>${session.title}</strong>.</p>
-                     <p style="margin-top:10px; font-size:13px; color:var(--text-muted);">Esta ação não poderá ser desfeita e não será possível recuperar essa conversa no futuro.</p>`,
-                    `<button class="btn-cancel">Cancelar</button>
-                     <button class="btn-confirm danger" id="btn-confirm-delete">Excluir</button>`,
+                    'Delete chat?',
+                    `<p style="margin:0;">This will delete the chat <strong>${session.title}</strong>.</p>
+                     <p style="margin-top:10px; font-size:13px; color:var(--text-muted);">This action cannot be undone and you won't be able to recover this chat.</p>`,
+                    `<button class="btn-cancel">Cancel</button>
+                     <button class="btn-confirm danger" id="btn-confirm-delete">Delete</button>`,
                     (closeModal, bodyEl, footerEl) => {
                         footerEl.querySelector('#btn-confirm-delete').onclick = () => {
                             const newHistory = history.filter(s => s.id !== session.id);
@@ -1086,12 +1086,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="msg-content">
                 <div class="lead-form-container">
-                    <h4>📝 Preencha seus dados para continuarmos</h4>
+                    <h4>📝 Fill in your details to continue</h4>
                     <form id="chat-lead-form">
-                        <input type="text" id="lead-nome" placeholder="Seu Nome Completo" required>
-                        <input type="email" id="lead-email" placeholder="Seu E-mail (Ex: gmail)" required>
-                        <input type="tel" id="lead-whatsapp" placeholder="Seu WhatsApp com DDD" required>
-                        <button type="submit" class="lead-submit-btn">Enviar Dados</button>
+                        <input type="text" id="lead-nome" placeholder="Your Full Name" required>
+                        <input type="email" id="lead-email" placeholder="Your Email (Ex: gmail)" required>
+                        <input type="tel" id="lead-whatsapp" placeholder="Your WhatsApp with code" required>
+                        <button type="submit" class="lead-submit-btn">Send Details</button>
                     </form>
                 </div>
             </div>
@@ -1107,7 +1107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = form.querySelector('#lead-email').value;
             const whatsapp = form.querySelector('#lead-whatsapp').value;
             
-            const formattedData = `Nome: ${nome}\nEmail: ${email}\nWhatsApp: ${whatsapp}`;
+            const formattedData = `Name: ${nome}\nEmail: ${email}\nWhatsApp: ${whatsapp}`;
             
             // Remove the form visually
             block.remove();
