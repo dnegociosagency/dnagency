@@ -1,0 +1,18 @@
+{
+  "name": "dnturboteste",
+  "version": "1.0.0",
+  "description": "Agente de IA Turbo - Painel de Controle e Simulador Conectado à n8n",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y http-server -p 3000",
+    "dev": "npx -y http-server -p 3000"
+  },
+  "keywords": [
+    "n8n",
+    "chat-widget",
+    "ai-agent",
+    "agencia-dn"
+  ],
+  "author": "Agência DN",
+  "license": "ISC"
+}
