@@ -68,6 +68,7 @@ export default function RootLayout({
     <html
       lang="en"
       className="dark font-sans antialiased"
+      suppressHydrationWarning
     >
       <head>
         {/* Preconnect to Google Fonts CDN to cut CSS critical path latency */}
@@ -78,7 +79,7 @@ export default function RootLayout({
         <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap" rel="stylesheet" />
         <SchemaMarkup />
       </head>
-      <body className="min-h-screen flex flex-col overflow-x-hidden">
+      <body className="min-h-screen flex flex-col overflow-x-hidden" suppressHydrationWarning>
         <Providers>
           <ClientShell>
             <Header />

@@ -49,15 +49,246 @@ window.handleCredentialResponse = function(response) {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+
+const i18n = {
+    en: {
+        title: "AI Chat - D'Negócios Agency",
+        login_title: "Welcome to DN",
+        login_desc: "Sign in with your Google account to send messages and keep your history securely saved.",
+        login_req_voice: "To use voice call, you must sign in with your Google account.",
+        login_req_msg: "For a better experience based on saved chats, sign in to an account.",
+        login_req_menu: "Sign in with your Google account to send messages and keep your history securely saved.",
+        login_guest: "Continue as guest",
+        new_chat: "New Chat",
+        recent: "Recent",
+        guest: "Guest",
+        login: "Login",
+        logout: "Logout",
+        back: "Back",
+        turbo_desc: "Fast responses for daily use",
+        pro_desc: "More complex thoughts",
+        production: "Production",
+        test: "Test",
+        how_can_i_help: "How can I help you?",
+        explore_power: "Explore the power of the <span id='welcome-mode-label'>Turbo</span> model to scale your sales and automations.",
+        sugg_1: "Paid Traffic Strategies and Ads",
+        sugg_2: "Sales Automation and CRM",
+        sugg_3: "SEO and Content Production",
+        sugg_4: "Schedule Strategic Meeting",
+        ask_something: "Ask something...",
+        ai_warning: "Denis is an AI and can make mistakes.",
+        voice_assistant: "Turbo Assistant",
+        voice_connected: "Connected via Voice",
+        voice_listening: "Listening...",
+        voice_thinking: "Thinking...",
+        voice_loading: "Loading voice...",
+        voice_speaking: "Speaking...",
+        voice_mic_error: "Microphone error",
+        clear_context: "Clear Context",
+        attach_file: "Attach file",
+        dictate: "Dictate",
+        start_voice: "Start Voice",
+        end_call: "End Call",
+        logout_msg: "You have signed out. Please sign in to continue.",
+        share_chat: "Share chat",
+        pin: "Pin",
+        unpin: "Unpin",
+        rename: "Rename",
+        delete: "Delete",
+        share_chat_title: "Share chat",
+        share_chat_desc: "Copy the chat text below:",
+        cancel: "Cancel",
+        copy_text: "Copy Text",
+        copied: "Copied!",
+        copy_error: "Error copying",
+        rename_chat_title: "Rename chat",
+        rename_chat_placeholder: "New chat name",
+        save: "Save",
+        delete_chat_title: "Delete chat?",
+        delete_chat_desc: "This will delete the chat",
+        delete_chat_warn: "This action cannot be undone and you will not be able to recover this chat.",
+        voice_not_supported: "Your browser does not support voice recognition. Use Google Chrome or Edge.",
+        empty_bot_reply: "I understand. I'm sorry, the flow did not return text.",
+        conn_error: "Connection error:"
+    },
+    pt: {
+        title: "Chat de IA - D'Negócios Agency",
+        login_title: "Bem-vindo à DN",
+        login_desc: "Faça login com sua conta Google para enviar mensagens e manter seu histórico salvo com segurança.",
+        login_req_voice: "Para utilizar a chamada de voz, você precisa fazer login com sua conta Google.",
+        login_req_msg: "Para uma melhor experiência com base em chats salvos, entre numa conta.",
+        login_req_menu: "Faça login com sua conta Google para enviar mensagens e manter seu histórico salvo com segurança.",
+        login_guest: "Continuar como visitante",
+        new_chat: "Novo Chat",
+        recent: "Recentes",
+        guest: "Visitante",
+        login: "Login",
+        logout: "Sair",
+        back: "Voltar",
+        turbo_desc: "Respostas rápidas para o dia a dia",
+        pro_desc: "Pensamentos mais complexos",
+        production: "Produção",
+        test: "Teste",
+        how_can_i_help: "Como posso te ajudar?",
+        explore_power: "Explore o poder do modelo <span id='welcome-mode-label'>Turbo</span> para escalar suas vendas e automações.",
+        sugg_1: "Estratégias de Tráfego Pago e Anúncios",
+        sugg_2: "Automação de Vendas e CRM",
+        sugg_3: "SEO e Produção de Conteúdo",
+        sugg_4: "Agendar Reunião Estratégica",
+        ask_something: "Pergunte algo...",
+        ai_warning: "Denis é uma IA e pode cometer erros.",
+        voice_assistant: "Assistente Turbo",
+        voice_connected: "Conectado via Voz",
+        voice_listening: "Ouvindo...",
+        voice_thinking: "Pensando...",
+        voice_loading: "Carregando voz...",
+        voice_speaking: "Falando...",
+        voice_mic_error: "Erro no microfone",
+        clear_context: "Limpar Contexto",
+        attach_file: "Anexar arquivo",
+        dictate: "Ditar",
+        start_voice: "Iniciar Voz",
+        end_call: "Encerrar Chamada",
+        logout_msg: "Você saiu. Faça login para continuar.",
+        share_chat: "Compartilhar chat",
+        pin: "Fixar",
+        unpin: "Desafixar",
+        rename: "Renomear",
+        delete: "Excluir",
+        share_chat_title: "Compartilhar chat",
+        share_chat_desc: "Copie o texto do chat abaixo:",
+        cancel: "Cancelar",
+        copy_text: "Copiar Texto",
+        copied: "Copiado!",
+        copy_error: "Erro ao copiar",
+        rename_chat_title: "Renomear chat",
+        rename_chat_placeholder: "Novo nome do chat",
+        save: "Salvar",
+        delete_chat_title: "Excluir chat?",
+        delete_chat_desc: "Isso excluirá o chat",
+        delete_chat_warn: "Esta ação não pode ser desfeita e você não poderá recuperar este chat.",
+        voice_not_supported: "Seu navegador não suporta reconhecimento de voz. Use o Google Chrome ou Edge.",
+        empty_bot_reply: "Entendi. Desculpe-me, o fluxo não retornou texto.",
+        conn_error: "Erro na conexão:"
+    },
+    es: {
+        title: "Chat de IA - D'Negócios Agency",
+        login_title: "Bienvenido a DN",
+        login_desc: "Inicia sesión con tu cuenta de Google para enviar mensajes y mantener tu historial guardado de forma segura.",
+        login_req_voice: "Para usar la llamada de voz, debes iniciar sesión con tu cuenta de Google.",
+        login_req_msg: "Para una mejor experiencia basada en chats guardados, inicia sesión en una cuenta.",
+        login_req_menu: "Inicia sesión con tu cuenta de Google para enviar mensajes y mantener tu historial guardado de forma segura.",
+        login_guest: "Continuar como invitado",
+        new_chat: "Nuevo Chat",
+        recent: "Recientes",
+        guest: "Invitado",
+        login: "Iniciar sesión",
+        logout: "Cerrar sesión",
+        back: "Volver",
+        turbo_desc: "Respuestas rápidas para el día a día",
+        pro_desc: "Pensamientos más complejos",
+        production: "Producción",
+        test: "Prueba",
+        how_can_i_help: "¿Cómo puedo ayudarte?",
+        explore_power: "Explora el poder del modelo <span id='welcome-mode-label'>Turbo</span> para escalar tus ventas y automatizaciones.",
+        sugg_1: "Estrategias de Tráfico Pago y Anuncios",
+        sugg_2: "Automatización de Ventas y CRM",
+        sugg_3: "SEO y Producción de Contenido",
+        sugg_4: "Programar Reunión Estratégica",
+        ask_something: "Pregunta algo...",
+        ai_warning: "Denis es una IA y puede cometer errores.",
+        voice_assistant: "Asistente Turbo",
+        voice_connected: "Conectado por Voz",
+        voice_listening: "Escuchando...",
+        voice_thinking: "Pensando...",
+        voice_loading: "Cargando voz...",
+        voice_speaking: "Hablando...",
+        voice_mic_error: "Error de micrófono",
+        clear_context: "Limpiar Contexto",
+        attach_file: "Adjuntar archivo",
+        dictate: "Dictar",
+        start_voice: "Iniciar Voz",
+        end_call: "Finalizar Llamada",
+        logout_msg: "Has cerrado sesión. Inicia sesión para continuar.",
+        share_chat: "Compartir chat",
+        pin: "Fijar",
+        unpin: "Desfijar",
+        rename: "Renombrar",
+        delete: "Eliminar",
+        share_chat_title: "Compartir chat",
+        share_chat_desc: "Copia el texto del chat a continuación:",
+        cancel: "Cancelar",
+        copy_text: "Copiar Texto",
+        copied: "¡Copiado!",
+        copy_error: "Error al copiar",
+        rename_chat_title: "Renombrar chat",
+        rename_chat_placeholder: "Nuevo nombre del chat",
+        save: "Guardar",
+        delete_chat_title: "¿Eliminar chat?",
+        delete_chat_desc: "Esto eliminará el chat",
+        delete_chat_warn: "Esta acción no se puede deshacer y no podrás recuperar este chat.",
+        voice_not_supported: "Tu navegador no admite el reconocimiento de voz. Usa Google Chrome o Edge.",
+        empty_bot_reply: "Entendido. Lo siento, el flujo no devolvió texto.",
+        conn_error: "Error en la conexión:"
+    }
+};
+
+function updateLanguageUI(lang) {
+    if (!i18n[lang]) return;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang][key]) {
+            el.innerHTML = i18n[lang][key]; 
+        }
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (i18n[lang][key]) {
+            el.setAttribute('placeholder', i18n[lang][key]);
+        }
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (i18n[lang][key]) {
+            el.setAttribute('title', i18n[lang][key]);
+        }
+    });
+    
+    // Update active voice/mode labels
+    const modeLabelEl = document.getElementById('welcome-mode-label');
+    const currModeBtn = document.querySelector('.mode-option.active');
+    if (modeLabelEl && currModeBtn) {
+        const mode = currModeBtn.getAttribute('data-mode');
+        modeLabelEl.textContent = mode === 'pro' ? 'Pro' : 'Turbo';
+    }
+}
+
     lucide.createIcons();
 
+    const webhookUrls = {
+        en: {
+            prod: "https://n8n.agenciadnegocios.com/webhook/agente-gemini-inglish",
+            test: "https://n8n.agenciadnegocios.com/webhook-test/agente-gemini-inglish"
+        },
+        pt: {
+            prod: "https://n8n.agenciadnegocios.com/webhook/agente-gemini-ptbr",
+            test: "https://n8n.agenciadnegocios.com/webhook-test/agente-gemini-ptbr"
+        },
+        es: {
+            prod: "https://n8n.agenciadnegocios.com/webhook/agente-gemini-espanhol",
+            test: "https://n8n.agenciadnegocios.com/webhook-test/agente-gemini-espanhol"
+        }
+    };
+
     const state = {
-        webhookProdUrl: "https://n8n.agenciadnegocios.com/webhook/agente-gemini",
-        webhookTestUrl: "https://n8n.agenciadnegocios.com/webhook-test/agente-gemini",
-        currentWebhookUrl: "https://n8n.agenciadnegocios.com/webhook/agente-gemini",
+        isTestMode: false,
+        get currentWebhookUrl() {
+            return this.isTestMode ? webhookUrls[this.currentLang].test : webhookUrls[this.currentLang].prod;
+        },
         sessionId: generateSessionId(),
         isWaiting: false,
-        isAiSpeaking: false
+        isAiSpeaking: false,
+        currentLang: 'en'
     };
 
     const el = {
@@ -79,6 +310,10 @@ document.addEventListener('DOMContentLoaded', () => {
         modeSwitch: document.getElementById('mode-switch'),
         modeBtns: document.querySelectorAll('.mode-btn'),
         modeLabel: document.getElementById('current-mode-label'),
+        langDropdownBtn: document.getElementById('lang-dropdown-btn'),
+        langDropdownMenu: document.getElementById('lang-dropdown-menu'),
+        langLabel: document.getElementById('current-lang-label'),
+        langOptions: document.querySelectorAll('#lang-dropdown-menu .mode-option'),
         webhookSwitch: document.getElementById('webhook-switch'),
         webhookLabel: document.getElementById('webhook-label'),
         btnClearContext: document.getElementById('btn-clear-context'),
@@ -115,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (loginScreen) {
                 const textEl = loginScreen.querySelector('p');
                 if (textEl) {
-                    textEl.textContent = 'Para uma melhor experiência com base em chats salvos, entre numa conta.';
+                    textEl.textContent = i18n[state.currentLang].login_req_msg;
                 }
                 loginScreen.classList.remove('hidden');
             }
@@ -167,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         recognition = new SpeechRecognition();
-        recognition.lang = 'en-US';
+        recognition.lang = state.currentLang === 'en' ? 'en-US' : (state.currentLang === 'es' ? 'es-ES' : 'pt-BR');
         recognition.continuous = false; // default for dictation
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         recognition.interimResults = !isMobile;
@@ -175,13 +410,13 @@ document.addEventListener('DOMContentLoaded', () => {
         recognition.onstart = () => {
             processedResultsCount = 0;
             if (currentVoiceMode === 'call') {
-                el.voiceStatusText.textContent = "Listening...";
+                el.voiceStatusText.textContent = i18n[state.currentLang].voice_listening;
                 el.voiceIconWrapper.className = 'voice-status-icon listening';
                 el.voiceIconWrapper.innerHTML = '<i data-lucide="mic"></i>';
                 lucide.createIcons({ node: el.voiceIconWrapper });
             } else if (currentVoiceMode === 'dictation') {
                 el.btnDictate.style.color = '#ef4444'; // Red to indicate recording
-                el.chatInput.placeholder = "Listening...";
+                el.chatInput.placeholder = i18n[state.currentLang].voice_listening;
             }
         };
 
@@ -222,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     clearTimeout(silenceTimer);
                     silenceTimer = setTimeout(() => {
                         if (el.chatInput.value.trim()) {
-                            el.voiceStatusText.textContent = "Thinking...";
+                            el.voiceStatusText.textContent = i18n[state.currentLang].voice_thinking;
                             el.voiceIconWrapper.className = 'voice-status-icon';
                             sendMessage();
                         }
@@ -238,12 +473,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Speech recognition error', event.error);
             if (currentVoiceMode === 'call') {
                 if (event.error !== 'no-speech') {
-                    el.voiceStatusText.textContent = "Microphone error";
+                    el.voiceStatusText.textContent = i18n[state.currentLang].voice_mic_error;
                     setTimeout(stopVoiceMode, 2000);
                 }
             } else {
                 el.btnDictate.style.color = '';
-                el.chatInput.placeholder = "Ask something...";
+                el.chatInput.placeholder = i18n[state.currentLang].ask_something;
                 currentVoiceMode = null;
             }
         };
@@ -266,14 +501,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (loginScreen) {
                 const textEl = loginScreen.querySelector('p');
                 if (textEl) {
-                    textEl.textContent = 'Para utilizar a chamada de voz, você precisa fazer login com sua conta Google.';
+                    textEl.textContent = i18n[state.currentLang].login_req_voice;
                 }
                 loginScreen.classList.remove('hidden');
             }
             return;
         }
         if (!recognition) {
-            alert("Seu navegador não suporta reconhecimento de voz. Use o Google Chrome ou Edge.");
+            alert(i18n[state.currentLang].voice_not_supported);
             return;
         }
         currentVoiceMode = 'call';
@@ -288,7 +523,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startDictationMode() {
         if (!requireLogin()) return;
         if (!recognition) {
-            alert("Seu navegador não suporta reconhecimento de voz. Use o Google Chrome ou Edge.");
+            alert(i18n[state.currentLang].voice_not_supported);
             return;
         }
         if (currentVoiceMode === 'dictation') {
@@ -329,7 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (isVoiceModeActive) {
-            el.voiceStatusText.textContent = "Loading voice...";
+            el.voiceStatusText.textContent = i18n[state.currentLang].voice_loading;
         }
 
         try {
@@ -359,7 +594,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             audio.onplay = () => {
                 if (isVoiceModeActive) {
-                    el.voiceStatusText.textContent = "Speaking...";
+                    el.voiceStatusText.textContent = i18n[state.currentLang].voice_speaking;
                     el.voiceIconWrapper.className = 'voice-status-icon speaking';
                     el.voiceIconWrapper.innerHTML = '<i data-lucide="volume-2"></i>';
                     lucide.createIcons({ node: el.voiceIconWrapper });
@@ -372,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isVoiceModeActive) {
                     el.voiceTranscriptText.textContent = '';
                     
-                    el.voiceStatusText.textContent = "Listening...";
+                    el.voiceStatusText.textContent = i18n[state.currentLang].voice_listening;
                     el.voiceIconWrapper.className = 'voice-status-icon listening';
                     el.voiceIconWrapper.innerHTML = '<i data-lucide="mic"></i>';
                     lucide.createIcons({ node: el.voiceIconWrapper });
@@ -401,22 +636,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!synth || !isVoiceModeActive) return;
         
         const utterance = new SpeechSynthesisUtterance(plainText);
-        utterance.lang = 'en-US';
+        utterance.lang = state.currentLang === 'en' ? 'en-US' : (state.currentLang === 'es' ? 'es-ES' : 'pt-BR');
         
         const voices = synth.getVoices();
         
-        let enVoice = voices.find(v => (v.lang === 'en-US' || v.lang === 'en_US') && v.name.includes('Natural'));
-        if (!enVoice) enVoice = voices.find(v => (v.lang === 'en-US' || v.lang === 'en_US') && (v.name.includes('David') || v.name.includes('Mark') || v.name.includes('Zira') || v.name.includes('Male')));
-        if (!enVoice) enVoice = voices.find(v => (v.lang === 'en-US' || v.lang === 'en_US') && (v.name.includes('Google') || v.name.includes('Premium')));
-        if (!enVoice) enVoice = voices.find(v => v.lang === 'en-US' || v.lang === 'en_US' || v.lang.startsWith('en'));
+        let targetLangVoice = voices.find(v => (v.lang === utterance.lang || v.lang.startsWith(state.currentLang)) && v.name.includes('Natural'));
+        if (!targetLangVoice) targetLangVoice = voices.find(v => (v.lang === utterance.lang || v.lang.startsWith(state.currentLang)) && (v.name.includes('Google') || v.name.includes('Premium')));
+        if (!targetLangVoice) targetLangVoice = voices.find(v => v.lang === utterance.lang || v.lang.startsWith(state.currentLang));
         
-        if (enVoice) utterance.voice = enVoice;
+        if (targetLangVoice) utterance.voice = targetLangVoice;
         utterance.rate = 1.08;
         utterance.pitch = 1.05;
 
         utterance.onstart = () => {
             if (isVoiceModeActive) {
-                el.voiceStatusText.textContent = "Speaking...";
+                el.voiceStatusText.textContent = i18n[state.currentLang].voice_speaking;
                 el.voiceIconWrapper.className = 'voice-status-icon speaking';
                 el.voiceIconWrapper.innerHTML = '<i data-lucide="volume-2"></i>';
                 lucide.createIcons({ node: el.voiceIconWrapper });
@@ -427,7 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
             state.isAiSpeaking = false;
             if (isVoiceModeActive) {
                 el.voiceTranscriptText.textContent = '';
-                el.voiceStatusText.textContent = "Listening...";
+                el.voiceStatusText.textContent = i18n[state.currentLang].voice_listening;
                 el.voiceIconWrapper.className = 'voice-status-icon listening';
                 el.voiceIconWrapper.innerHTML = '<i data-lucide="mic"></i>';
                 lucide.createIcons({ node: el.voiceIconWrapper });
@@ -555,6 +789,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Handle Lang Dropdown
+    if (el.langDropdownBtn && el.langDropdownMenu) {
+        el.langDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            el.langDropdownMenu.classList.toggle('show');
+            el.langDropdownBtn.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!el.langDropdownBtn.contains(e.target) && !el.langDropdownMenu.contains(e.target)) {
+                el.langDropdownMenu.classList.remove('show');
+                el.langDropdownBtn.classList.remove('active');
+            }
+        });
+
+        if (el.langOptions) {
+            el.langOptions.forEach(opt => {
+                opt.addEventListener('click', () => {
+                    el.langOptions.forEach(o => o.classList.remove('active'));
+                    opt.classList.add('active');
+                    
+                    const lang = opt.getAttribute('data-lang');
+                    state.currentLang = lang;
+                    updateLanguageUI(lang);
+                    renderSidebarHistory();
+                    
+                    let displayLang = 'EN';
+                    if (lang === 'pt') displayLang = 'PT';
+                    else if (lang === 'es') displayLang = 'ES';
+                    
+                    if (el.langLabel) el.langLabel.textContent = displayLang;
+                    
+                    if (recognition) {
+                        recognition.lang = lang === 'en' ? 'en-US' : (lang === 'es' ? 'es-ES' : 'pt-BR');
+                    }
+                    
+                    el.langDropdownMenu.classList.remove('show');
+                    el.langDropdownBtn.classList.remove('active');
+                });
+            });
+        }
+    }
+
     // Handle History Context Menus
     document.addEventListener('click', (e) => {
         const btn = e.target.closest('.btn-history-options');
@@ -608,7 +885,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (loginScreen) {
                 const textEl = loginScreen.querySelector('p');
                 if (textEl) {
-                    textEl.textContent = 'Faça login com sua conta Google para enviar mensagens e manter seu histórico salvo com segurança.';
+                    textEl.textContent = i18n[state.currentLang].login_req_menu;
                 }
                 loginScreen.classList.remove('hidden');
             }
@@ -629,7 +906,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const userNameEl = document.getElementById('sidebar-user-name');
             const userAvatarEl = document.getElementById('sidebar-avatar');
             
-            if (userNameEl) userNameEl.textContent = 'Guest';
+            if (userNameEl) userNameEl.textContent = 'Visitante';
             if (userAvatarEl) {
                 userAvatarEl.innerHTML = '<i data-lucide="user"></i>';
                 userAvatarEl.style.background = '';
@@ -647,7 +924,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (loginScreen) {
                 const textEl = loginScreen.querySelector('p');
                 if (textEl) {
-                    textEl.textContent = 'You logged out. Log in to continue.';
+                    textEl.textContent = i18n[state.currentLang].logout_msg;
                 }
                 loginScreen.classList.remove('hidden');
             }
@@ -661,12 +938,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (el.webhookSwitch) {
         el.webhookSwitch.addEventListener('change', (e) => {
             if (e.target.checked) {
-                state.currentWebhookUrl = state.webhookTestUrl;
-                el.webhookLabel.textContent = "Test";
+                state.isTestMode = true;
+                el.webhookLabel.textContent = i18n[state.currentLang].test;
                 el.webhookLabel.style.color = "#f59e0b"; // Amber color
             } else {
-                state.currentWebhookUrl = state.webhookProdUrl;
-                el.webhookLabel.textContent = "Production";
+                state.isTestMode = false;
+                el.webhookLabel.textContent = i18n[state.currentLang].production;
                 el.webhookLabel.style.color = "var(--text-secondary)";
             }
         });
@@ -815,17 +1092,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="btn-history-options" title="Options"><i data-lucide="more-vertical"></i></button>
                     <div class="history-options-menu">
                         <button class="history-opt-btn btn-share">
-                            <div class="history-opt-btn-left"><i data-lucide="share-2"></i> Share chat</div>
+                            <div class="history-opt-btn-left"><i data-lucide="share-2"></i> ${i18n[state.currentLang].share_chat}</div>
                         </button>
                         <button class="history-opt-btn btn-pin">
-                            <div class="history-opt-btn-left"><i data-lucide="pin"></i> ${session.pinned ? 'Unpin' : 'Pin'}</div>
+                            <div class="history-opt-btn-left"><i data-lucide="pin"></i> ${session.pinned ? i18n[state.currentLang].unpin : i18n[state.currentLang].pin}</div>
                         </button>
                         <button class="history-opt-btn btn-rename">
-                            <div class="history-opt-btn-left"><i data-lucide="edit-2"></i> Rename</div>
+                            <div class="history-opt-btn-left"><i data-lucide="edit-2"></i> ${i18n[state.currentLang].rename}</div>
                         </button>
                         <div class="history-opt-divider"></div>
                         <button class="history-opt-btn delete btn-delete">
-                            <div class="history-opt-btn-left"><i data-lucide="trash-2"></i> Delete</div>
+                            <div class="history-opt-btn-left"><i data-lucide="trash-2"></i> ${i18n[state.currentLang].delete}</div>
                         </button>
                     </div>
                 </div>
@@ -870,22 +1147,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const chatText = session.messages.map(m => `${m.role === 'user' ? 'You' : 'AI'}: ${m.text}`).join('\n\n');
                 showCustomModal(
-                    'Share chat',
-                    `<p style="margin: 0 0 10px 0;">Copy the chat text below:</p>
+                    i18n[state.currentLang].share_chat_title,
+                    `<p style="margin: 0 0 10px 0;">${i18n[state.currentLang].share_chat_desc}</p>
                      <textarea id="share-text-input" style="width: 100%; height: 150px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: var(--radius-sm); padding: 10px; font-family: inherit; font-size: 14px; resize: none; margin-top: 5px;" readonly>${chatText}</textarea>`,
-                    `<button class="btn-cancel">Cancel</button>
-                     <button class="btn-confirm" id="btn-copy-link">Copy Text</button>`,
+                    `<button class="btn-cancel">${i18n[state.currentLang].cancel}</button>
+                     <button class="btn-confirm" id="btn-copy-link">${i18n[state.currentLang].copy_text}</button>`,
                     (closeModal, bodyEl, footerEl) => {
                         const input = bodyEl.querySelector('#share-text-input');
                         input.select();
                         const copyBtn = footerEl.querySelector('#btn-copy-link');
                         copyBtn.onclick = () => {
                             navigator.clipboard.writeText(chatText).then(() => {
-                                copyBtn.textContent = 'Copied!';
+                                copyBtn.textContent = i18n[state.currentLang].copied;
                                 copyBtn.style.background = '#10b981'; // Green
                                 setTimeout(closeModal, 1000);
                             }).catch(() => {
-                                alert('Error copying');
+                                alert(i18n[state.currentLang].copy_error);
                             });
                         };
                     }
@@ -907,10 +1184,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.classList.remove('menu-open');
                 
                 showCustomModal(
-                    'Rename chat',
-                    `<input type="text" id="rename-input" value="${session.title}" placeholder="New chat name">`,
-                    `<button class="btn-cancel">Cancel</button>
-                     <button class="btn-confirm" id="btn-save-rename">Save</button>`,
+                    i18n[state.currentLang].rename_chat_title,
+                    `<input type="text" id="rename-input" value="${session.title}" placeholder="${i18n[state.currentLang].rename_chat_placeholder}">`,
+                    `<button class="btn-cancel">${i18n[state.currentLang].cancel}</button>
+                     <button class="btn-confirm" id="btn-save-rename">${i18n[state.currentLang].save}</button>`,
                     (closeModal, bodyEl, footerEl) => {
                         const input = bodyEl.querySelector('#rename-input');
                         input.focus();
@@ -941,11 +1218,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.classList.remove('menu-open');
                 
                 showCustomModal(
-                    'Delete chat?',
-                    `<p style="margin:0;">This will delete the chat <strong>${session.title}</strong>.</p>
-                     <p style="margin-top:10px; font-size:13px; color:var(--text-muted);">This action cannot be undone and you won't be able to recover this chat.</p>`,
-                    `<button class="btn-cancel">Cancel</button>
-                     <button class="btn-confirm danger" id="btn-confirm-delete">Delete</button>`,
+                    i18n[state.currentLang].delete_chat_title,
+                    `<p style="margin:0;">${i18n[state.currentLang].delete_chat_desc} <strong>${session.title}</strong>.</p>
+                     <p style="margin-top:10px; font-size:13px; color:var(--text-muted);">${i18n[state.currentLang].delete_chat_warn}</p>`,
+                    `<button class="btn-cancel">${i18n[state.currentLang].cancel}</button>
+                     <button class="btn-confirm danger" id="btn-confirm-delete">${i18n[state.currentLang].delete}</button>`,
                     (closeModal, bodyEl, footerEl) => {
                         footerEl.querySelector('#btn-confirm-delete').onclick = () => {
                             const newHistory = history.filter(s => s.id !== session.id);
@@ -1160,19 +1437,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const activeModeOpt = document.querySelector('.mode-option.active');
             const aiMode = activeModeOpt ? activeModeOpt.getAttribute('data-mode') : 'turbo';
             
+            let systemPrompt = "";
+            if (state.currentLang === 'en') systemPrompt = "Please reply in English. ";
+            else if (state.currentLang === 'es') systemPrompt = "Por favor, responde en Español. ";
+            else if (state.currentLang === 'pt') systemPrompt = "Por favor, responda em Português do Brasil. ";
+            
             const response = await fetch(state.currentWebhookUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     message: text,
-                    chatInput: text,
+                    chatInput: systemPrompt + text,
                     sessionId: state.sessionId,
                     sender: 'user',
                     timestamp: new Date().toISOString(),
                     aiMode: aiMode,
                     mode: aiMode,
+                    language: state.currentLang,
                     metadata: {
                         aiMode: aiMode,
+                        language: state.currentLang,
                         interface: "full-chat"
                     }
                 })
@@ -1200,7 +1484,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (!botReply || botReply.trim() === '') {
-                botReply = "Entendi. Desculpe-me, o fluxo não retornou texto.";
+                botReply = i18n[state.currentLang].empty_bot_reply;
             }
 
             addMessage('ai', botReply, true, typingBlock, true);
@@ -1222,7 +1506,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (err) {
             // Only remove if it wasn't already updated by a successful request
             if (typingBlock.parentNode) {
-                addMessage('ai', `⚠️ **Erro na conexão:** ${err.message}.`, true, typingBlock, true);
+                addMessage('ai', `⚠️ **${i18n[state.currentLang].conn_error}** ${err.message}.`, true, typingBlock, true);
             }
         } finally {
             state.isWaiting = false;
@@ -1261,4 +1545,5 @@ document.addEventListener('DOMContentLoaded', () => {
     
     toggleSendButton();
     renderSidebarHistory();
+    updateLanguageUI(state.currentLang);
 });
