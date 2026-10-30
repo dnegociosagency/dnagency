@@ -78,6 +78,12 @@ export default function RootLayout({
         {/* Satoshi Font for Body/Menu */}
         <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap" rel="stylesheet" />
         <SchemaMarkup />
+        {/* Google AdSense (verificação do site e anúncios) */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3314591246431602"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="min-h-screen flex flex-col overflow-x-hidden" suppressHydrationWarning>
         <Providers>
