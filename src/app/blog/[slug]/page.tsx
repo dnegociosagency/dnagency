@@ -139,7 +139,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="mt-16 pt-12 border-t border-white/10 flex flex-col md:flex-row items-center gap-6">
             <div className="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-[--color-brand-primary]/20 shrink-0 border border-white/10 relative">
               <img 
-                src="/team/donis.png" 
+                src="/team/donis.webp" 
                 alt="Donis Alfredo" 
                 className="w-full h-full object-cover object-top"
               />

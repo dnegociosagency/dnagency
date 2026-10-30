@@ -42,21 +42,21 @@ export default function PrincipiosProposito() {
             style={{ opacity: opacity1 }}
             className="text-3xl md:text-5xl lg:text-7xl font-light text-brand-white tracking-wide"
           >
-            {"\"Whatever you do...\""}
+            {"\"Tudo o que fizerem...\""}
           </motion.h2>
 
           <motion.h2 
             style={{ opacity: opacity2 }}
             className="text-3xl md:text-5xl lg:text-7xl font-light text-brand-white tracking-wide"
           >
-            {"\"work at it with all your heart...\""}
+            {"\"façam de todo o coração...\""}
           </motion.h2>
 
           <motion.h2 
             style={{ opacity: opacity3 }}
             className="text-3xl md:text-5xl lg:text-7xl font-bold text-brand-white tracking-wide"
           >
-            {"\"as for the Lord.\""}
+            {"\"como para o Senhor.\""}
           </motion.h2>
         </div>
 

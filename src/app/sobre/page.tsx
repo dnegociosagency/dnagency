@@ -9,14 +9,14 @@ import PrincipiosProposito from "@/components/sobre/PrincipiosProposito";
 import FinalCinematico from "@/components/sobre/FinalCinematico";
 
 export const metadata: Metadata = {
-  title: "About Us | DN Agency",
-  description: "Discover the story and growth engineering behind DN Agency. From frustrated clients to a global conversion-first agency helping businesses across the US & Canada.",
+  title: "Sobre Nós",
+  description: "Conheça a história e a engenharia de crescimento por trás da DN Agency. De clientes frustrados a uma agência focada em conversão que ajuda empresas no Brasil e no exterior.",
   alternates: {
     canonical: "https://www.agenciadnegocios.com/sobre",
   },
   openGraph: {
-    title: "About Us | DN Agency",
-    description: "Discover the story and growth engineering behind DN Agency. From frustrated clients to a global conversion-first agency.",
+    title: "Sobre Nós | DN Agency",
+    description: "Conheça a história e a engenharia de crescimento por trás da DN Agency. De clientes frustrados a uma agência global focada em conversão.",
     url: "https://www.agenciadnegocios.com/sobre",
     images: ["/og-image.png"],
   },

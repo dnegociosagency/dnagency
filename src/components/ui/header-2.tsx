@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useScroll } from "@/components/ui/use-scroll";
-import MagneticButton from "@/components/ui/MagneticButton";
+import LanguageSelector from "@/components/LanguageSelector";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -73,10 +73,10 @@ export function Header() {
   const isVisible = isAcademy ? showAcademyHeader : (isHome ? showHomeHeader : true);
 
   const links = [
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/#servicos" },
-    { label: "Method", href: "/#metodo" },
-    { label: "About", href: "/sobre" },
+    { label: "Início", href: "/" },
+    { label: "Serviços", href: "/#servicos" },
+    { label: "Método", href: "/#metodo" },
+    { label: "Sobre", href: "/sobre" },
     { label: "Blog", href: "/blog" },
   ];
 
@@ -126,14 +126,15 @@ export function Header() {
           </nav>
 
           {/* Desktop CTA - Anchored right, larger, premium look */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:flex items-center gap-2">
+            <LanguageSelector />
             <a
               href="https://calendar.app.google/TJ85TG2Do9uLhC2K7"
               target="_blank"
               rel="noopener noreferrer"
             >
               <button className="px-6 py-2.5 text-[15px] font-semibold bg-gradient-to-r from-[#2f6b65] to-[#3b8780] text-white hover:to-[#469e96] rounded-full shadow-[0_4px_14px_0_rgba(47,107,101,0.3)] hover:shadow-[0_6px_20px_rgba(47,107,101,0.4)] hover:-translate-y-[1px] transition-all duration-300 ease-out flex items-center gap-2">
-                Book a Call
+                Agendar Reunião
               </button>
             </a>
           </div>
@@ -143,7 +144,7 @@ export function Header() {
             <button
               className="p-1.5 rounded-full hover:bg-gray-100 transition-colors text-gray-900"
               onClick={() => setOpen(!open)}
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-label={open ? "Fechar menu" : "Abrir menu"}
               aria-expanded={open}
             >
               {open ? <X size={24} strokeWidth={2.5} /> : <Menu size={24} strokeWidth={2.5} />}
@@ -193,6 +194,7 @@ export function Header() {
               transition={{ delay: links.length * 0.05 + 0.05, duration: 0.3 }}
               className="flex flex-col items-center gap-4 w-full max-w-xs mt-4"
             >
+              <LanguageSelector variant="menu" />
               <a
                 href="https://calendar.app.google/TJ85TG2Do9uLhC2K7"
                 target="_blank"
@@ -201,7 +203,7 @@ export function Header() {
                 className="w-full"
               >
                 <button className="w-full px-6 py-4 text-lg font-bold bg-gradient-to-r from-[#2f6b65] to-[#3b8780] text-white hover:to-[#469e96] rounded-full shadow-[0_8px_20px_rgba(47,107,101,0.3)] transition-all duration-300">
-                  Book a Strategy Call
+                  Agendar Reunião Estratégica
                 </button>
               </a>
             </motion.div>

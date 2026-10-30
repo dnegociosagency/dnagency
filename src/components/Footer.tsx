@@ -141,17 +141,17 @@ function MagneticButton({ className, children, as: Tag = "button", ...props }: M
 function MarqueeItem() {
   return (
     <div className="flex items-center space-x-10 px-6 text-white/35 font-bold tracking-[.28em] text-[11px] uppercase whitespace-nowrap">
-      <span>Paid Media</span>
+      <span>Tráfego Pago</span>
       <span className="text-[--color-brand-primary]">✦</span>
       <span>Google Ads</span>
       <span className="text-[--color-brand-primary]">✦</span>
       <span>Meta Ads</span>
       <span className="text-[--color-brand-primary]">✦</span>
-      <span>Conversion Funnels</span>
+      <span>Funis de Conversão</span>
       <span className="text-[--color-brand-primary]">✦</span>
-      <span>Performance Marketing</span>
+      <span>Marketing de Performance</span>
       <span className="text-[--color-brand-primary]">✦</span>
-      <span>USA & Canada</span>
+      <span>Brasil · EUA · Canadá</span>
       <span className="text-[--color-brand-primary]">✦</span>
     </div>
   );
@@ -161,28 +161,28 @@ function MarqueeItem() {
 
 const NAV_LINKS = [
   {
-    title: "Services",
+    title: "Serviços",
     items: [
-      { label: "Paid Media", href: "#servicos" },
-      { label: "SEO & Organic Search", href: "#servicos" },
-      { label: "Conversion Funnels", href: "#servicos" },
-      { label: "Premium Web Design", href: "#servicos" },
+      { label: "Tráfego Pago", href: "#servicos" },
+      { label: "SEO & Busca Orgânica", href: "#servicos" },
+      { label: "Funis de Conversão", href: "#servicos" },
+      { label: "Sites Premium", href: "#servicos" },
     ],
   },
   {
-    title: "Agency",
+    title: "Agência",
     items: [
-      { label: "Our Process", href: "#metodo" },
-      { label: "Markets", href: "#global" },
+      { label: "Nosso Método", href: "#metodo" },
+      { label: "Mercados", href: "#global" },
       { label: "Blog", href: "/blog" },
-      { label: "Book a Call", href: "https://calendar.app.google/TJ85TG2Do9uLhC2K7" },
+      { label: "Agendar Reunião", href: "https://calendar.app.google/TJ85TG2Do9uLhC2K7" },
     ],
   },
   {
     title: "Legal",
     items: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
+      { label: "Política de Privacidade", href: "#" },
+      { label: "Termos de Uso", href: "#" },
     ],
   },
 ];
@@ -291,7 +291,7 @@ export default function Footer() {
               DN Agency
             </h2>
             <p className="text-center text-white/45 text-base md:text-lg font-light mb-14 tracking-wide">
-              Digital Performance · USA & Canada
+              Performance Digital · Brasil · EUA · Canadá
             </p>
 
             {/* Links + Redes */}
@@ -343,12 +343,12 @@ export default function Footer() {
 
               {/* Copyright */}
               <p className="text-[11px] font-semibold uppercase tracking-widest text-white/30 order-2 md:order-1">
-                © {new Date().getFullYear()} DN Agency · All rights reserved
+                © {new Date().getFullYear()} DN Agency · Todos os direitos reservados
               </p>
 
               {/* Badge "feito com ♥" */}
               <div className="dn-glass-pill flex items-center gap-2 rounded-full px-5 py-2.5 order-1 md:order-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Crafted by</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Feito por</span>
                 <span className="text-sm font-black text-white">DN Dev</span>
                 <span className="dn-heartbeat text-[--color-brand-primary] text-base leading-none">♥</span>
               </div>
@@ -363,7 +363,7 @@ export default function Footer() {
                   className="dn-glass-pill flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white/70"
                 >
                   <MessageCircle className="h-4 w-4 text-[--color-brand-primary]" />
-                  Book Call
+                  Agendar
                 </MagneticButton>
 
                 <MagneticButton

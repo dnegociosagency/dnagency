@@ -143,13 +143,13 @@ export default function ExpansaoGlobal() {
           transition={{ duration: 1 }}
         >
           <span className="px-4 py-1.5 rounded-full border border-brand-white/10 bg-brand-white/5 text-brand-white/70 text-sm font-medium tracking-wide mb-8 inline-block">
-            Borderless
+            Sem Fronteiras
           </span>
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-brand-white mb-6 tracking-tight">
-            Time zones stopped <br/>being a limit.
+            Fuso horário deixou <br/>de ser limite.
           </h2>
           <p className="text-xl md:text-2xl text-brand-white/50 max-w-2xl mx-auto font-light leading-relaxed">
-            Today, we run campaigns and drive results across multiple continents. Our technology and methodology know no bounds.
+            Hoje, rodamos campanhas e geramos resultados em vários continentes. Nossa tecnologia e nossa metodologia não têm fronteiras.
           </p>
         </motion.div>
       </div>

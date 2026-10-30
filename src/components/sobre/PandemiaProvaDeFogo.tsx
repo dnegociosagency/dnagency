@@ -65,7 +65,7 @@ export default function PandemiaProvaDeFogo() {
       <div className="relative z-10 w-full max-w-4xl px-6 flex flex-col gap-[30vh] text-center">
         
         <h2 className="reveal-text text-4xl md:text-6xl lg:text-7xl font-bold text-brand-white leading-tight">
-          While businesses were closing down...
+          Enquanto empresas fechavam as portas...
         </h2>
 
         <div className="reveal-text flex flex-col items-center justify-center">
@@ -83,12 +83,12 @@ export default function PandemiaProvaDeFogo() {
             ))}
           </div>
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-brand-white leading-tight">
-            we transformed traffic into pure survival.
+            nós transformamos tráfego em sobrevivência.
           </h2>
         </div>
 
         <h2 className="reveal-text text-3xl md:text-5xl lg:text-6xl font-light text-brand-white/70 leading-tight pb-[20vh]">
-          That was the exact moment the agency we always wanted to hire was born.
+          Foi nesse exato momento que nasceu a agência que sempre quisemos contratar.
         </h2>
 
       </div>

@@ -31,10 +31,10 @@ export default function FinalCinematico() {
           transition={{ duration: 1, delay: 0.5 }}
         >
           <h3 className="text-2xl md:text-4xl font-light text-[#0a1211] mb-4">
-            You don&apos;t need another agency.
+            Você não precisa de mais uma agência.
           </h3>
           <p className="text-lg md:text-2xl text-[#0a1211]/65 font-light mb-16">
-            You need a partner who understands your reality and helps build your future.
+            Você precisa de um parceiro que entenda a sua realidade e ajude a construir o seu futuro.
           </p>
 
           <a 
@@ -43,7 +43,7 @@ export default function FinalCinematico() {
             rel="noopener noreferrer"
             className="group relative inline-flex h-16 items-center justify-center overflow-hidden rounded-full bg-[#2f6b65] px-12 font-medium text-white transition-all duration-300 hover:bg-[#255651] hover:scale-105 hover:shadow-[0_0_40px_rgba(47,107,101,0.35)]"
           >
-            <span className="mr-2 text-lg">Scale my business</span>
+            <span className="mr-2 text-lg">Quero escalar meu negócio</span>
             <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" />
           </a>
         </motion.div>

@@ -84,7 +84,7 @@ export default function PricingSection() {
             <span className="w-2 h-2 rounded-full bg-[#2f6b65] animate-pulse" />
             <span className="w-2 h-2 rounded-full bg-[#2f6b65] animate-pulse" />
             <span className="text-xs md:text-sm font-bold tracking-[0.2em] text-[#2f6b65] uppercase">
-              The End of Generic Agencies
+              O Fim das Agências Genéricas
             </span>
           </motion.div>
           
@@ -95,9 +95,9 @@ export default function PricingSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-4xl sm:text-6xl md:text-8xl font-black text-white tracking-tighter mb-8 leading-[1.1]"
           >
-            Your Business <br className="hidden md:block" />
+            Seu Negócio <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-[#2f6b65] drop-shadow-sm relative inline-block">
-              Deserves More
+              Merece Mais
               <Zap className="absolute -top-6 -right-10 w-8 h-8 text-[#2f6b65] opacity-60 animate-pulse hidden md:block" />
             </span>
           </motion.h2>
@@ -109,7 +109,7 @@ export default function PricingSection() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="text-white/60 max-w-3xl mx-auto text-lg md:text-2xl font-light leading-relaxed"
           >
-            We don't sell 'post packages'. We engineer a <strong className="text-white font-medium">customer acquisition machine</strong> focused entirely on your financial return.
+            Não vendemos 'pacotes de posts'. Construímos uma <strong className="text-white font-medium">máquina de aquisição de clientes</strong> focada inteiramente no seu retorno financeiro.
           </motion.p>
         </div>
 
@@ -130,18 +130,18 @@ export default function PricingSection() {
             <div className="bg-white/5 rounded-[2rem] p-8 md:p-10 border border-white/10 shadow-lg hover:bg-white/[0.07] transition-all duration-700 ease-out flex flex-col justify-between w-full">
               <div>
                 <h3 className="text-xl font-bold text-white/40 mb-8 pb-6 flex items-center justify-between border-b border-white/10">
-                  Traditional Agencies
+                  Agências Tradicionais
                   <span className="text-[10px] font-mono tracking-widest bg-red-500/10 text-red-400 px-3 py-1 rounded-full border border-red-500/20">
-                    WASTED BUDGET
+                    VERBA DESPERDIÇADA
                   </span>
                 </h3>
                 
                 <ul className="space-y-6">
                   {[
-                    "Focus on likes and vanity metrics that don't drive cash flow.",
-                    "Rigid packages with zero alignment to your actual sales goals.",
-                    "Lack of strategic integration and hidden performance metrics.",
-                    "Slow, template-based websites that drive prospects away."
+                    "Foco em curtidas e métricas de vaidade que não geram caixa.",
+                    "Pacotes engessados, sem alinhamento com suas metas reais de vendas.",
+                    "Falta de integração estratégica e métricas de desempenho escondidas.",
+                    "Sites lentos, feitos a partir de templates, que espantam os potenciais clientes."
                   ].map((text, i) => (
                     <li key={i} className="flex items-start gap-4 group">
                       <div className="mt-1 bg-red-500/5 rounded-full p-1.5 border border-red-500/10 group-hover:bg-red-500/10 transition-colors">
@@ -155,7 +155,7 @@ export default function PricingSection() {
                 </ul>
               </div>
               <div className="mt-8 pt-6 border-t border-white/5 text-center">
-                <span className="text-[10px] text-white/20 tracking-wider uppercase font-mono">Paying for curiosity, not calls</span>
+                <span className="text-[10px] text-white/20 tracking-wider uppercase font-mono">Pagando por curiosos, não por ligações</span>
               </div>
             </div>
           </motion.div>
@@ -177,7 +177,7 @@ export default function PricingSection() {
                   <div className="absolute inset-0 bg-[#2f6b65] blur-md opacity-60 animate-pulse" />
                   <div className="relative bg-[#040807] text-white px-6 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase border border-[#2f6b65] flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#2f6b65] animate-ping" />
-                    Our Focus
+                    Nosso Foco
                   </div>
                 </div>
               </div>
@@ -188,16 +188,16 @@ export default function PricingSection() {
                     DN Agency<span className="text-[#2f6b65]">.</span>
                   </span>
                   <span className="text-[10px] font-mono tracking-widest bg-[#2f6b65]/15 text-[#2f6b65] px-3 py-1.5 rounded-full border border-[#2f6b65]/30">
-                    EXPERT GROWTH
+                    CRESCIMENTO EXPERT
                   </span>
                 </h3>
 
                 <ul className="space-y-6 mb-8">
                   {[
-                    { text: "Strategy focused 100% on ", highlight: "conversion and ROI" },
-                    { text: "Bespoke roadmaps integrated with your ", highlight: "sales pipeline" },
-                    { text: "Real-time performance dashboards showing ", highlight: "every conversion" },
-                    { text: "Custom premium web designs with ", highlight: "radical performance" }
+                    { text: "Estratégia 100% focada em ", highlight: "conversão e ROI" },
+                    { text: "Planos sob medida integrados ao seu ", highlight: "funil de vendas" },
+                    { text: "Dashboards de desempenho em tempo real mostrando ", highlight: "cada conversão" },
+                    { text: "Sites premium personalizados com ", highlight: "performance radical" }
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-4 group">
                       <div className="mt-0.5 bg-[#2f6b65]/10 rounded-full p-1.5 border border-[#2f6b65]/30 shadow-[0_0_15px_rgba(47,107,101,0.3)] shrink-0">
@@ -215,7 +215,7 @@ export default function PricingSection() {
                 <a href="https://calendar.app.google/TJ85TG2Do9uLhC2K7" target="_blank" rel="noopener noreferrer" className="w-full block group">
                   <div className="relative w-full rounded-2xl overflow-hidden">
                     <MagneticButton className="w-full py-5 bg-[--color-brand-primary] text-white text-base md:text-lg font-bold rounded-2xl relative z-10 border border-white/10 shadow-[0_10px_30px_rgba(47,107,101,0.4)] group-hover:shadow-[0_15px_50px_rgba(47,107,101,0.6)] transition-all duration-500 overflow-hidden flex items-center justify-center gap-2">
-                      <span className="relative z-10">Book a Strategy Session</span>
+                      <span className="relative z-10">Agendar Sessão Estratégica</span>
                       <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1.5 transition-transform duration-300" />
                       
                       {/* Sweep/Shimmer Effect */}
@@ -225,7 +225,7 @@ export default function PricingSection() {
                     </MagneticButton>
                   </div>
                   <p className="text-center text-white/40 text-[10px] mt-3 tracking-widest uppercase font-mono group-hover:text-[--color-brand-primary] transition-colors">
-                    Limited client intake slots this month
+                    Vagas limitadas para novos clientes este mês
                   </p>
                 </a>
               </div>
@@ -240,18 +240,18 @@ export default function PricingSection() {
             <div className="bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-lg hover:bg-white/[0.07] transition-all duration-700 ease-out flex flex-col justify-between w-full">
               <div>
                 <h3 className="text-xl font-bold text-white/40 mb-8 pb-6 flex items-center justify-between border-b border-white/10">
-                  Performance Perks
+                  Vantagens de Performance
                   <span className="text-[10px] font-mono tracking-widest bg-[#2f6b65]/15 text-[#2f6b65] px-3 py-1 rounded-full border border-[#2f6b65]/20">
-                    ZERO RISK
+                    RISCO ZERO
                   </span>
                 </h3>
                 
                 <div className="space-y-6">
                   {[
-                    { title: "100% Exclusive Calls", desc: "No shared directory leads. When your phone rings, the client is exclusively yours." },
-                    { title: "Pay Per Lead, Not Clicks", desc: "If they don't call, you don't pay. Stop paying for curiosity in search grids." },
-                    { title: "Spam & Bot Shielding", desc: "We dispute and get refunds from Google for wrong numbers or spam robocalls." },
-                    { title: "Verification Support", desc: "We coordinate license verification, insurance submission, and background check gates." }
+                    { title: "Ligações 100% Exclusivas", desc: "Nada de leads compartilhados de diretórios. Quando o seu telefone toca, o cliente é só seu." },
+                    { title: "Pague Por Lead, Não Por Clique", desc: "Se não ligarem, você não paga. Pare de pagar por curiosos nos resultados de busca." },
+                    { title: "Proteção Contra Spam & Robôs", desc: "Contestamos e conseguimos reembolso do Google por números errados ou ligações de spam." },
+                    { title: "Suporte na Verificação", desc: "Cuidamos da verificação de licenças, do envio do seguro e das etapas de checagem de antecedentes." }
                   ].map((item, index) => (
                     <div key={index} className="flex gap-4 items-start group">
                       <div className="w-1.5 h-1.5 rounded-full bg-[#2f6b65] mt-2 shrink-0 animate-pulse" />
@@ -265,7 +265,7 @@ export default function PricingSection() {
               </div>
               
               <div className="mt-8 pt-6 border-t border-white/5 text-center">
-                <span className="text-[10px] text-white/20 tracking-wider uppercase font-mono">Engineered for North American Subcontractors</span>
+                <span className="text-[10px] text-white/20 tracking-wider uppercase font-mono">Pensado para prestadores de serviço na América do Norte</span>
               </div>
             </div>
           </motion.div>

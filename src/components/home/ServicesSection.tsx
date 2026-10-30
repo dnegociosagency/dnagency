@@ -88,12 +88,12 @@ export default function ServicesSection() {
         >
           <div className="max-w-2xl text-center md:text-left">
             <h2 className="text-5xl md:text-7xl font-black text-gray-900 tracking-tighter leading-[1.1]">
-              Engineered for <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2f6b65] to-[#43968e]">Market Dominance.</span>
+              Construído para <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2f6b65] to-[#43968e]">Dominar o Mercado.</span>
             </h2>
           </div>
           <p className="text-gray-500 max-w-sm text-center md:text-right text-lg md:text-xl font-light">
-            We don't just build websites. We create hyper-optimized revenue ecosystems.
+            Não criamos apenas sites. Criamos ecossistemas de receita altamente otimizados.
           </p>
         </motion.div>
 
@@ -112,10 +112,10 @@ export default function ServicesSection() {
                   <Target className="w-8 h-8 text-[#2f6b65]" />
                 </div>
                 <h3 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-6">
-                  Paid Media & <br/> Performance
+                  Tráfego Pago & <br/> Performance
                 </h3>
                 <p className="text-gray-500 text-lg md:text-xl font-light leading-relaxed max-w-md">
-                  Aggressive, data-driven ad campaigns on Meta, Google, and TikTok. We relentlessly optimize for lower CAC and maximum ROAS, scaling your customer acquisition automatically.
+                  Campanhas agressivas e orientadas por dados no Meta, Google e TikTok. Otimizamos sem parar para reduzir o CAC e maximizar o ROAS, escalando a aquisição de clientes de forma automática.
                 </p>
               </div>
               <div className="relative z-10 flex items-center gap-4 mt-12">
@@ -123,7 +123,7 @@ export default function ServicesSection() {
                   <ArrowUpRight className="w-6 h-6" />
                 </div>
                 <span className="text-sm font-bold text-gray-900 uppercase tracking-widest group-hover:text-[#2f6b65] transition-colors duration-300">
-                  Explore Performance
+                  Conheça a Performance
                 </span>
               </div>
             </BentoCard>
@@ -138,10 +138,10 @@ export default function ServicesSection() {
                     <Globe className="w-7 h-7 text-emerald-600" />
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                    Conversion-First Web Dev
+                    Sites Focados em Conversão
                   </h3>
                   <p className="text-gray-500 text-lg font-light">
-                    Premium, blazing-fast landing pages engineered with consumer psychology to turn clicks into high-ticket clients.
+                    Landing pages premium e ultrarrápidas, construídas com psicologia do consumidor para transformar cliques em clientes de alto ticket.
                   </p>
                 </div>
               </div>
@@ -156,10 +156,10 @@ export default function ServicesSection() {
                   <Search className="w-6 h-6 text-amber-600" />
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
-                  Organic SEO
+                  SEO Orgânico
                 </h3>
                 <p className="text-gray-500 font-light">
-                  Dominate search results and capture high-intent traffic without paying for every click.
+                  Domine os resultados de busca e capte tráfego qualificado sem pagar por cada clique.
                 </p>
               </div>
             </BentoCard>
@@ -173,10 +173,10 @@ export default function ServicesSection() {
                   <Fingerprint className="w-6 h-6 text-purple-600" />
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
-                  Premium Branding
+                  Branding Premium
                 </h3>
                 <p className="text-gray-500 font-light">
-                  Elevate your perception. Command higher prices with world-class visual identities and creatives.
+                  Eleve a percepção da sua marca. Cobre mais caro com identidades visuais e criativos de nível internacional.
                 </p>
               </div>
             </BentoCard>
@@ -192,7 +192,7 @@ export default function ServicesSection() {
         >
           <a href="https://calendar.app.google/TJ85TG2Do9uLhC2K7" target="_blank" rel="noopener noreferrer">
             <MagneticButton className="px-10 py-5 text-lg font-bold bg-gray-900 text-white hover:bg-[#2f6b65] rounded-[2rem] shadow-xl hover:shadow-[0_10px_40px_rgba(47,107,101,0.3)] transition-all duration-500">
-              Transform Your Business
+              Transforme Seu Negócio
             </MagneticButton>
           </a>
         </motion.div>

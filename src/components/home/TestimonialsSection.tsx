@@ -8,19 +8,19 @@ const testimonials = [
   {
     name: "Pércio",
     role: "CEO, JJ Moto Peças",
-    content: "DN Agency transformed our client acquisition. We went from a high Cost Per Lead to a predictable and highly profitable acquisition engine in just 3 months.",
+    content: "A DN Agency transformou nossa aquisição de clientes. Saímos de um Custo Por Lead alto para uma máquina de aquisição previsível e muito lucrativa em apenas 3 meses.",
     rating: 5
   },
   {
     name: "Rhenan Veres",
     role: "CEO, Dentista Para todos",
-    content: "The design of our new website combined with their paid traffic strategy doubled our online sales. Their level of professionalism and dedication is unmatched.",
+    content: "O design do nosso novo site, junto com a estratégia de tráfego pago deles, dobrou nossas vendas online. O nível de profissionalismo e dedicação é incomparável.",
     rating: 5
   },
   {
     name: "Laís",
     role: "CEO, Connect Imoveis Litoral",
-    content: "They are not just an agency, they are growth partners. They understand the metrics that actually matter: sales and bottom-line profit.",
+    content: "Eles não são só uma agência, são parceiros de crescimento. Entendem as métricas que realmente importam: vendas e lucro no fim do mês.",
     rating: 5
   }
 ];
@@ -68,7 +68,7 @@ export default function TestimonialsSection() {
             viewport={{ once: true }}
             className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[--color-brand-primary]/30 bg-[--color-brand-primary]/5 backdrop-blur-sm"
           >
-            <span className="text-sm font-semibold tracking-wider text-[--color-brand-primary] uppercase">Proven Results</span>
+            <span className="text-sm font-semibold tracking-wider text-[--color-brand-primary] uppercase">Resultados Comprovados</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -77,8 +77,8 @@ export default function TestimonialsSection() {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-5xl font-bold text-white tracking-tighter mb-6"
           >
-            Don't just take our word for it. <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[--color-brand-primary]">Hear from our clients.</span>
+            Não acredite só na nossa palavra. <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[--color-brand-primary]">Ouça nossos clientes.</span>
           </motion.h2>
         </div>
 

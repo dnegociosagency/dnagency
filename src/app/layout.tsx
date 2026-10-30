@@ -13,9 +13,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
     template: "%s | DN Agency",
-    default: "DN Agency | Premium Conversion-First Web Design & Growth",
+    default: "DN Agency | Sites Premium Focados em Conversão & Crescimento",
   },
-  description: "DN Agency is a high-end web design and performance growth agency. We build custom websites, high-converting landing pages, and scale paid search & social campaigns for businesses across the US & Canada.",
+  description: "A DN Agency é uma agência premium de sites e crescimento por performance. Criamos sites personalizados, landing pages de alta conversão e escalamos campanhas de tráfego pago no Google e nas redes sociais para empresas no Brasil e no exterior.",
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
@@ -26,25 +26,25 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
   openGraph: {
-    title: "DN Agency | Premium Design & Digital Growth",
-    description: "We scale businesses across the US and Canada with conversion-first web design and high-performance digital marketing.",
+    title: "DN Agency | Design Premium & Crescimento Digital",
+    description: "Escalamos empresas com sites focados em conversão e marketing digital de alta performance.",
     url: BASE_URL,
     siteName: "DN Agency",
-    locale: "en_US",
+    locale: "pt_BR",
     type: "website",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "DN Agency — Premium Conversion-First Web Design & Growth",
+        alt: "DN Agency — Sites Premium Focados em Conversão & Crescimento",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DN Agency | Premium Design & Digital Growth",
-    description: "We scale businesses across the US and Canada with conversion-first web design and high-performance digital marketing.",
+    title: "DN Agency | Design Premium & Crescimento Digital",
+    description: "Escalamos empresas com sites focados em conversão e marketing digital de alta performance.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -66,7 +66,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       className="dark font-sans antialiased"
       suppressHydrationWarning
     >

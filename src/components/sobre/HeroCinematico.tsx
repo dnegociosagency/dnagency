@@ -76,11 +76,11 @@ export default function HeroCinematico() {
 
       <div className="relative z-10 text-center max-w-5xl px-6">
         <h1 ref={text1Ref} className="text-4xl md:text-6xl lg:text-7xl font-bold text-brand-white tracking-tight mb-6 leading-tight">
-          Before DN Agency existed... <br/>
-          <span className="text-brand-white/30 dark:text-brand-white/40">we were the frustrated client.</span>
+          Antes de a DN Agency existir... <br/>
+          <span className="text-brand-white/30 dark:text-brand-white/40">nós éramos o cliente frustrado.</span>
         </h1>
         <p ref={text2Ref} className="text-lg md:text-2xl text-brand-white/60 max-w-3xl mx-auto font-light leading-relaxed">
-          We know exactly what it&apos;s like to invest in marketing without clarity, without proximity, and without results. We felt first-hand what we strive to solve today.
+          Sabemos exatamente como é investir em marketing sem clareza, sem proximidade e sem resultado. Sentimos na pele aquilo que hoje nos dedicamos a resolver.
         </p>
       </div>
 
@@ -91,7 +91,7 @@ export default function HeroCinematico() {
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-xs uppercase tracking-[0.2em] text-brand-white/30">Discover</span>
+        <span className="text-xs uppercase tracking-[0.2em] text-brand-white/30">Descubra</span>
         <div className="w-[1px] h-12 bg-gradient-to-b from-brand-white/30 to-transparent"></div>
       </motion.div>
     </section>

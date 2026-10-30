@@ -43,13 +43,13 @@ export default function NascimentoAgencia() {
             transition={{ duration: 1 }}
           >
             <span className="px-4 py-1.5 rounded-full border border-[#2f6b65]/30 bg-[#2f6b65]/5 text-[#2f6b65] text-sm font-semibold tracking-wider mb-6 inline-block">
-              The Method
+              O Método
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0a1211] mb-6 tracking-tight">
-              The growth architecture.
+              A arquitetura do crescimento.
             </h2>
             <p className="text-lg text-[#0a1211]/60 font-light leading-relaxed">
-              We replaced guesswork with data engineering. Created processes. Standardized excellence. Everything fell perfectly into place.
+              Trocamos o achismo pela engenharia de dados. Criamos processos. Padronizamos a excelência. Tudo se encaixou perfeitamente.
             </p>
           </motion.div>
         </div>
@@ -65,8 +65,8 @@ export default function NascimentoAgencia() {
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/10 flex items-center justify-center mb-6">
                 <svg className="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
               </div>
-              <h3 className="text-xl font-bold text-[#0a1211] mb-3">Pure Performance</h3>
-              <p className="text-[#0a1211]/60 font-light leading-relaxed">Campaigns built for extreme conversion. No vanity metrics, just traceable ROI.</p>
+              <h3 className="text-xl font-bold text-[#0a1211] mb-3">Performance Pura</h3>
+              <p className="text-[#0a1211]/60 font-light leading-relaxed">Campanhas construídas para conversão extrema. Nada de métricas de vaidade, só ROI rastreável.</p>
             </div>
           </motion.div>
 
@@ -78,8 +78,8 @@ export default function NascimentoAgencia() {
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2f6b65]/15 to-[#2f6b65]/5 border border-[#2f6b65]/10 flex items-center justify-center mb-6">
                 <svg className="w-6 h-6 text-[#2f6b65]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2m0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
               </div>
-              <h3 className="text-xl font-bold text-[#0a1211] mb-3">Data Engineering</h3>
-              <p className="text-[#0a1211]/60 font-light leading-relaxed">Integrated dashboards connecting every single cent invested to actual sales revenue.</p>
+              <h3 className="text-xl font-bold text-[#0a1211] mb-3">Engenharia de Dados</h3>
+              <p className="text-[#0a1211]/60 font-light leading-relaxed">Dashboards integrados que conectam cada centavo investido ao faturamento real das vendas.</p>
             </div>
           </motion.div>
 
@@ -91,8 +91,8 @@ export default function NascimentoAgencia() {
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/15 to-blue-500/5 border border-blue-500/10 flex items-center justify-center mb-6">
                 <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
               </div>
-              <h3 className="text-xl font-bold text-[#0a1211] mb-3">Relentless Scale</h3>
-              <p className="text-[#0a1211]/60 font-light leading-relaxed">Systems designed not to generate $10k, but to sustain $1M+ with high stability.</p>
+              <h3 className="text-xl font-bold text-[#0a1211] mb-3">Escala Implacável</h3>
+              <p className="text-[#0a1211]/60 font-light leading-relaxed">Sistemas feitos não para gerar R$ 10 mil, mas para sustentar R$ 1 milhão+ com alta estabilidade.</p>
             </div>
           </motion.div>
 

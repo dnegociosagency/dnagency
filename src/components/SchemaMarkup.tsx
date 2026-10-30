@@ -13,19 +13,19 @@ const organizationSchema = {
   url: BASE_URL,
   logo: `${BASE_URL}/logo.png`,
   description:
-    "DN Agency is a premium conversion-first web design and digital growth agency serving businesses across the US and Canada.",
+    "A DN Agency é uma agência premium de sites focados em conversão e crescimento digital, atendendo empresas no Brasil, nos EUA e no Canadá.",
   foundingDate: "2020",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
     url: "https://calendar.app.google/TJ85TG2Do9uLhC2K7",
-    availableLanguage: ["English", "Portuguese"],
+    availableLanguage: ["Portuguese", "English"],
   },
   sameAs: [
     "https://www.instagram.com/dnagency",
     "https://www.linkedin.com/company/dnagency",
   ],
-  areaServed: ["US", "CA"],
+  areaServed: ["BR", "US", "CA"],
   serviceType: [
     "Web Design",
     "Landing Page Design",
@@ -41,7 +41,7 @@ const websiteSchema = {
   name: "DN Agency",
   url: BASE_URL,
   description:
-    "Premium conversion-first web design and digital growth agency.",
+    "Agência premium de sites focados em conversão e crescimento digital.",
   potentialAction: {
     "@type": "SearchAction",
     target: {
@@ -58,34 +58,34 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "How long does it take to see measurable results?",
+      name: "Quanto tempo leva para ver resultados mensuráveis?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We focus on both immediate traction and long-term scaling. During the first few weeks, we optimize tracking and creative assets. Most of our clients see an increase in qualified pipeline and leads within the first 30 days.",
+        text: "Trabalhamos tanto com tração imediata quanto com escala no longo prazo. Nas primeiras semanas, otimizamos o rastreamento e os criativos. A maioria dos nossos clientes vê um aumento de oportunidades e leads qualificados já nos primeiros 30 dias.",
       },
     },
     {
       "@type": "Question",
-      name: "Do you work with my specific industry?",
+      name: "Vocês trabalham com o meu segmento?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We specialize in performance growth and conversion. If your business has a validated product or service â€” whether you run a local clinic, gym, barbershop, restaurant, or premium B2B offer â€” our growth systems can be custom-fitted to acquire your ideal clients.",
+        text: "Somos especialistas em crescimento por performance e conversão. Se o seu negócio tem um produto ou serviço validado — seja uma clínica, academia, barbearia, restaurante ou uma oferta B2B premium — nossos sistemas de crescimento podem ser adaptados para atrair seus clientes ideais.",
       },
     },
     {
       "@type": "Question",
-      name: "What is the minimum budget required to start?",
+      name: "Qual é o investimento mínimo para começar?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We don't sell generic packages; our strategies are tailored to your current revenue and scaling goals. Book a call with us so we can design a custom roadmap that aligns with your unit economics.",
+        text: "Não vendemos pacotes genéricos; nossas estratégias são montadas de acordo com o seu faturamento atual e suas metas de crescimento. Agende uma reunião para desenharmos um plano personalizado que faça sentido para o seu caixa.",
       },
     },
     {
       "@type": "Question",
-      name: "What is included in your scope of work?",
+      name: "O que está incluído no trabalho de vocês?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Unlike traditional agencies that sell social media posts or basic templates, we deliver full-funnel solutions: high-converting premium web design, technical SEO, and advanced media buying (Google, Meta, TikTok) â€” all engineered to maximize your return on ad spend.",
+        text: "Diferente das agências tradicionais que vendem posts para redes sociais ou templates básicos, entregamos soluções de funil completo: sites premium de alta conversão, SEO técnico e gestão avançada de tráfego pago (Google, Meta, TikTok) — tudo pensado para maximizar o retorno sobre o seu investimento em anúncios.",
       },
     },
   ],

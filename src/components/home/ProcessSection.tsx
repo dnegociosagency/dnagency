@@ -18,23 +18,23 @@ export default function ProcessSection() {
   const steps = [
     { 
       number: "01", 
-      title: "Audit & Growth Roadmap", 
-      desc: "We analyze your current digital funnel, identify conversions bottlenecks, and map out clear ROI targets with a custom roadmap." 
+      title: "Auditoria & Plano de Crescimento", 
+      desc: "Analisamos seu funil digital atual, identificamos os gargalos de conversão e definimos metas claras de ROI com um plano personalizado." 
     },
     { 
       number: "02", 
-      title: "Funnel & Creative Setup", 
-      desc: "We build out your landing pages, configure advanced tracking (pixels & APIs), and design custom scroll-stopping creatives." 
+      title: "Estruturação de Funil & Criativos", 
+      desc: "Construímos suas landing pages, configuramos rastreamento avançado (pixels & APIs) e criamos criativos personalizados que prendem a atenção." 
     },
     { 
       number: "03", 
-      title: "Launch & Acquisition", 
-      desc: "We push campaigns live to capture high-intent traffic. Daily oversight ensures campaign health, CTR stability, and lead quality." 
+      title: "Lançamento & Aquisição", 
+      desc: "Colocamos as campanhas no ar para captar tráfego qualificado. O acompanhamento diário garante a saúde das campanhas, a estabilidade do CTR e a qualidade dos leads." 
     },
     { 
       number: "04", 
-      title: "Scale & Revenue Growth", 
-      desc: "Armed with clean data, we cut underperforming angles and shift budgets to winning campaigns to scale your revenue predictably." 
+      title: "Escala & Crescimento de Receita", 
+      desc: "Com dados confiáveis em mãos, cortamos o que não performa e direcionamos a verba para as campanhas vencedoras, escalando sua receita de forma previsível." 
     },
   ];
 
@@ -77,7 +77,7 @@ export default function ProcessSection() {
               viewport={{ once: true }}
               className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[--color-brand-primary]/30 bg-[--color-brand-primary]/5 backdrop-blur-sm"
             >
-              <span className="text-sm font-semibold tracking-wider text-[--color-brand-primary] uppercase">Our Method</span>
+              <span className="text-sm font-semibold tracking-wider text-[--color-brand-primary] uppercase">Nosso Método</span>
             </motion.div>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
@@ -86,7 +86,7 @@ export default function ProcessSection() {
               transition={{ duration: 0.8 }}
               className="text-4xl md:text-6xl font-bold text-white tracking-tighter mb-6"
             >
-              Revenue <br/><span className="text-[--color-brand-primary]">Engineering</span>
+              Engenharia de <br/><span className="text-[--color-brand-primary]">Receita</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -95,7 +95,7 @@ export default function ProcessSection() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-white/70 text-lg md:text-xl font-medium max-w-lg"
             >
-              A mathematically structured workflow engineered to turn clicks into customers. Scroll to explore our process.
+              Um processo estruturado com precisão para transformar cliques em clientes. Role a página para conhecer nosso método.
             </motion.p>
           </div>
 

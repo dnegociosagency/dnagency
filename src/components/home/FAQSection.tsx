@@ -6,20 +6,20 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "How long does it take to see measurable results?",
-    answer: "We focus on both immediate traction and long-term scaling. During the first few weeks, we optimize tracking and creative assets. Most of our clients see an increase in qualified pipeline and leads within the first 30 days."
+    question: "Quanto tempo leva para ver resultados mensuráveis?",
+    answer: "Trabalhamos tanto com tração imediata quanto com escala no longo prazo. Nas primeiras semanas, otimizamos o rastreamento e os criativos. A maioria dos nossos clientes vê um aumento de oportunidades e leads qualificados já nos primeiros 30 dias."
   },
   {
-    question: "Do you work with my specific industry?",
-    answer: "We specialize in performance growth and conversion. If your business has a validated product or service — whether you run a local clinic, gym, barbershop, restaurant, or premium B2B offer — our growth systems can be custom-fitted to acquire your ideal clients."
+    question: "Vocês trabalham com o meu segmento?",
+    answer: "Somos especialistas em crescimento por performance e conversão. Se o seu negócio tem um produto ou serviço validado — seja uma clínica, academia, barbearia, restaurante ou uma oferta B2B premium — nossos sistemas de crescimento podem ser adaptados para atrair seus clientes ideais."
   },
   {
-    question: "What is the minimum budget required to start?",
-    answer: "We don't sell generic packages; our strategies are tailored to your current revenue and scaling goals. Book a call with us so we can design a custom roadmap that aligns with your unit economics."
+    question: "Qual é o investimento mínimo para começar?",
+    answer: "Não vendemos pacotes genéricos; nossas estratégias são montadas de acordo com o seu faturamento atual e suas metas de crescimento. Agende uma reunião para desenharmos um plano personalizado que faça sentido para o seu caixa."
   },
   {
-    question: "What is included in your scope of work?",
-    answer: "Unlike traditional agencies that sell social media posts or basic templates, we deliver full-funnel solutions: high-converting premium web design, technical SEO, and advanced media buying (Google, Meta, TikTok) — all engineered to maximize your return on ad spend."
+    question: "O que está incluído no trabalho de vocês?",
+    answer: "Diferente das agências tradicionais que vendem posts para redes sociais ou templates básicos, entregamos soluções de funil completo: sites premium de alta conversão, SEO técnico e gestão avançada de tráfego pago (Google, Meta, TikTok) — tudo pensado para maximizar o retorno sobre o seu investimento em anúncios."
   }
 ];
 
@@ -50,7 +50,7 @@ export default function FAQSection() {
             viewport={{ once: true }}
             className="inline-block mb-6 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
           >
-            <span className="text-sm font-semibold tracking-wider text-white/80 uppercase">Any Questions?</span>
+            <span className="text-sm font-semibold tracking-wider text-white/80 uppercase">Ficou Alguma Dúvida?</span>
           </motion.div>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export default function FAQSection() {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-5xl font-bold text-white tracking-tighter"
           >
-            Frequently Asked Questions
+            Perguntas Frequentes
           </motion.h2>
         </div>
 

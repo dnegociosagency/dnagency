@@ -7,26 +7,26 @@ import { LineChart, Search, Zap, RotateCw } from "lucide-react";
 const steps = [
   {
     number: "01",
-    title: "Deep Audit & Blueprint",
-    description: "We don't guess. We analyze your competitors, audit your current tracking, and map out a bulletproof strategy to lower your CAC and capture high-intent traffic.",
+    title: "Auditoria Profunda & Plano",
+    description: "Não trabalhamos no achismo. Analisamos seus concorrentes, auditamos o seu rastreamento atual e desenhamos uma estratégia à prova de falhas para reduzir seu CAC e captar tráfego qualificado.",
     icon: <Search className="w-6 h-6 text-[#2f6b65]" />,
   },
   {
     number: "02",
-    title: "Conversion Engineering",
-    description: "Traffic is useless if it doesn't convert. We engineer high-speed, persuasive landing pages and funnels designed specifically to turn clicks into booked calls and sales.",
+    title: "Engenharia de Conversão",
+    description: "Tráfego não serve para nada se não converte. Criamos landing pages e funis rápidos e persuasivos, feitos para transformar cliques em reuniões agendadas e vendas.",
     icon: <Zap className="w-6 h-6 text-[#2f6b65]" />,
   },
   {
     number: "03",
-    title: "Aggressive Media Scaling",
-    description: "Once the funnel is tight, we launch highly targeted campaigns across Google and Meta. We aggressively test creatives and audiences to find the most profitable winners.",
+    title: "Escala Agressiva de Mídia",
+    description: "Com o funil ajustado, lançamos campanhas altamente segmentadas no Google e no Meta. Testamos criativos e públicos de forma agressiva para encontrar os mais lucrativos.",
     icon: <LineChart className="w-6 h-6 text-[#2f6b65]" />,
   },
   {
     number: "04",
-    title: "Continuous Optimization",
-    description: "The market changes daily. We monitor your campaigns in real-time, killing losing ads, scaling the winners, and tweaking the landing page for maximum yield.",
+    title: "Otimização Contínua",
+    description: "O mercado muda todos os dias. Monitoramos suas campanhas em tempo real, pausando os anúncios que não performam, escalando os vencedores e ajustando a landing page para o máximo de retorno.",
     icon: <RotateCw className="w-6 h-6 text-[#2f6b65]" />,
   }
 ];
@@ -52,14 +52,14 @@ export default function ManifestoScrollSection() {
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-20 md:mb-32">
           <span className="text-[#2f6b65] font-bold tracking-widest uppercase text-sm bg-[#2f6b65]/10 px-4 py-1.5 rounded-full mb-6">
-            The Growth Protocol
+            O Protocolo de Crescimento
           </span>
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 tracking-tighter leading-[1.1] max-w-4xl">
-            A relentless focus on <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2f6b65] to-emerald-500">optimization & delivery.</span>
+            Foco implacável em <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2f6b65] to-emerald-500">otimização & entrega.</span>
           </h2>
           <p className="mt-6 text-gray-500 text-lg md:text-xl font-light max-w-2xl leading-relaxed">
-            Forget vanity metrics. We built a 4-step framework engineered entirely around generating revenue, capturing market share, and outperforming your competitors.
+            Esqueça métricas de vaidade. Criamos um método de 4 etapas pensado inteiramente para gerar receita, conquistar participação de mercado e superar seus concorrentes.
           </p>
         </div>
 
@@ -113,17 +113,17 @@ export default function ManifestoScrollSection() {
           
           <div className="relative z-10 max-w-2xl text-center md:text-left">
             <h3 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
-              Ready to scale your delivery?
+              Pronto para escalar seus resultados?
             </h3>
             <p className="text-gray-300 text-lg font-light">
-              Stop guessing. Let our team implement the exact growth framework we've used to generate massive ROI for our partners.
+              Pare de tentar adivinhar. Deixe nosso time implementar o mesmo método de crescimento que usamos para gerar um ROI enorme para nossos parceiros.
             </p>
           </div>
           
           <div className="relative z-10 shrink-0">
             <a href="https://calendar.app.google/TJ85TG2Do9uLhC2K7" target="_blank" rel="noopener noreferrer">
               <button className="px-8 py-5 text-lg font-bold bg-white text-gray-900 hover:bg-[#2f6b65] hover:text-white rounded-full shadow-xl hover:shadow-[0_10px_40px_rgba(47,107,101,0.4)] transition-all duration-300 hover:scale-105 active:scale-95">
-                Start Your Audit
+                Comece Sua Auditoria
               </button>
             </a>
           </div>

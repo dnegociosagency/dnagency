@@ -288,7 +288,7 @@ function updateLanguageUI(lang) {
         sessionId: generateSessionId(),
         isWaiting: false,
         isAiSpeaking: false,
-        currentLang: 'en'
+        currentLang: 'pt'
     };
 
     const el = {

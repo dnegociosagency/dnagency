@@ -8,52 +8,39 @@ const team = [
   {
     id: 1,
     name: "Donis Alfredo",
-    role: "CEO & Strategist",
-    image: "/team/donis.png",
+    role: "CEO & Estrategista",
+    image: "/team/donis.webp",
   },
   {
     id: 2,
     name: "Pâmela Lavor",
-    role: "CEO & Paid Traffic Specialist",
-    image: "/team/pamela.png",
+    role: "CEO & Especialista em Tráfego Pago",
+    image: "/team/pamela.webp",
   },
   {
     id: 3,
-    name: "Matheus Sales",
-    role: "Full Stack Developer",
-    image: "/team/matheus.png",
+    name: "Gabriel Henrique",
+    role: "UX/UI Designer",
+    image: "/team/gabriel.webp",
   },
   {
     id: 4,
-    name: "Gabriel Henrique",
-    role: "UX/UI Designer",
-    image: "/team/gabriel.png",
+    name: "Cecilia",
+    role: "Gerente de Marketing Digital",
+    image: "/team/cecilia.webp",
   },
   {
     id: 5,
-    name: "Cecilia",
-    role: "Digital Marketing Manager",
-    image: "/team/cecilia.png",
+    name: "Joana",
+    role: "Analista de Tráfego Pago",
+    image: "/team/joana.webp",
+    position: "object-top",
   },
   {
     id: 6,
-    name: "Joana",
-    role: "Paid Traffic Analyst",
-    image: "/team/joana.png",
-    position: "object-top",
-  },
-  {
-    id: 7,
     name: "Juliana",
-    role: "GROWTH PARTNER | CANADA OFFICE",
-    image: "/team/juliana.jpg",
-  },
-  {
-    id: 8,
-    name: "Anabella",
-    role: "GROWTH PARTNER | US OFFICE",
-    image: "/team/anabella.png",
-    position: "object-top",
+    role: "GROWTH PARTNER | ESCRITÓRIO CANADÁ",
+    image: "/team/juliana.webp",
   },
 ];
 
@@ -78,7 +65,7 @@ export default function LadoHumano() {
           <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-[#2f6b65]/20 bg-[#2f6b65]/5">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2f6b65]" />
             <span className="text-[#2f6b65] font-semibold text-xs tracking-widest uppercase">
-              Our People
+              Nosso Time
             </span>
           </div>
 
@@ -89,9 +76,9 @@ export default function LadoHumano() {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl lg:text-6xl font-light text-[#0a1211] tracking-tight leading-tight"
           >
-            Behind the numbers, <br/>
+            Por trás dos números, <br/>
             <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#0a1211] to-[#2f6b65]">
-              there are people.
+              existem pessoas.
             </span>
           </motion.h2>
         </div>

@@ -43,11 +43,11 @@ export default function LogoTicker() {
       {/* Cabeçalho */}
       <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
         <h2 className="text-2xl md:text-3xl font-black text-[#0a1211] mb-2 tracking-tight">
-          Brands That Trust{" "}
-          <span className="text-[#2f6b65]">Us</span>
+          Marcas Que Confiam{" "}
+          <span className="text-[#2f6b65]">em Nós</span>
         </h2>
         <p className="text-[#0a1211]/55 text-xs tracking-widest uppercase font-semibold">
-          Accelerating growth through conversion-first design
+          Acelerando o crescimento com design focado em conversão
         </p>
       </div>
 

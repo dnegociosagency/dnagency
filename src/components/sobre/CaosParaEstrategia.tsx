@@ -72,27 +72,27 @@ export default function CaosParaEstrategia() {
         {/* Timeline item 1 */}
         <div className={cx("flex-shrink-0", isMobile ? "w-full" : "w-[80vw] md:w-[45vw]")}>
           <p className="text-[#2f6b65] text-sm md:text-base font-bold tracking-[0.2em] uppercase mb-4">2020</p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#0a1211] mb-6 leading-tight">The Clothing Store.</h2>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#0a1211] mb-6 leading-tight">A Loja de Roupas.</h2>
           <p className="text-[#0a1211]/65 text-lg md:text-xl font-light leading-relaxed">
-            It all started with a local business. But with the global pandemic, chaos ensued and the only way out was the internet. That&apos;s when paid traffic stopped being an option and became absolute survival.
+            Tudo começou com um negócio local. Mas, com a pandemia, veio o caos e a única saída era a internet. Foi aí que o tráfego pago deixou de ser uma opção e virou questão de sobrevivência.
           </p>
         </div>
 
         {/* Timeline item 2 */}
         <div className={cx("flex-shrink-0", isMobile ? "w-full" : "w-[80vw] md:w-[45vw]")}>
-          <p className="text-[#2f6b65] text-sm md:text-base font-bold tracking-[0.2em] uppercase mb-4">The Turning Point</p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#0a1211] mb-6 leading-tight">From frustrated <br/>to specialists.</h2>
+          <p className="text-[#2f6b65] text-sm md:text-base font-bold tracking-[0.2em] uppercase mb-4">A Virada</p>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#0a1211] mb-6 leading-tight">De frustrados <br/>a especialistas.</h2>
           <p className="text-[#0a1211]/65 text-lg md:text-xl font-light leading-relaxed">
-            We bought every course. Tested every strategy. Spent money we didn&apos;t have trying to crack the algorithm. And then, our methodology began to take shape, and the red charts finally turned green.
+            Compramos todos os cursos. Testamos todas as estratégias. Gastamos o dinheiro que não tínhamos tentando decifrar o algoritmo. E então nossa metodologia começou a tomar forma, e os gráficos vermelhos finalmente ficaram verdes.
           </p>
         </div>
 
         {/* Timeline item 3 */}
         <div className={cx("flex-shrink-0", isMobile ? "w-full pb-10" : "w-[80vw] md:w-[45vw] pr-[10vw]")}>
-          <p className="text-[#2f6b65] text-sm md:text-base font-bold tracking-[0.2em] uppercase mb-4">The Birth</p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#0a1211] mb-6 leading-tight">The agency we wanted to hire.</h2>
+          <p className="text-[#2f6b65] text-sm md:text-base font-bold tracking-[0.2em] uppercase mb-4">O Nascimento</p>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#0a1211] mb-6 leading-tight">A agência que queríamos contratar.</h2>
           <p className="text-[#0a1211]/65 text-lg md:text-xl font-light leading-relaxed">
-            Friends started asking for help. Results scaled rapidly. We realized the market was flooded with generic agencies, but completely empty of true strategic partners. We decided to become that partnership.
+            Amigos começaram a pedir ajuda. Os resultados escalaram rápido. Percebemos que o mercado estava cheio de agências genéricas, mas vazio de verdadeiros parceiros estratégicos. Decidimos ser essa parceria.
           </p>
         </div>
 

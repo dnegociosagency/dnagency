@@ -74,12 +74,12 @@ export default function Hero() {
     <FloatingIconsHero
       title={
         <>
-          Marketing Built for One Purpose: <br className="hidden md:block" />
-          <span className="text-white/60 text-4xl md:text-6xl">Revenue Growth.</span>
+          Marketing Criado com um Único Objetivo: <br className="hidden md:block" />
+          <span className="text-white/60 text-4xl md:text-6xl">Fazer Sua Receita Crescer.</span>
         </>
       }
-      subtitle="We go beyond aesthetics. We engineer hyper-profitable funnels, deploy aggressive paid campaigns, and systematically scale your company to dominate your market in the US & Canada."
-      ctaText="Book a Strategy Call"
+      subtitle="Vamos além da estética. Construímos funis altamente lucrativos, rodamos campanhas pagas agressivas e escalamos sua empresa de forma sistemática para dominar o seu mercado."
+      ctaText="Agendar Reunião Estratégica"
       ctaHref="https://calendar.app.google/TJ85TG2Do9uLhC2K7"
       icons={[]}
     />
